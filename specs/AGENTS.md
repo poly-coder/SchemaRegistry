@@ -8,6 +8,7 @@ The `specs` folder is intended to house all specification documents related to t
 
 - `specs/memory` folder: Contains documents that provide guidelines and best practices for the project, and should not be modified by agents.
   - `Constitution.md`: Outlines the foundational principles and responsibilities for the project. It MUST be considered by agents every time they make a change to any file in the repository.
+- `specs/architecture` folder: Contains documents that describe the overall architecture of the project, including system components, interactions, and design patterns.
 - `specs/templates` folder: Contains templates for various types of documents that agents may need to create or modify, like requirements, design documents, and task breakdowns, or even source code file templates.
   - The templates should be referenced in prompt and instructions files for agents for consistency.
   - The templates should not be modified by agents.

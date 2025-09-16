@@ -1,0 +1,34 @@
+# .gitattributes
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Explicitly declare text files you want to always be normalized
+*.cs text
+*.csproj text
+*.sln text
+*.md text
+*.json text
+*.yml text
+*.yaml text
+*.xml text
+*.txt text
+
+# Treat images and other binary files as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.mp4 binary
+*.mp3 binary
+*.mov binary
+*.avi binary
+*.exe binary
+*.dll binary
+*.so binary
+*.bin binary

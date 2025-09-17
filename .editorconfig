@@ -13,6 +13,12 @@ insert_final_newline = true
 [*.md]
 indent_size = 2
 
+[*.{json,jsonc,yaml,yml}]
+indent_size = 2
+
+[*.{csproj,props,targets,slnx}]
+indent_size = 4
+
 # C# files
 [*.cs]
 

@@ -1,0 +1,6 @@
+@SchemaRegistry.WebApi_HostAddress = http://localhost:5219
+
+GET {{SchemaRegistry.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

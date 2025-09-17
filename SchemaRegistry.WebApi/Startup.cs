@@ -11,17 +11,19 @@ internal static class Startup
 
         builder.Services.AddOpenApi(options =>
         {
-            options.AddDocumentTransformer((document, _, _) =>
-            {
-                document.Info = new OpenApiInfo()
+            options.AddDocumentTransformer(
+                (document, _, _) =>
                 {
-                    Title = "Schema Registry API",
-                    Version = "v1",
-                    Description = "API for managing schema registry",
-                };
+                    document.Info = new OpenApiInfo()
+                    {
+                        Title = "Schema Registry API",
+                        Version = "v1",
+                        Description = "API for managing schema registry",
+                    };
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
         });
     }
 
@@ -32,10 +34,13 @@ internal static class Startup
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
-            app.MapScalarApiReference("/docs", (options, context) =>
-            {
-                options.Title = "Schema Registry API";
-            });
+            app.MapScalarApiReference(
+                "/docs",
+                (options, context) =>
+                {
+                    options.Title = "Schema Registry API";
+                }
+            );
         }
 
         app.UseHttpsRedirection();

@@ -68,6 +68,16 @@ internal static class Startup
                 }),
             Console.Out
         );
+
+        builder.Services.LogRegisteredServices(
+            "[***] Microsoft Orleans services",
+            _ =>
+                builder.Host.UseOrleans(silo =>
+                {
+                    silo.UseLocalhostClustering();
+                }),
+            TextWriter.Null
+        );
     }
 
     public static void ConfigureApplication(WebApplication app)

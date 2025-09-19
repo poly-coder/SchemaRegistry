@@ -8,7 +8,8 @@ public class SchemaRegistryDomain
 {
     public static readonly Assembly Assembly = typeof(SchemaRegistryDomain).Assembly;
 
-    public static readonly string Name = "SchemaRegistry.Domain";
+    public const string ProjectName = "SchemaRegistry";
+    public const string Name = $"{ProjectName}.Domain";
 
     public static readonly ActivitySource ActivitySource = new(Name);
 

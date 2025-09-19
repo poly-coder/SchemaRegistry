@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.Orleans.Server" />
         <PackageReference Include="Scalar.AspNetCore" />
         <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Endpoints" />
     </ItemGroup>

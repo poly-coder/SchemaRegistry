@@ -1,5 +1,12 @@
-﻿using Microsoft.OpenApi.Models;
+using FluentValidation;
+using Microsoft.OpenApi.Models;
+using Pico.DependencyInjection;
+using Pico.WebApi;
 using Scalar.AspNetCore;
+using SchemaRegistry.Domain;
+using SchemaRegistry.Infrastructure.NamespaceFeature;
+using SchemaRegistry.WebApi.NamespaceFeature;
+using SharpGrip.FluentValidation.AutoValidation.Endpoints.Extensions;
 
 namespace SchemaRegistry.WebApi;
 
@@ -7,24 +14,60 @@ internal static class Startup
 {
     public static void ConfigureServices(WebApplicationBuilder builder)
     {
-        builder.AddServiceDefaults();
+        builder.Services.LogRegisteredServices(
+            "[***] ServiceDefaults services",
+            _ => builder.AddServiceDefaults(),
+            TextWriter.Null
+        );
 
-        builder.Services.AddOpenApi(options =>
-        {
-            options.AddDocumentTransformer(
-                (document, _, _) =>
+        builder.Services.LogRegisteredServices(
+            "[***] FluentValidation services",
+            services =>
+                services
+                    .AddValidatorsFromAssemblyContaining<SchemaRegistryDomain>(
+                        includeInternalTypes: true
+                    )
+                    .AddFluentValidationAutoValidation(),
+            Console.Out
+        );
+
+        builder.Services.LogRegisteredServices(
+            "[***] ProblemDetails services",
+            services =>
+                services
+                    .AddProblemDetails()
+                    .AddCustomExceptionHandlerMiddleware()
+                    .AddExceptionToProblemHandler<FluentValidationExceptionToProblemHandler>(),
+            Console.Out
+        );
+
+        builder.Services.LogRegisteredServices(
+            "[***] SchemaRegistry Infrastructure services",
+            services => services.AddSchemaRegistryInfrastructureServices(),
+            Console.Out
+        );
+
+        builder.Services.LogRegisteredServices(
+            "[***] OpenAPI services",
+            services =>
+                services.AddOpenApi(options =>
                 {
-                    document.Info = new OpenApiInfo()
-                    {
-                        Title = "Schema Registry API",
-                        Version = "v1",
-                        Description = "API for managing schema registry",
-                    };
+                    options.AddDocumentTransformer(
+                        (document, _, _) =>
+                        {
+                            document.Info = new OpenApiInfo()
+                            {
+                                Title = "Schema Registry API",
+                                Version = "v1",
+                                Description = "API for managing schema registry",
+                            };
 
-                    return Task.CompletedTask;
-                }
-            );
-        });
+                            return Task.CompletedTask;
+                        }
+                    );
+                }),
+            Console.Out
+        );
     }
 
     public static void ConfigureApplication(WebApplication app)
@@ -45,6 +88,8 @@ internal static class Startup
 
         app.UseHttpsRedirection();
 
-        var api = app.MapGroup("/api");
+        app.UseExceptionToProblemMiddleware();
+
+        app.MapSchemaRegistryEndpoints();
     }
 }

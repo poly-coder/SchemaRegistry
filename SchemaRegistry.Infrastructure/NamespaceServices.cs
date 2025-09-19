@@ -1,3 +1,4 @@
+using Marten;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
@@ -8,6 +9,11 @@ public static class SchemaRegistryInfrastructureServices
         this IServiceCollection services
     )
     {
-        return services.AddNamespaceInfrastructureServices();
+        return services
+            .AddNamespaceInfrastructureServices()
+            .ConfigureMarten(options =>
+            {
+                options.Events.AddEventType<NamespaceWasCreated>();
+            });
     }
 }

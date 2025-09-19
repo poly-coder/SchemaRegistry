@@ -4,6 +4,7 @@ using System.Runtime.ExceptionServices;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Pico.Domain.Errors;
 
 namespace Pico.WebApi;
 
@@ -25,6 +26,16 @@ public static class CommonDependencyInjectionExtensions
         return services;
     }
 
+    public static IServiceCollection AddPicoExceptionsToProblemHandlers(
+        this IServiceCollection services
+    )
+    {
+        return services
+            .AddExceptionToProblemHandler<FluentValidationExceptionToProblemHandler>()
+            .AddExceptionToProblemHandler<AlreadyExistsExceptionToProblemHandler>()
+            .AddExceptionToProblemHandler<DoesNotExistExceptionToProblemHandler>();
+    }
+
     public static IApplicationBuilder UseExceptionToProblemMiddleware(
         this IApplicationBuilder services
     ) => services.UseMiddleware<ExceptionToProblemMiddleware>();
@@ -40,17 +51,17 @@ public interface IExceptionToProblemHandler
     );
 }
 
-public class FluentValidationExceptionToProblemHandler : IExceptionToProblemHandler
+internal class FluentValidationExceptionToProblemHandler : IExceptionToProblemHandler
 {
     public bool TryCreateProblemDetails(
         CreateProblemDetailsContext context,
         [NotNullWhen(true)] out ProblemDetails? problemDetails
     )
     {
-        if (context.Exception is ValidationException validationException)
+        if (context.Exception is ValidationException exception)
         {
             problemDetails = new ValidationProblemDetails(
-                validationException
+                exception
                     .Errors.GroupBy(e => e.PropertyName)
                     .ToDictionary(
                         g => g.Key,
@@ -60,8 +71,66 @@ public class FluentValidationExceptionToProblemHandler : IExceptionToProblemHand
             {
                 Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
                 Title = "One or more validation errors occurred.",
-                Detail = validationException.ToString(),
+                Detail = exception.Message,
                 Status = (int)HttpStatusCode.BadRequest,
+            };
+            return true;
+        }
+
+        problemDetails = null;
+        return false;
+    }
+}
+
+internal class AlreadyExistsExceptionToProblemHandler : IExceptionToProblemHandler
+{
+    public bool TryCreateProblemDetails(
+        CreateProblemDetailsContext context,
+        [NotNullWhen(true)] out ProblemDetails? problemDetails
+    )
+    {
+        if (context.Exception is AlreadyExistsException exception)
+        {
+            problemDetails = new ProblemDetails
+            {
+                Type = "https://tools.ietf.org/html/rfc9110#section-15.5.10",
+                Title = "Entity already exists.",
+                Detail = exception.Message,
+                Status = (int)HttpStatusCode.Conflict,
+                Extensions =
+                {
+                    ["entityType"] = exception.EntityType,
+                    ["entityId"] = exception.EntityId,
+                },
+            };
+            return true;
+        }
+
+        problemDetails = null;
+        return false;
+    }
+}
+
+internal class DoesNotExistExceptionToProblemHandler : IExceptionToProblemHandler
+{
+    public bool TryCreateProblemDetails(
+        CreateProblemDetailsContext context,
+        [NotNullWhen(true)] out ProblemDetails? problemDetails
+    )
+    {
+        if (context.Exception is DoesNotExistException exception)
+        {
+            problemDetails = new ProblemDetails
+            {
+                Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+                Title = "Entity does not exist.",
+                Detail = exception.Message,
+                Status = (int)HttpStatusCode.NotFound,
+                Extensions =
+                {
+                    ["entityType"] = exception.EntityType,
+                    ["entityId"] = exception.EntityId,
+                },
             };
             return true;
         }

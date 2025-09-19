@@ -1,3 +1,4 @@
+using JasperFx;
 using SchemaRegistry.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,4 +9,4 @@ var app = builder.Build();
 
 Startup.ConfigureApplication(app);
 
-app.Run();
+return await app.RunJasperFxCommands(args);

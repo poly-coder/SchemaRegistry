@@ -14,7 +14,7 @@ internal sealed class CreateNamespaceService(IGrainFactory grains) : ICreateName
 
         var input = command.MapToInput();
 
-        var output = await grain.CreateNamespace(input);
+        var output = await grain.CreateNamespace(input, cancel);
 
         return output.MapToResult();
     }

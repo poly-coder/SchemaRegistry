@@ -1,6 +1,13 @@
 using FluentValidation;
+using JasperFx;
+using JasperFx.CodeGeneration;
+using JasperFx.Events;
+using JasperFx.Events.Daemon;
+using Marten;
+using Marten.Services;
 using Microsoft.OpenApi.Models;
 using Pico.DependencyInjection;
+using Pico.OpenTelemetry;
 using Pico.WebApi;
 using Scalar.AspNetCore;
 using SchemaRegistry.Domain;
@@ -37,7 +44,7 @@ internal static class Startup
                 services
                     .AddProblemDetails()
                     .AddCustomExceptionHandlerMiddleware()
-                    .AddExceptionToProblemHandler<FluentValidationExceptionToProblemHandler>(),
+                    .AddPicoExceptionsToProblemHandlers(),
             Console.Out
         );
 
@@ -66,6 +73,67 @@ internal static class Startup
                         }
                     );
                 }),
+            Console.Out
+        );
+
+        builder.Services.LogRegisteredServices(
+            "[***] Postgres services",
+            services =>
+            {
+                var connectionString =
+                    builder.Configuration.GetConnectionString("database")
+                    ?? throw new Exception("Connection string 'database' not found.");
+
+                services.AddNpgsqlDataSource(connectionString);
+
+                services.AddOpenTelemetrySources(nameof(Npgsql));
+            },
+            Console.Out
+        );
+
+        builder.Services.LogRegisteredServices(
+            "[***] Marten services",
+            services =>
+            {
+                services
+                    .AddMarten(options =>
+                    {
+                        options.UseSystemTextJsonForSerialization();
+
+                        options.AutoCreateSchemaObjects = AutoCreate.All;
+
+                        options.DatabaseSchemaName = "marten";
+
+                        options.Events.StreamIdentity = StreamIdentity.AsString;
+                        options.Events.MetadataConfig.HeadersEnabled = true;
+                        options.Events.MetadataConfig.CausationIdEnabled = true;
+                        options.Events.MetadataConfig.CorrelationIdEnabled = true;
+                        options.Events.MetadataConfig.UserNameEnabled = true;
+
+                        options.OpenTelemetry.TrackConnections = TrackLevel.Normal;
+                        options.OpenTelemetry.TrackEventCounters();
+                    })
+                    .UseNpgsqlDataSource()
+                    .UseLightweightSessions()
+                    .ApplyAllDatabaseChangesOnStartup()
+                    .AddAsyncDaemon(DaemonMode.HotCold);
+
+                services.CritterStackDefaults(_ => { });
+                //services.CritterStackDefaults(options =>
+                //{
+                //    options.Development.GeneratedCodeMode = TypeLoadMode.Auto;
+                //    options.Development.ResourceAutoCreate = AutoCreate.All;
+                //    options.Development.AssertAllPreGeneratedTypesExist = true;
+                //    options.Development.SourceCodeWritingEnabled = false;
+
+                //    options.Production.GeneratedCodeMode = TypeLoadMode.Static;
+                //    options.Production.ResourceAutoCreate = AutoCreate.None;
+                //    options.Production.AssertAllPreGeneratedTypesExist = true;
+                //    options.Production.SourceCodeWritingEnabled = false;
+                //});
+
+                services.AddOpenTelemetrySources(nameof(Marten));
+            },
             Console.Out
         );
 

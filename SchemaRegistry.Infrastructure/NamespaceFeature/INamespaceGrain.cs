@@ -4,7 +4,10 @@ namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
 public interface INamespaceGrain : IGrainWithStringKey
 {
-    Task<CreateNamespaceOutput> CreateNamespace(CreateNamespaceInput command);
+    Task<CreateNamespaceOutput> CreateNamespace(
+        CreateNamespaceInput command,
+        CancellationToken cancel
+    );
 }
 
 [GenerateSerializer]

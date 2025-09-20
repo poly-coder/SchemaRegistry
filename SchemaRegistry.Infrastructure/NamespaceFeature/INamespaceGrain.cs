@@ -1,5 +1,3 @@
-using SchemaRegistry.Domain;
-
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
 public interface INamespaceGrain : IGrainWithStringKey
@@ -8,17 +6,24 @@ public interface INamespaceGrain : IGrainWithStringKey
         CreateNamespaceInput command,
         CancellationToken cancel
     );
+
+    Task<UpdateNamespaceDescriptionsOutput> UpdateNamespaceDescriptions(
+        UpdateNamespaceDescriptionsInput command,
+        CancellationToken cancel
+    );
+
+    Task<DeleteNamespaceOutput> DeleteNamespace(
+        DeleteNamespaceInput command,
+        CancellationToken cancel
+    );
+
+    Task<RestoreNamespaceOutput> RestoreNamespace(
+        RestoreNamespaceInput command,
+        CancellationToken cancel
+    );
+
+    Task<GetNamespaceByIdOutput> GetNamespaceById(
+        GetNamespaceByIdInput command,
+        CancellationToken cancel
+    );
 }
-
-[GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(CreateNamespaceInput)}")]
-public sealed record CreateNamespaceInput(
-    string Name,
-    string? DisplayName,
-    string? Description,
-    string? Documentation
-);
-
-[GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(CreateNamespaceOutput)}")]
-public sealed record CreateNamespaceOutput;

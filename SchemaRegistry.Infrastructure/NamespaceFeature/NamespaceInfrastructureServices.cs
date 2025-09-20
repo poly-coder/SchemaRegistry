@@ -5,11 +5,12 @@ namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
 internal static class NamespaceInfrastructureServices
 {
-    public static IServiceCollection AddNamespaceInfrastructureServices(
-        this IServiceCollection services
-    )
+    public static IServiceCollection AddNamespaceOrleansServices(this IServiceCollection services)
     {
-        services.AddScoped<ICreateNamespaceService, CreateNamespaceService>();
+        services
+            .AddScoped<ICreateNamespaceService, NamespaceGrainService>()
+            .AddScoped<IDeleteNamespaceService, NamespaceGrainService>()
+            .AddScoped<IRestoreNamespaceService, NamespaceGrainService>();
 
         return services;
     }

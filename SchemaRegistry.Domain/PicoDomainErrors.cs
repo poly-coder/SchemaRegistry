@@ -1,8 +1,6 @@
-using FluentValidation;
-
 namespace Pico.Domain.Errors;
 
-public class PicoDomainException : Exception
+public abstract class PicoDomainException : Exception
 {
     public PicoDomainException() { }
 
@@ -13,7 +11,7 @@ public class PicoDomainException : Exception
         : base(message, inner) { }
 }
 
-public class AlreadyExistsException : PicoDomainException
+public sealed class AlreadyExistsException : PicoDomainException
 {
     public AlreadyExistsException(string entityType, string entityId)
         : base($"Entity '{entityType}' with ID '{entityId}' already exists.")
@@ -26,9 +24,9 @@ public class AlreadyExistsException : PicoDomainException
     public string EntityId { get; }
 }
 
-public class DoesNotExistException : PicoDomainException
+public sealed class EntityNotFoundException : PicoDomainException
 {
-    public DoesNotExistException(string entityType, string entityId)
+    public EntityNotFoundException(string entityType, string entityId)
         : base($"Entity '{entityType}' with ID '{entityId}' does not exist.")
     {
         EntityType = entityType;
@@ -37,4 +35,28 @@ public class DoesNotExistException : PicoDomainException
 
     public string EntityType { get; }
     public string EntityId { get; }
+}
+
+public sealed class OperationConflictException : PicoDomainException
+{
+    public OperationConflictException(
+        string entityType,
+        string entityId,
+        string operation,
+        string reason
+    )
+        : base(
+            $"Conflict on entity '{entityType}' with ID '{entityId}' during '{operation}': {reason}"
+        )
+    {
+        EntityType = entityType;
+        EntityId = entityId;
+        Reason = reason;
+        Operation = operation;
+    }
+
+    public string EntityType { get; }
+    public string EntityId { get; }
+    public string Reason { get; }
+    public string Operation { get; }
 }

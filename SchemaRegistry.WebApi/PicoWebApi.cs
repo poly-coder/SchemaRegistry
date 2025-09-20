@@ -1,12 +1,27 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 using System.Net;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Pico.Domain;
 using Pico.Domain.Errors;
 
 namespace Pico.WebApi;
+
+public class PicoWebApi
+{
+    public static readonly Assembly Assembly = typeof(PicoWebApi).Assembly;
+
+    public const string Name = $"{PicoDomain.ProjectName}.WebApi";
+
+    public static readonly ActivitySource ActivitySource = new(Name);
+
+    public static readonly Meter Meter = new(Name);
+}
 
 public static class CommonDependencyInjectionExtensions
 {
@@ -32,8 +47,7 @@ public static class CommonDependencyInjectionExtensions
     {
         return services
             .AddExceptionToProblemHandler<FluentValidationExceptionToProblemHandler>()
-            .AddExceptionToProblemHandler<AlreadyExistsExceptionToProblemHandler>()
-            .AddExceptionToProblemHandler<DoesNotExistExceptionToProblemHandler>();
+            .AddExceptionToProblemHandler<PicoDomainExceptionsToProblemHandler>();
     }
 
     public static IApplicationBuilder UseExceptionToProblemMiddleware(
@@ -41,7 +55,7 @@ public static class CommonDependencyInjectionExtensions
     ) => services.UseMiddleware<ExceptionToProblemMiddleware>();
 }
 
-public record CreateProblemDetailsContext(HttpContext HttpContext, Exception Exception);
+public sealed record CreateProblemDetailsContext(HttpContext HttpContext, Exception Exception);
 
 public interface IExceptionToProblemHandler
 {
@@ -51,7 +65,7 @@ public interface IExceptionToProblemHandler
     );
 }
 
-internal class FluentValidationExceptionToProblemHandler : IExceptionToProblemHandler
+internal sealed class FluentValidationExceptionToProblemHandler : IExceptionToProblemHandler
 {
     public bool TryCreateProblemDetails(
         CreateProblemDetailsContext context,
@@ -82,61 +96,69 @@ internal class FluentValidationExceptionToProblemHandler : IExceptionToProblemHa
     }
 }
 
-internal class AlreadyExistsExceptionToProblemHandler : IExceptionToProblemHandler
+internal sealed class PicoDomainExceptionsToProblemHandler : IExceptionToProblemHandler
 {
     public bool TryCreateProblemDetails(
         CreateProblemDetailsContext context,
         [NotNullWhen(true)] out ProblemDetails? problemDetails
     )
     {
-        if (context.Exception is AlreadyExistsException exception)
+        switch (context.Exception)
         {
-            problemDetails = new ProblemDetails
-            {
-                Type = "https://tools.ietf.org/html/rfc9110#section-15.5.10",
-                Title = "Entity already exists.",
-                Detail = exception.Message,
-                Status = (int)HttpStatusCode.Conflict,
-                Extensions =
+            case EntityNotFoundException exception:
+                problemDetails = new ProblemDetails
                 {
-                    ["entityType"] = exception.EntityType,
-                    ["entityId"] = exception.EntityId,
-                },
-            };
-            return true;
-        }
+                    Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+                    Title = "Entity does not exist.",
+                    Detail = exception.Message,
+                    Status = (int)HttpStatusCode.NotFound,
+                    Extensions =
+                    {
+                        ["errorType"] = "EntityNotFound",
+                        ["entityType"] = exception.EntityType,
+                        ["entityId"] = exception.EntityId,
+                    },
+                };
+                return true;
 
-        problemDetails = null;
-        return false;
-    }
-}
-
-internal class DoesNotExistExceptionToProblemHandler : IExceptionToProblemHandler
-{
-    public bool TryCreateProblemDetails(
-        CreateProblemDetailsContext context,
-        [NotNullWhen(true)] out ProblemDetails? problemDetails
-    )
-    {
-        if (context.Exception is DoesNotExistException exception)
-        {
-            problemDetails = new ProblemDetails
-            {
-                Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
-                Title = "Entity does not exist.",
-                Detail = exception.Message,
-                Status = (int)HttpStatusCode.NotFound,
-                Extensions =
+            case AlreadyExistsException exception:
+                problemDetails = new ProblemDetails
                 {
-                    ["entityType"] = exception.EntityType,
-                    ["entityId"] = exception.EntityId,
-                },
-            };
-            return true;
-        }
+                    Type = "https://tools.ietf.org/html/rfc9110#section-15.5.10",
+                    Title = "Entity already exists.",
+                    Detail = exception.Message,
+                    Status = (int)HttpStatusCode.Conflict,
+                    Extensions =
+                    {
+                        ["errorType"] = "AlreadyExists",
+                        ["entityType"] = exception.EntityType,
+                        ["entityId"] = exception.EntityId,
+                    },
+                };
+                return true;
 
-        problemDetails = null;
-        return false;
+            case OperationConflictException exception:
+                problemDetails = new ProblemDetails
+                {
+                    Type = "https://tools.ietf.org/html/rfc9110#section-15.5.10",
+                    Title = "Conflict occurred.",
+                    Detail = exception.Message,
+                    Status = (int)HttpStatusCode.Conflict,
+                    Extensions =
+                    {
+                        ["errorType"] = "OperationConflict",
+                        ["entityType"] = exception.EntityType,
+                        ["entityId"] = exception.EntityId,
+                        ["operation"] = exception.Operation,
+                        ["reason"] = exception.Reason,
+                    },
+                };
+                return true;
+
+            default:
+                problemDetails = null;
+                return false;
+        }
     }
 }
 

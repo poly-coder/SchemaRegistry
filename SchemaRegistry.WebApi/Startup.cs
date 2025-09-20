@@ -50,7 +50,7 @@ internal static class Startup
 
         builder.Services.LogRegisteredServices(
             "[***] SchemaRegistry Infrastructure services",
-            services => services.AddSchemaRegistryInfrastructureServices(),
+            services => services.AddSchemaRegistryOrleansServices(),
             Console.Out
         );
 

@@ -11,6 +11,9 @@
         <File Path="global.json" />
         <File Path="README.md" />
     </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/SchemaRegistry.Domain.UnitTests/SchemaRegistry.Domain.UnitTests.csproj" Id="0661c8d3-95b6-43a4-9edf-3d56de3732b9" />
+    </Folder>
     <Project Path="AppHost/AppHost.csproj" />
     <Project Path="SchemaRegistry.Application/SchemaRegistry.Application.csproj" Id="4eb6e956-0807-4595-b65e-b1460fb8354f" />
     <Project Path="SchemaRegistry.Domain/SchemaRegistry.Domain.csproj" Id="3f5100bc-8885-4e4e-a52d-025bcada2f70" />

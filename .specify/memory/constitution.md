@@ -2,20 +2,21 @@
 Sync Impact Report
 Version change: 1.0.0 → 1.0.0 (no version change requested)
 Modified principles:
-- II. Code Quality & Testing (expanded with Testing Libraries requirement using Moq, Verify, and Shouldly)
-- III. Technology Stack & Infrastructure (expanded with OpenTelemetry for observability)
+- II. Code Quality & Testing (expanded with Domain-Driven Development Terminology requirement)
+- III. Technology Stack & Infrastructure (expanded with MermaidJS Diagram Requirements)
+- IV. Architecture & Design (expanded with Data Contracts requirement)
 Added sections:
-- Testing Libraries requirement (Moq, Verify, Shouldly for consistent test implementation)
-- Observability Implementation requirement (OpenTelemetry for comprehensive observability)
-- Enhanced testing standards and observability practices
+- Domain-Driven Development Terminology requirement (DDD jargon for consistent domain modeling)
+- MermaidJS Diagram Requirements (visual technical documentation standards)
+- Data Contracts requirement (explicit API interface definitions)
 Removed sections:
 - None
 Templates requiring updates:
-- ✅ .specify/templates/plan-template.md (Constitution Check updated with OpenTelemetry and testing libraries requirements)
+- ✅ .specify/templates/plan-template.md (Constitution Check updated with DDD terminology, MermaidJS diagrams, and data contracts requirements)
 - ✅ .specify/templates/spec-template.md (no changes needed - correctly focused on functional requirements)
-- ✅ .specify/templates/tasks-template.md (validation checklist updated with OpenTelemetry and testing libraries)
+- ✅ .specify/templates/tasks-template.md (validation checklist updated with DDD terminology, MermaidJS diagrams, and data contracts requirements)
 Follow-up TODOs:
-- None (all templates aligned with expanded Code Quality & Testing and Technology Stack requirements)
+- None (all templates aligned with expanded Code Quality, Technology Stack, and Architecture requirements)
 -->
 
 # Schema Registry Service Constitution
@@ -42,6 +43,8 @@ Rationale: Ensures code quality through review, maintains audit trail, enables c
 
 **Testing Libraries**: Test implementation MUST use Moq for mocking, Verify for assertion extensions, and Shouldly for fluent assertions to ensure consistent and readable test code.
 
+**Domain-Driven Development Terminology**: All code, documentation, and communications MUST use established DDD terminology including but not limited to: Aggregate Root, Entity, Value Object, Domain Service, Application Service, Repository, Domain Event, Bounded Context, and Ubiquitous Language to ensure consistent domain modeling and team communication.
+
 **Infrastructure Testing**: Infrastructure code MUST be validated through integration tests; full coverage not required.
 
 **Quality Standards**: All warnings MUST be treated as errors to ensure high code quality. Consistent code style MUST be enforced using EditorConfig and Code Analyzers.
@@ -54,7 +57,7 @@ Rationale: Ensures code quality through review, maintains audit trail, enables c
 
 **Continuous Integration**: Automated testing MUST be implemented as part of CI/CD pipeline to catch issues early. Code coverage tools MUST be used to monitor and improve test coverage over time.
 
-Rationale: Ensures business logic reliability, maintains high code quality standards with consistent testing frameworks, enables early issue detection, and maintains system security through proper error handling.
+Rationale: Ensures business logic reliability, maintains high code quality standards with consistent testing frameworks and domain-driven terminology, enables early issue detection, and maintains system security through proper error handling.
 
 ### III. Technology Stack & Infrastructure
 
@@ -82,7 +85,9 @@ Rationale: Ensures business logic reliability, maintains high code quality stand
 
 **Documentation Standard**: All specifications and documentation MUST be written in Markdown format and maintained in the `specs` directory to ensure readability and consistency.
 
-Rationale: Establishes consistent technology foundation with clear architectural boundaries, ensures reliable event sourcing through Marten/PostgreSQL, enables horizontal scaling through Orleans and durable workflows via Temporal.io, provides comprehensive observability through OpenTelemetry, enables simplified local development through .NET Aspire, and maintains documentation standards.
+**Diagram Requirements**: All architectural designs, system flows, and complex relationships MUST be documented using MermaidJS diagrams embedded in Markdown files to ensure visual clarity and maintainable technical documentation.
+
+Rationale: Establishes consistent technology foundation with clear architectural boundaries, ensures reliable event sourcing through Marten/PostgreSQL, enables horizontal scaling through Orleans and durable workflows via Temporal.io, provides comprehensive observability through OpenTelemetry, enables simplified local development through .NET Aspire, maintains documentation standards, and ensures visual technical documentation through MermaidJS diagrams.
 
 ### IV. Architecture & Design
 
@@ -98,9 +103,11 @@ Rationale: Establishes consistent technology foundation with clear architectural
 
 **RESTful API Design**: APIs MUST follow RESTful principles with standard HTTP verbs, appropriate status codes, and consistent resource naming.
 
+**Data Contracts**: All API interfaces and data transfer objects MUST be explicitly defined with clear contracts including request/response schemas, validation rules, and versioning strategies to ensure API consistency and consumer clarity.
+
 **Idempotent Operations**: All operations MUST be idempotent and resilient to transient failures for system reliability.
 
-Rationale: Ensures maintainable architecture, reliable data management, pure domain layer with controlled dependencies through FluentValidation, comprehensive audit capabilities, and consistent API design patterns.
+Rationale: Ensures maintainable architecture, reliable data management, pure domain layer with controlled dependencies through FluentValidation, comprehensive audit capabilities, consistent API design patterns, and clear data contract definitions for API reliability.
 
 ## Governance
 

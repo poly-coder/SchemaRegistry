@@ -135,6 +135,7 @@ GATE: Checked by main() before returning
 
 - [ ] All business logic has 100% test coverage with individual rule tests using xUnit
 - [ ] Moq, Verify, and Shouldly used for test implementation (mocking, assertions, fluent assertions)
+- [ ] DDD terminology consistently used (Aggregate Root, Entity, Value Object, Domain Service, Application Service, Repository, Domain Event, Bounded Context, Ubiquitous Language)
 - [ ] Infrastructure components have integration tests
 - [ ] All tests come before implementation
 - [ ] Parallel tasks truly independent
@@ -152,6 +153,8 @@ GATE: Checked by main() before returning
 - [ ] OpenTelemetry configured for comprehensive observability (tracing, metrics, logging)
 - [ ] .NET Aspire configured for local development orchestration
 - [ ] Docker containerization configured
+- [ ] MermaidJS diagrams included for architectural designs and system flows
+- [ ] Data contracts explicitly defined for all API interfaces and DTOs
 - [ ] Soft deletion pattern implemented where applicable
 - [ ] Domain events emitted for mutations
 - [ ] RESTful API design followed

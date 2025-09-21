@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+  title: Schema Registry - Namespace Management API
+  description: RESTful API for managing namespaces in the Schema Registry
+  version: 1.0.0
+  contact:
+    name: Schema Registry Team
+    email: schema-registry@company.com
+
+servers:
+  - url: https://api.schemaregistry.company.com/v1
+    description: Production server
+  - url: https://staging-api.schemaregistry.company.com/v1
+    description: Staging server
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    NamespaceResponse:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - createdAt
+        - modifiedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the namespace
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[a-zA-Z0-9\-_]+$'
+          description: Unique name for the namespace
+          example: "payment-schemas"
+        displayName:
+          type: string
+          maxLength: 200
+          nullable: true
+          description: Human-friendly display name
+          example: "Payment Processing Schemas"
+        description:
+          type: string
+          maxLength: 1000
+          nullable: true
+          description: Brief description of the namespace
+          example: "Schemas for payment processing workflows"
+        documentation:
+          type: string
+          maxLength: 50000
+          nullable: true
+          description: Detailed markdown documentation
+          example: "# Payment Schemas\n\nThis namespace contains..."
+        status:
+          type: string
+          enum: [Active, SoftDeleted, PermanentlyDeleted]
+          description: Current lifecycle status
+          example: "Active"
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when namespace was created
+          example: "2025-09-21T10:30:00Z"
+        modifiedAt:
+          type: string
+          format: date-time
+          description: Timestamp when namespace was last modified
+          example: "2025-09-21T15:45:30Z"
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when namespace was soft-deleted
+          example: null
+
+    CreateNamespaceRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[a-zA-Z0-9\-_]+$'
+          description: Unique name for the namespace
+          example: "payment-schemas"
+        displayName:
+          type: string
+          maxLength: 200
+          nullable: true
+          description: Human-friendly display name
+          example: "Payment Processing Schemas"
+        description:
+          type: string
+          maxLength: 1000
+          nullable: true
+          description: Brief description of the namespace
+          example: "Schemas for payment processing workflows"
+        documentation:
+          type: string
+          maxLength: 50000
+          nullable: true
+          description: Detailed markdown documentation
+          example: "# Payment Schemas\n\nThis namespace contains..."
+
+    UpdateNamespaceRequest:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 200
+          nullable: true
+          description: Human-friendly display name
+          example: "Updated Payment Processing Schemas"
+        description:
+          type: string
+          maxLength: 1000
+          nullable: true
+          description: Brief description of the namespace
+          example: "Updated description for payment processing workflows"
+        documentation:
+          type: string
+          maxLength: 50000
+          nullable: true
+          description: Detailed markdown documentation
+          example: "# Updated Payment Schemas\n\nThis namespace contains..."
+
+    NamespaceListResponse:
+      type: object
+      required:
+        - namespaces
+        - totalCount
+      properties:
+        namespaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamespaceResponse'
+        totalCount:
+          type: integer
+          minimum: 0
+          description: Total number of namespaces matching the filter
+          example: 42
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Number of items per page
+          example: 20
+        pageNumber:
+          type: integer
+          minimum: 1
+          description: Current page number
+          example: 1
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+          description: URI identifying the problem type
+          example: "https://api.schemaregistry.company.com/problems/namespace-already-exists"
+        title:
+          type: string
+          description: Short, human-readable summary of the problem
+          example: "Namespace already exists"
+        status:
+          type: integer
+          description: HTTP status code
+          example: 409
+        detail:
+          type: string
+          description: Human-readable explanation of the problem
+          example: "A namespace with the name 'payment-schemas' already exists"
+        instance:
+          type: string
+          format: uri
+          description: URI identifying the specific occurrence of the problem
+          example: "/api/namespaces"
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Validation errors by field
+          example:
+            name: ["The name field is required", "Name must be unique"]
+
+paths:
+  /api/namespaces:
+    get:
+      summary: List namespaces
+      description: Retrieve a paginated list of namespaces with optional filtering
+      operationId: listNamespaces
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: includeDeleted
+          in: query
+          description: Include soft-deleted namespaces in results
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: status
+          in: query
+          description: Filter by namespace status
+          required: false
+          schema:
+            type: string
+            enum: [Active, SoftDeleted]
+        - name: search
+          in: query
+          description: Search in name, display name, or description
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+        - name: pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: pageNumber
+          in: query
+          description: Page number (1-based)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        '200':
+          description: Successfully retrieved namespace list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceListResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-read)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+    post:
+      summary: Create namespace
+      description: Create a new namespace with unique name
+      operationId: createNamespace
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNamespaceRequest'
+      responses:
+        '201':
+          description: Namespace created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResponse'
+          headers:
+            Location:
+              description: URI of the created namespace
+              schema:
+                type: string
+                format: uri
+                example: "/api/namespaces/123e4567-e89b-12d3-a456-426614174000"
+        '400':
+          description: Invalid request data
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-write)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Conflict - namespace name already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+  /api/namespaces/{id}:
+    get:
+      summary: Get namespace by ID
+      description: Retrieve detailed information about a specific namespace
+      operationId: getNamespaceById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the namespace
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Namespace found and returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResponse'
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-read)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Namespace not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+    put:
+      summary: Update namespace
+      description: Update namespace metadata (name cannot be changed)
+      operationId: updateNamespace
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the namespace
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNamespaceRequest'
+      responses:
+        '200':
+          description: Namespace updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResponse'
+        '400':
+          description: Invalid request data
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-write)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Namespace not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+    delete:
+      summary: Soft delete namespace
+      description: Mark namespace as deleted (can be restored later)
+      operationId: softDeleteNamespace
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the namespace
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Namespace soft-deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-write)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Namespace not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Conflict - namespace cannot be deleted (invalid state)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+  /api/namespaces/{id}/restore:
+    post:
+      summary: Restore namespace
+      description: Restore a soft-deleted namespace to active status
+      operationId: restoreNamespace
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the namespace
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Namespace restored successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceResponse'
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-write)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Namespace not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Conflict - namespace cannot be restored (invalid state or name collision)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+  /api/namespaces/{id}/permanent:
+    delete:
+      summary: Permanently delete namespace
+      description: Permanently remove a soft-deleted namespace (irreversible)
+      operationId: permanentlyDeleteNamespace
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the namespace
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Namespace permanently deleted
+        '401':
+          description: Unauthorized - invalid or missing JWT token
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden - insufficient permissions (requires namespace-write)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Namespace not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Conflict - namespace cannot be permanently deleted (not soft-deleted)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+tags:
+  - name: Namespaces
+    description: Namespace management operations

@@ -11,12 +11,12 @@
 1. Parse user description from Input
    → User wants namespace functionality for schema organization
 2. Extract key concepts from description
-   → Actors: Schema Registry users
+   → Actors: Schema Registry clients
    → Actions: create, update, soft-delete, permanently delete, restore namespaces
    → Data: namespace name, display name, description, markdown documentation
    → Constraints: unique namespace names
 3. For each unclear aspect:
-   → ✅ RESOLVED: JWT-based authorization with namespace-read/namespace-write permissions
+   → ✅ RESOLVED: Internal service - no authorization required (microservice architecture)
    → ✅ RESOLVED: Flat namespace structure (no nested namespaces)
    → ✅ RESOLVED: Cascade soft delete - schemas are soft-deleted with namespace and can be accessed with deleted=true filter
 4. Fill User Scenarios & Testing section
@@ -26,7 +26,7 @@
 6. Identify Key Entities
    → Namespace entity with specified attributes
 7. Run Review Checklist
-   → WARN "Spec has uncertainties about permissions and schema relationships"
+   → All requirements clear for internal microservice usage
 8. Return: SUCCESS (spec ready for planning)
 ```
 
@@ -44,25 +44,28 @@
 
 ### Primary User Story
 
-As a schema registry user, I want to organize my schemas into logical namespaces so that I can better manage and categorize related schemas, making them easier to find and maintain. I need the ability to create namespaces with descriptive information, update them as needed, and manage their lifecycle including soft deletion and restoration when necessary.
+As a schema registry client, I want to organize schemas into logical namespaces through the Schema Registry service API so that I can better manage and categorize related schemas within my microservice architecture, making them easier to find and maintain. I need the ability to create namespaces with descriptive information, update them as needed, and manage their lifecycle including soft deletion and restoration when necessary.
 
 ### Acceptance Scenarios
 
-1. **Given** I am a schema registry user, **When** I create a new namespace with a unique name "payment-schemas", **Then** the namespace is created and available for schema assignment
-2. **Given** I have an existing namespace, **When** I update its display name and description, **Then** the changes are saved and reflected in the namespace information
-3. **Given** I have a namespace I no longer need, **When** I soft-delete it, **Then** the namespace is marked as deleted but can be restored later
-4. **Given** I have a soft-deleted namespace, **When** I choose to restore it, **Then** the namespace becomes active again with all its previous information
-5. **Given** I have a soft-deleted namespace, **When** I permanently delete it, **Then** the namespace is completely removed from the system
-6. **Given** I try to create a namespace, **When** I use a name that already exists, **Then** the system prevents creation and shows an appropriate error message
-7. **Given** I have a namespace containing schemas, **When** I soft-delete the namespace, **Then** all schemas within are automatically soft-deleted and can be accessed using `deleted=true` filter
-8. **Given** I have a soft-deleted namespace with soft-deleted schemas, **When** I restore the namespace, **Then** both the namespace and all its schemas are restored to active status
+1. **Given** I am a schema registry client, **When** I create a new namespace with a unique name "payment-schemas" via the API, **Then** the namespace is created and available for schema assignment
+2. **Given** I have an existing namespace, **When** I update its display name and description via the API, **Then** the changes are saved and reflected in the namespace information
+3. **Given** I have a namespace I no longer need, **When** I soft-delete it via the API, **Then** the namespace is marked as deleted but can be restored later
+4. **Given** I have a soft-deleted namespace, **When** I choose to restore it via the API, **Then** the namespace becomes active again with all its previous information
+5. **Given** I have a soft-deleted namespace, **When** I permanently delete it via the API, **Then** the namespace is completely removed from the system
+6. **Given** I try to create a namespace via the API, **When** I use a name that already exists, **Then** the system prevents creation and returns an appropriate error response
+7. **Given** I have a namespace containing schemas, **When** I soft-delete the namespace via the API, **Then** all schemas within are automatically soft-deleted and can be accessed using `deleted=true` filter
+8. **Given** I have a soft-deleted namespace with soft-deleted schemas, **When** I restore the namespace via the API, **Then** both the namespace and all its schemas are restored to active status
 
 ### Edge Cases
 
 - When a namespace containing schemas is soft-deleted, all schemas within are automatically soft-deleted and can be accessed with `deleted=true` filter
-- How does the system handle restoration of a namespace when a new namespace with the same name was created after deletion?
-- What validation rules apply to namespace names, display names, and descriptions?
-- How does the system handle concurrent operations on the same namespace?
+- When a namespace is soft-deleted, its name is kept as reserved until permanently deleted (prevents name reuse)
+- Namespace names must follow pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
+- Display names must be trimmed and have maximum 80 characters
+- Descriptions must be trimmed and have maximum 1000 characters
+- Documentation can have maximum 10kb (10,240 characters)
+- System must handle concurrent operations safely to prevent race conditions
 
 ## Requirements *(mandatory)*
 
@@ -81,11 +84,16 @@ As a schema registry user, I want to organize my schemas into logical namespaces
 - **FR-011**: System MUST display namespace information including name, display name, description, and documentation
 - **FR-012**: System MUST track the creation and modification timestamps for namespaces
 - **FR-013**: System MUST distinguish between active, soft-deleted, and permanently deleted namespaces in listings
-- **FR-014**: System MUST authorize namespace operations using JWT-based authentication with specific permissions: users with `namespace-write` permission can create, update, and delete namespaces; users with `namespace-read` permission can view namespace information
-- **FR-015**: System MUST implement a flat namespace structure with no support for nested or hierarchical namespaces
-- **FR-016**: System MUST cascade soft-delete operations: when a namespace is soft-deleted, all schemas within that namespace are automatically soft-deleted and can be accessed using a `deleted=true` filter
-- **FR-017**: System MUST cascade restore operations: when a soft-deleted namespace is restored, all schemas that were soft-deleted with the namespace are automatically restored
-- **FR-018**: System MUST cascade permanent delete operations: when a namespace is permanently deleted, all schemas within that namespace are permanently deleted
+- **FR-014**: System MUST implement a flat namespace structure with no support for nested or hierarchical namespaces
+- **FR-015**: System MUST cascade soft-delete operations: when a namespace is soft-deleted, all schemas within that namespace are automatically soft-deleted and can be accessed using a `deleted=true` filter
+- **FR-016**: System MUST cascade restore operations: when a soft-deleted namespace is restored, all schemas that were soft-deleted with the namespace are automatically restored
+- **FR-017**: System MUST cascade permanent delete operations: when a namespace is permanently deleted, all schemas within that namespace are permanently deleted
+- **FR-018**: System MUST reserve soft-deleted namespace names until permanent deletion to prevent name reuse
+- **FR-019**: System MUST validate namespace names using pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
+- **FR-020**: System MUST trim and validate display names with maximum 80 characters
+- **FR-021**: System MUST trim and validate descriptions with maximum 1000 characters
+- **FR-022**: System MUST validate documentation with maximum 10kb (10,240 characters)
+- **FR-023**: System MUST handle concurrent operations safely to prevent race conditions and data corruption
 
 ### Key Entities *(include if feature involves data)*
 

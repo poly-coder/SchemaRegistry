@@ -1,6 +1,6 @@
-# Message Registry Service
+# Schema Registry Service
 
-The Message Registry service is a crucial component of our system, designed to manage and serve message definitions used across various components. It provides a centralized repository for message metadata, including schemas, human-readable descriptions, versioning information, dependencies, and other relevant attributes.
+The Schema Registry service is a crucial component of our system, designed to manage and serve message definitions used across various components. It provides a centralized repository for message metadata, including schemas, human-readable descriptions, versioning information, dependencies, and other relevant attributes.
 
 ## Features
 

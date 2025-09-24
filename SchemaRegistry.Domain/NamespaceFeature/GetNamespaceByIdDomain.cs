@@ -3,6 +3,13 @@ using Pico;
 
 namespace SchemaRegistry.Domain.NamespaceFeature;
 
+public enum NamespaceStatus
+{
+    Active,
+    SoftDeleted,
+    PermanentlyDeleted,
+}
+
 public sealed record GetNamespaceByIdQuery(string Name, bool Deleted);
 
 public sealed record GetNamespaceByIdQueryResult(
@@ -16,8 +23,9 @@ public sealed record NamespaceDetails(
     string? Description,
     string? Documentation,
     DateTimeOffset CreatedAt,
+    DateTimeOffset ModifiedAt,
     DateTimeOffset? DeletedAt,
-    bool IsDeleted
+    NamespaceStatus Status
 );
 
 public sealed record NamespaceOperations(

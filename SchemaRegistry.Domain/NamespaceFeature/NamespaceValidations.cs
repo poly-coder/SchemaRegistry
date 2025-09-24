@@ -28,7 +28,7 @@ public static partial class NamespaceValidations
 
     // DisplayName
 
-    public const int MaxDisplayNameLength = 100;
+    public const int MaxDisplayNameLength = 80;
 
     public static IRuleBuilder<T, string?> IsValidNamespaceDisplayName<T>(
         this IRuleBuilderInitial<T, string?> ruleBuilder
@@ -44,7 +44,7 @@ public static partial class NamespaceValidations
 
     // Documentation
 
-    public const int MaxDocumentationLength = 10_000;
+    public const int MaxDocumentationLength = 10_240;
 
     public static IRuleBuilder<T, string?> IsValidNamespaceDocumentation<T>(
         this IRuleBuilderInitial<T, string?> ruleBuilder

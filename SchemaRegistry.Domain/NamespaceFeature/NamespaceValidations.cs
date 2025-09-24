@@ -44,7 +44,7 @@ public static partial class NamespaceValidations
 
     // Documentation
 
-    public const int MaxDocumentationLength = 10_240;
+    public const int MaxDocumentationLength = 10_000;
 
     public static IRuleBuilder<T, string?> IsValidNamespaceDocumentation<T>(
         this IRuleBuilderInitial<T, string?> ruleBuilder

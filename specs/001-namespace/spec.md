@@ -77,7 +77,7 @@ stateDiagram-v2
   - Invalid examples: "User-Service" (uppercase), "-payment" (starts with hyphen), "user--service" (consecutive hyphens)
 - Display names must be trimmed and have maximum 80 characters
 - Descriptions must be trimmed and have maximum 1000 characters
-- Documentation can have maximum 10kb (10,240 characters)
+- Documentation can have maximum 10kb (10,000 characters)
 - System must handle concurrent operations safely to prevent race conditions
 - When namespace name contains only whitespace or is empty, system rejects creation with validation error
 - When display name or description contains only whitespace, system trims to empty string and accepts
@@ -109,7 +109,7 @@ stateDiagram-v2
 - **FR-016**: System MUST validate namespace names using pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
 - **FR-017**: System MUST trim and validate display names with maximum 80 characters
 - **FR-018**: System MUST trim and validate descriptions with maximum 1000 characters
-- **FR-019**: System MUST validate documentation with maximum 10kb (10,240 characters)
+- **FR-019**: System MUST validate documentation with maximum 10kb (10,000 characters)
 - **FR-020**: System MUST handle concurrent operations safely to prevent race conditions and data corruption
 - **FR-021**: System MUST return appropriate HTTP status codes and error messages for validation failures (400 Bad Request for invalid input, 409 Conflict for duplicate names)
 - **FR-022**: System MUST return descriptive error messages that clearly indicate which validation rule was violated
@@ -131,10 +131,10 @@ stateDiagram-v2
 ### Key Entities *(include if feature involves data)*
 
 - **Namespace**: Represents a logical grouping container for schemas with the following attributes:
-  - Name (required, unique): String, 1-40 characters, pattern: `^[a-z0-9-]+$` (lowercase letters, numbers, hyphens only)
+  - Name (required, unique): String, 1-40 characters, pattern: `^([a-z][a-z0-9]*)(\-([a-z][a-z0-9]*))*$` (lowercase letters, numbers, hyphens only)
   - Display Name (optional): String, 0-80 characters after trimming, human-friendly name for display purposes
   - Description (optional): String, 0-1000 characters after trimming, brief description of the namespace purpose
-  - Documentation (optional): String, 0-10,240 characters, markdown-formatted detailed documentation
+  - Documentation (optional): String, 0-10,000 characters, markdown-formatted detailed documentation
   - Status: Enum (Active, SoftDeleted)
   - Created timestamp: ISO 8601 datetime, when the namespace was originally created
   - Modified timestamp: ISO 8601 datetime, when the namespace was last updated

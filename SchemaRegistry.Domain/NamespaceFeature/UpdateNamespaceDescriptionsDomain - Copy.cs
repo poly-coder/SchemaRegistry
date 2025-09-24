@@ -6,11 +6,8 @@ namespace SchemaRegistry.Domain.NamespaceFeature;
 public sealed record UpdateNamespaceDescriptionsCommand(
     string Name,
     string? DisplayName = null,
-    string? Description = null,
-    string? Documentation = null
+    string? Description = null
 );
-
-public sealed record UpdateNamespaceDescriptionsCommandResult;
 
 // Validation
 
@@ -24,8 +21,6 @@ internal class UpdateNamespaceDescriptionsCommandValidator
         RuleFor(x => x.DisplayName).IsValidNamespaceDisplayName();
 
         RuleFor(x => x.Description).IsValidNamespaceDescription();
-
-        RuleFor(x => x.Documentation).IsValidNamespaceDocumentation();
     }
 }
 
@@ -40,8 +35,7 @@ public static class UpdateNamespaceDescriptionsCommandExtensions
         return new(
             command.Name.CoerceTrim(),
             command.DisplayName.CoerceTrim(),
-            command.Description.CoerceTrim(),
-            command.Documentation.CoerceTrim()
+            command.Description.CoerceTrim()
         );
     }
 }

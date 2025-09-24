@@ -4,7 +4,7 @@ namespace SchemaRegistry.Application.NamespaceFeature;
 
 public interface IUpdateNamespaceDescriptionsService
 {
-    Task<UpdateNamespaceDescriptionsCommandResult> UpdateNamespaceDescriptionsAsync(
+    Task<NamespaceCommandResult> UpdateNamespaceDescriptionsAsync(
         UpdateNamespaceDescriptionsCommand command,
         CancellationToken cancel = default
     );

@@ -5,8 +5,6 @@ namespace SchemaRegistry.Domain.NamespaceFeature;
 
 public sealed record RestoreNamespaceCommand(string Name);
 
-public sealed record RestoreNamespaceCommandResult;
-
 // Validation
 
 internal class RestoreNamespaceCommandValidator : AbstractValidator<RestoreNamespaceCommand>

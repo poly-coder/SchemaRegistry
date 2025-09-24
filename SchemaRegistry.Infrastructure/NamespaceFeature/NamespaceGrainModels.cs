@@ -12,36 +12,24 @@ public sealed record CreateNamespaceInput(
 );
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(CreateNamespaceOutput)}")]
-public sealed record CreateNamespaceOutput;
-
-[GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDescriptionsInput)}")]
-public sealed record UpdateNamespaceDescriptionsInput(
-    string? DisplayName,
-    string? Description,
-    string? Documentation
-);
+public sealed record UpdateNamespaceDescriptionsInput(string? DisplayName, string? Description);
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDescriptionsOutput)}")]
-public sealed record UpdateNamespaceDescriptionsOutput;
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDocumentationInput)}")]
+public sealed record UpdateNamespaceDocumentationInput(string? Documentation);
 
 [GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(DeleteNamespaceInput)}")]
-public sealed record DeleteNamespaceInput(bool Permanently);
-
-[GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(DeleteNamespaceOutput)}")]
-public sealed record DeleteNamespaceOutput(bool PermanentlyDeleted);
+public sealed record DeleteNamespaceInput;
 
 [GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(RestoreNamespaceInput)}")]
 public sealed record RestoreNamespaceInput;
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(RestoreNamespaceOutput)}")]
-public sealed record RestoreNamespaceOutput;
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceCommandOutput)}")]
+public sealed record NamespaceCommandOutput(bool Updated);
 
 [GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdInput)}")]
@@ -61,7 +49,9 @@ public sealed record NamespaceDetailsData(
     string? DisplayName,
     string? Description,
     string? Documentation,
+    NamespaceStatus Status,
     DateTimeOffset CreatedAt,
+    DateTimeOffset ModifiedAt,
     DateTimeOffset? DeletedAt
 )
 {
@@ -73,8 +63,7 @@ public sealed record NamespaceDetailsData(
 public sealed record NamespaceOperationsData(
     bool CanUpdateDescriptions,
     bool CanDelete,
-    bool CanRestore,
-    bool CanDeletePermanently
+    bool CanRestore
 );
 
 // Mapper
@@ -87,8 +76,17 @@ public static class NamespaceGrainModelsMapper
             DisplayName: aggregate.DisplayName,
             Description: aggregate.Description,
             Documentation: aggregate.Documentation,
+            Status: aggregate.Status,
             CreatedAt: aggregate.CreatedAt,
+            ModifiedAt: aggregate.ModifiedAt,
             DeletedAt: aggregate.DeletedAt
+        );
+
+    public static NamespaceOperationsData MapToOperations(this NamespaceAggregate aggregate) =>
+        new(
+            CanDelete: aggregate.Status != NamespaceStatus.Deleted,
+            CanRestore: aggregate.Status != NamespaceStatus.Active,
+            CanUpdateDescriptions: aggregate.Status == NamespaceStatus.Active
         );
 
     public static NamespaceDetails MapToDomain(this NamespaceDetailsData data) =>
@@ -97,16 +95,16 @@ public static class NamespaceGrainModelsMapper
             DisplayName: data.DisplayName,
             Description: data.Description,
             Documentation: data.Documentation,
+            Status: data.Status,
             CreatedAt: data.CreatedAt,
-            DeletedAt: data.DeletedAt,
-            IsDeleted: data.IsDeleted
+            ModifiedAt: data.ModifiedAt,
+            DeletedAt: data.DeletedAt
         );
 
     public static NamespaceOperations MapToDomain(this NamespaceOperationsData data) =>
         new(
             CanUpdateDescriptions: data.CanUpdateDescriptions,
             CanDelete: data.CanDelete,
-            CanRestore: data.CanRestore,
-            CanDeletePermanently: data.CanDeletePermanently
+            CanRestore: data.CanRestore
         );
 }

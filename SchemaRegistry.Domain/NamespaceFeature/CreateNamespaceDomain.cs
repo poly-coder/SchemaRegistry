@@ -10,8 +10,6 @@ public sealed record CreateNamespaceCommand(
     string? Documentation = null
 );
 
-public sealed record CreateNamespaceCommandResult;
-
 // Validation
 
 internal class CreateNamespaceCommandValidator : AbstractValidator<CreateNamespaceCommand>

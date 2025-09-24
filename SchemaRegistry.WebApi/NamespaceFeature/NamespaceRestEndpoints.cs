@@ -26,21 +26,28 @@ internal static class NamespaceRestEndpoints
             .WithName(nameof(CreateNamespace))
             .WithSummary("Create a new namespace")
             .WithDescription("Creates a new namespace in the schema registry.")
-            .Produces<CreateNamespaceResponseBody>(StatusCodes.Status201Created);
+            .Produces<NamespaceResponseBody>(StatusCodes.Status201Created);
 
         commands
             .MapPut("/{name}/descriptions", UpdateNamespaceDescriptions)
             .WithName(nameof(UpdateNamespaceDescriptions))
             .WithSummary("Update the descriptions of a namespace")
             .WithDescription("Updates the descriptions of a namespace in the schema registry.")
-            .Produces<UpdateNamespaceDescriptionsResponseBody>();
+            .Produces<NamespaceResponseBody>();
+
+        commands
+            .MapPut("/{name}/documentation", UpdateNamespaceDocumentation)
+            .WithName(nameof(UpdateNamespaceDocumentation))
+            .WithSummary("Update the documentation of a namespace")
+            .WithDescription("Updates the documentation of a namespace in the schema registry.")
+            .Produces<NamespaceResponseBody>();
 
         commands
             .MapPut("/{name}/restore", RestoreNamespace)
             .WithName(nameof(RestoreNamespace))
             .WithSummary("Restore a deleted namespace")
             .WithDescription("Restores a deleted namespace in the schema registry.")
-            .Produces<RestoreNamespaceResponseBody>();
+            .Produces<NamespaceResponseBody>();
 
         commands
             .MapDelete("/{name}", DeleteNamespace)
@@ -49,12 +56,12 @@ internal static class NamespaceRestEndpoints
             .WithDescription(
                 "Deletes a namespace from the schema registry. Indicate whether to delete permanently or not."
             )
-            .Produces<DeleteNamespaceResponseBody>();
+            .Produces<NamespaceResponseBody>();
 
         return endpoints;
     }
 
-    internal static async Task<CreateNamespaceResponseBody> CreateNamespace(
+    internal static async Task<NamespaceResponseBody> CreateNamespace(
         [FromRoute(Name = "name")] string name,
         [FromBody] CreateNamespaceRequestBody body,
         [FromServices] ICreateNamespaceService service,
@@ -69,7 +76,7 @@ internal static class NamespaceRestEndpoints
         return result.MapToResponseBody();
     }
 
-    internal static async Task<UpdateNamespaceDescriptionsResponseBody> UpdateNamespaceDescriptions(
+    internal static async Task<NamespaceResponseBody> UpdateNamespaceDescriptions(
         [FromRoute(Name = "name")] string name,
         [FromBody] UpdateNamespaceDescriptionsRequestBody body,
         [FromServices] IUpdateNamespaceDescriptionsService service,
@@ -84,7 +91,22 @@ internal static class NamespaceRestEndpoints
         return result.MapToResponseBody();
     }
 
-    internal static async Task<RestoreNamespaceResponseBody> RestoreNamespace(
+    internal static async Task<NamespaceResponseBody> UpdateNamespaceDocumentation(
+        [FromRoute(Name = "name")] string name,
+        [FromBody] UpdateNamespaceDocumentationRequestBody body,
+        [FromServices] IUpdateNamespaceDocumentationService service,
+        [FromServices] IValidator<UpdateNamespaceDocumentationCommand> validator,
+        CancellationToken cancel
+    )
+    {
+        var command = await body.MapToCommand(name).Coerce().ValidateWithAsync(validator, cancel);
+
+        var result = await service.UpdateNamespaceDocumentationAsync(command, cancel);
+
+        return result.MapToResponseBody();
+    }
+
+    internal static async Task<NamespaceResponseBody> RestoreNamespace(
         [FromRoute(Name = "name")] string name,
         [FromServices] IRestoreNamespaceService service,
         [FromServices] IValidator<RestoreNamespaceCommand> validator,
@@ -100,17 +122,14 @@ internal static class NamespaceRestEndpoints
         return result.MapToResponseBody();
     }
 
-    internal static async Task<DeleteNamespaceResponseBody> DeleteNamespace(
+    internal static async Task<NamespaceResponseBody> DeleteNamespace(
         [FromRoute(Name = "name")] string name,
-        [FromQuery(Name = "permanently")] bool permanently,
         [FromServices] IDeleteNamespaceService service,
         [FromServices] IValidator<DeleteNamespaceCommand> validator,
         CancellationToken cancel
     )
     {
-        var command = new DeleteNamespaceCommand(name, permanently)
-            .Coerce()
-            .ValidateWith(validator);
+        var command = new DeleteNamespaceCommand(name).Coerce().ValidateWith(validator);
 
         var result = await service.DeleteNamespaceAsync(command, cancel);
 

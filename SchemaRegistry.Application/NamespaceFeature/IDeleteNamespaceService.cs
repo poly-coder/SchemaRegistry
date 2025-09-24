@@ -4,7 +4,7 @@ namespace SchemaRegistry.Application.NamespaceFeature;
 
 public interface IDeleteNamespaceService
 {
-    Task<DeleteNamespaceCommandResult> DeleteNamespaceAsync(
+    Task<NamespaceCommandResult> DeleteNamespaceAsync(
         DeleteNamespaceCommand command,
         CancellationToken cancel = default
     );

@@ -1,6 +1,5 @@
 using FluentValidation;
 using JasperFx;
-using JasperFx.CodeGeneration;
 using JasperFx.Events;
 using JasperFx.Events.Daemon;
 using Marten;
@@ -11,7 +10,7 @@ using Pico.OpenTelemetry;
 using Pico.WebApi;
 using Scalar.AspNetCore;
 using SchemaRegistry.Domain;
-using SchemaRegistry.Infrastructure.NamespaceFeature;
+using SchemaRegistry.Infrastructure;
 using SchemaRegistry.WebApi.NamespaceFeature;
 using SharpGrip.FluentValidation.AutoValidation.Endpoints.Extensions;
 

@@ -3,9 +3,7 @@ using Pico;
 
 namespace SchemaRegistry.Domain.NamespaceFeature;
 
-public sealed record DeleteNamespaceCommand(string Name, bool Permanently);
-
-public sealed record DeleteNamespaceCommandResult(bool PermanentlyDeleted);
+public sealed record DeleteNamespaceCommand(string Name);
 
 // Validation
 

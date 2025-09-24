@@ -2,22 +2,27 @@ namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
 public interface INamespaceGrain : IGrainWithStringKey
 {
-    Task<CreateNamespaceOutput> CreateNamespace(
+    Task<NamespaceCommandOutput> CreateNamespace(
         CreateNamespaceInput command,
         CancellationToken cancel
     );
 
-    Task<UpdateNamespaceDescriptionsOutput> UpdateNamespaceDescriptions(
+    Task<NamespaceCommandOutput> UpdateNamespaceDescriptions(
         UpdateNamespaceDescriptionsInput command,
         CancellationToken cancel
     );
 
-    Task<DeleteNamespaceOutput> DeleteNamespace(
+    Task<NamespaceCommandOutput> UpdateNamespaceDocumentation(
+        UpdateNamespaceDocumentationInput command,
+        CancellationToken cancel
+    );
+
+    Task<NamespaceCommandOutput> DeleteNamespace(
         DeleteNamespaceInput command,
         CancellationToken cancel
     );
 
-    Task<RestoreNamespaceOutput> RestoreNamespace(
+    Task<NamespaceCommandOutput> RestoreNamespace(
         RestoreNamespaceInput command,
         CancellationToken cancel
     );

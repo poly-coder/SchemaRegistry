@@ -4,7 +4,7 @@ namespace SchemaRegistry.Application.NamespaceFeature;
 
 public interface ICreateNamespaceService
 {
-    Task<CreateNamespaceCommandResult> CreateNamespaceAsync(
+    Task<NamespaceCommandResult> CreateNamespaceAsync(
         CreateNamespaceCommand command,
         CancellationToken cancel = default
     );

@@ -10,19 +10,14 @@ public sealed record CreateNamespaceRequestBody(
     string? Documentation = null
 );
 
-public sealed record CreateNamespaceResponseBody();
-
 public sealed record UpdateNamespaceDescriptionsRequestBody(
     string? DisplayName = null,
-    string? Description = null,
-    string? Documentation = null
+    string? Description = null
 );
 
-public sealed record UpdateNamespaceDescriptionsResponseBody();
+public sealed record UpdateNamespaceDocumentationRequestBody(string? Documentation = null);
 
-public sealed record DeleteNamespaceResponseBody(bool PermanentlyDeleted);
-
-public sealed record RestoreNamespaceResponseBody();
+public sealed record NamespaceResponseBody(bool Updated);
 
 // Mapper
 
@@ -41,44 +36,24 @@ public static class CreateNamespaceRestMapper
         );
     }
 
-    public static CreateNamespaceResponseBody MapToResponseBody(
-        this CreateNamespaceCommandResult result
-    )
-    {
-        return new();
-    }
-
     public static UpdateNamespaceDescriptionsCommand MapToCommand(
         this UpdateNamespaceDescriptionsRequestBody body,
         string name
     )
     {
-        return new UpdateNamespaceDescriptionsCommand(
-            name,
-            body.DisplayName,
-            body.Description,
-            body.Documentation
-        );
+        return new UpdateNamespaceDescriptionsCommand(name, body.DisplayName, body.Description);
     }
 
-    public static UpdateNamespaceDescriptionsResponseBody MapToResponseBody(
-        this UpdateNamespaceDescriptionsCommandResult result
+    public static UpdateNamespaceDocumentationCommand MapToCommand(
+        this UpdateNamespaceDocumentationRequestBody body,
+        string name
     )
     {
-        return new();
+        return new UpdateNamespaceDocumentationCommand(name, body.Documentation);
     }
 
-    public static DeleteNamespaceResponseBody MapToResponseBody(
-        this DeleteNamespaceCommandResult result
-    )
+    public static NamespaceResponseBody MapToResponseBody(this NamespaceCommandResult result)
     {
-        return new(result.PermanentlyDeleted);
-    }
-
-    public static RestoreNamespaceResponseBody MapToResponseBody(
-        this RestoreNamespaceCommandResult result
-    )
-    {
-        return new();
+        return new(Updated: result.Updated);
     }
 }

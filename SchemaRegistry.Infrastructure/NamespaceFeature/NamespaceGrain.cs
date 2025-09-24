@@ -27,7 +27,7 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         );
     }
 
-    public async Task<CreateNamespaceOutput> CreateNamespace(
+    public async Task<NamespaceCommandOutput> CreateNamespace(
         CreateNamespaceInput command,
         CancellationToken cancel
     )
@@ -48,10 +48,10 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         await UpdateAggregate(session, action, cancel);
 
-        return new();
+        return new(Updated: true);
     }
 
-    public async Task<UpdateNamespaceDescriptionsOutput> UpdateNamespaceDescriptions(
+    public async Task<NamespaceCommandOutput> UpdateNamespaceDescriptions(
         UpdateNamespaceDescriptionsInput command,
         CancellationToken cancel
     )
@@ -60,22 +60,54 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         await using var session = store.LightweightSession();
 
-        var created = new NamespaceDescriptionsWereUpdated(
+        if (
+            StringComparer.Ordinal.Equals(command.DisplayName, aggregate.DisplayName)
+            && StringComparer.Ordinal.Equals(command.Description, aggregate.Description)
+        )
+        {
+            return new(Updated: false);
+        }
+
+        var updated = new NamespaceDescriptionsWereUpdated(
             DisplayName: command.DisplayName,
-            Description: command.Description,
-            Documentation: command.Documentation
+            Description: command.Description
         );
 
-        var action = session.Events.Append(Id, version, created);
+        var action = session.Events.Append(Id, version, updated);
 
         await session.SaveChangesAsync(cancel);
 
         await UpdateAggregate(session, action, cancel);
 
-        return new();
+        return new(Updated: true);
     }
 
-    public async Task<DeleteNamespaceOutput> DeleteNamespace(
+    public async Task<NamespaceCommandOutput> UpdateNamespaceDocumentation(
+        UpdateNamespaceDocumentationInput command,
+        CancellationToken cancel
+    )
+    {
+        ValidateExistingAggregate(deleted: false);
+
+        await using var session = store.LightweightSession();
+
+        if (StringComparer.Ordinal.Equals(command.Documentation, aggregate.Documentation))
+        {
+            return new(Updated: false);
+        }
+
+        var updated = new NamespaceDocumentationWasUpdated(Documentation: command.Documentation);
+
+        var action = session.Events.Append(Id, version, updated);
+
+        await session.SaveChangesAsync(cancel);
+
+        await UpdateAggregate(session, action, cancel);
+
+        return new(Updated: true);
+    }
+
+    public async Task<NamespaceCommandOutput> DeleteNamespace(
         DeleteNamespaceInput command,
         CancellationToken cancel
     )
@@ -84,44 +116,23 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         await using var session = store.LightweightSession();
 
-        StreamAction action;
-
-        if (command.Permanently)
+        if (aggregate.Status is NamespaceStatus.Deleted)
         {
-            if (aggregate.DeletedAt is null)
-            {
-                throw new OperationConflictException(
-                    NamespaceMetadata.Name,
-                    Id,
-                    nameof(DeleteNamespace),
-                    "Cannot permanently delete an active namespace. Please, soft delete the namespace first."
-                );
-            }
-
-            var restored = new NamespaceWasPermanentlyDeleted();
-
-            action = session.Events.Append(Id, version, restored);
+            return new(Updated: false);
         }
-        else
-        {
-            if (aggregate.DeletedAt is not null)
-            {
-                return new(PermanentlyDeleted: false);
-            }
 
-            var softDeleted = new NamespaceWasSoftDeleted();
+        var deleted = new NamespaceWasDeleted();
 
-            action = session.Events.Append(Id, version, softDeleted);
-        }
+        var action = session.Events.Append(Id, version, deleted);
 
         await session.SaveChangesAsync(cancel);
 
         await UpdateAggregate(session, action, cancel);
 
-        return new(PermanentlyDeleted: command.Permanently);
+        return new(Updated: true);
     }
 
-    public async Task<RestoreNamespaceOutput> RestoreNamespace(
+    public async Task<NamespaceCommandOutput> RestoreNamespace(
         RestoreNamespaceInput command,
         CancellationToken cancel
     )
@@ -130,9 +141,9 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         await using var session = store.LightweightSession();
 
-        if (aggregate.DeletedAt is null)
+        if (aggregate.Status is NamespaceStatus.Active)
         {
-            return new();
+            return new(Updated: false);
         }
 
         var restored = new NamespaceWasRestored();
@@ -143,7 +154,7 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         await UpdateAggregate(session, action, cancel);
 
-        return new();
+        return new(Updated: true);
     }
 
     public Task<GetNamespaceByIdOutput> GetNamespaceById(
@@ -155,12 +166,7 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
 
         var details = aggregate.MapToDetails();
 
-        var operations = new NamespaceOperationsData(
-            CanUpdateDescriptions: !details.IsDeleted,
-            CanDelete: !details.IsDeleted,
-            CanRestore: details.IsDeleted,
-            CanDeletePermanently: details.IsDeleted
-        );
+        var operations = aggregate.MapToOperations();
 
         return Task.FromResult(new GetNamespaceByIdOutput(details, operations));
     }

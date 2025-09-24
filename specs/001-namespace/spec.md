@@ -56,16 +56,27 @@ As a schema registry client, I want to organize schemas into logical namespaces 
 6. **Given** I try to create a namespace via the API, **When** I use a name that already exists, **Then** the system prevents creation and returns an appropriate error response
 7. **Given** I have a namespace containing schemas, **When** I soft-delete the namespace via the API, **Then** all schemas within are automatically soft-deleted and can be accessed using `deleted=true` filter
 8. **Given** I have a soft-deleted namespace with soft-deleted schemas, **When** I restore the namespace via the API, **Then** both the namespace and all its schemas are restored to active status
+9. **Given** I have multiple namespaces in the system, **When** I request a list of active namespaces via the API, **Then** only active (non-deleted) namespaces are returned
+10. **Given** I have both active and soft-deleted namespaces, **When** I request namespaces with `deleted=true` filter, **Then** both active and soft-deleted namespaces are returned with their status clearly indicated
 
 ### Edge Cases
 
 - When a namespace containing schemas is soft-deleted, all schemas within are automatically soft-deleted and can be accessed with `deleted=true` filter
 - When a namespace is soft-deleted, its name is kept as reserved until permanently deleted (prevents name reuse)
-- Namespace names must follow pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
+- Namespace names must follow pattern: lowercase letters (a-z), numbers (0-9), and hyphens (-), with maximum 40 characters
+  - Valid examples: "user-service", "payment-v2", "analytics123", "core"
+  - Invalid examples: "User-Service" (uppercase), "-payment" (starts with hyphen), "user--service" (consecutive hyphens)
 - Display names must be trimmed and have maximum 80 characters
 - Descriptions must be trimmed and have maximum 1000 characters
 - Documentation can have maximum 10kb (10,240 characters)
 - System must handle concurrent operations safely to prevent race conditions
+- When namespace name contains only whitespace or is empty, system rejects creation with validation error
+- When display name or description contains only whitespace, system trims to empty string and accepts
+- When attempting to restore an already active namespace, system returns appropriate error
+- When attempting to soft-delete an already soft-deleted namespace, system returns appropriate error
+- When multiple clients attempt to create namespace with same name simultaneously, only one succeeds
+- When permanently deleting a namespace, system must ensure all external references to schemas within that namespace are considered (this may require coordination with dependent services)
+- When a namespace contains schemas that are referenced by other systems, soft-deletion should be preferred over permanent deletion to maintain referential integrity
 
 ## Requirements *(mandatory)*
 
@@ -94,18 +105,42 @@ As a schema registry client, I want to organize schemas into logical namespaces 
 - **FR-021**: System MUST trim and validate descriptions with maximum 1000 characters
 - **FR-022**: System MUST validate documentation with maximum 10kb (10,240 characters)
 - **FR-023**: System MUST handle concurrent operations safely to prevent race conditions and data corruption
+- **FR-024**: System MUST return appropriate HTTP status codes and error messages for validation failures (400 Bad Request for invalid input, 409 Conflict for duplicate names)
+- **FR-025**: System MUST return descriptive error messages that clearly indicate which validation rule was violated
+- **FR-026**: System MUST return 404 Not Found when attempting operations on non-existent namespaces
+- **FR-027**: System MUST return 422 Unprocessable Entity when attempting invalid state transitions (e.g., restoring active namespace, permanently deleting active namespace)
+- **FR-028**: System MUST provide warnings when attempting to permanently delete namespaces that contain schemas with external dependencies
+- **FR-029**: System MUST support querying schemas within a namespace to verify dependencies before permanent deletion
+- **FR-030**: System MUST maintain an audit trail of all namespace operations including creation, updates, deletions, and restorations
+- **FR-031**: System MUST record the operation type, timestamp, and any relevant metadata for each namespace change
+- **FR-032**: System MUST provide the ability to query the audit trail for a specific namespace to understand its change history
+
+### Non-Functional Requirements
+
+- **NFR-001**: System MUST support at least 10,000 active namespaces without performance degradation
+- **NFR-002**: Namespace operations (create, read, update) MUST complete within 100ms under normal load
+- **NFR-003**: System MUST maintain 99.9% availability for namespace operations
+- **NFR-004**: Namespace listing operations MUST support pagination to handle large numbers of namespaces efficiently
+- **NFR-005**: System MUST be horizontally scalable to handle increased namespace management load
+- **NFR-006**: All namespace data MUST be persisted durably to prevent data loss
 
 ### Key Entities *(include if feature involves data)*
 
 - **Namespace**: Represents a logical grouping container for schemas with the following attributes:
-  - Name (required, unique): The primary identifier for the namespace
-  - Display Name (optional): A human-friendly name for display purposes
-  - Description (optional): A brief description of the namespace purpose
-  - Documentation (optional): Markdown-formatted detailed documentation
-  - Status: Active, soft-deleted, or permanently deleted
-  - Created timestamp: When the namespace was originally created
-  - Modified timestamp: When the namespace was last updated
-  - Deleted timestamp: When the namespace was soft-deleted (if applicable)
+  - Name (required, unique): String, 1-40 characters, pattern: `^[a-z0-9-]+$` (lowercase letters, numbers, hyphens only)
+  - Display Name (optional): String, 0-80 characters after trimming, human-friendly name for display purposes
+  - Description (optional): String, 0-1000 characters after trimming, brief description of the namespace purpose
+  - Documentation (optional): String, 0-10,240 characters, markdown-formatted detailed documentation
+  - Status: Enum (Active, SoftDeleted, PermanentlyDeleted)
+  - Created timestamp: ISO 8601 datetime, when the namespace was originally created
+  - Modified timestamp: ISO 8601 datetime, when the namespace was last updated
+  - Deleted timestamp: ISO 8601 datetime, when the namespace was soft-deleted (null if never deleted)
+
+- **Namespace Audit Entry**: Represents a record of operations performed on namespaces with the following attributes:
+  - Namespace ID: String or UUID, reference to the affected namespace
+  - Operation Type: Enum (CREATE, UPDATE, SOFT_DELETE, RESTORE, PERMANENT_DELETE)
+  - Timestamp: ISO 8601 datetime, when the operation occurred
+  - Metadata: JSON object, additional context about the operation (e.g., which fields were changed, previous values)
 
 ---
 

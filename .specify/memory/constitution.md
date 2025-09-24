@@ -1,22 +1,18 @@
 <!--
 Sync Impact Report
-Version change: 1.0.0 → 1.0.0 (no version change requested)
+Version change: 1.0.0 → 1.0.0 (PATCH: added standard entity query patterns requirement)
 Modified principles:
-- II. Code Quality & Testing (expanded with Domain-Driven Development Terminology requirement)
-- III. Technology Stack & Infrastructure (expanded with MermaidJS Diagram Requirements)
-- IV. Architecture & Design (expanded with Data Contracts requirement)
+- IV. Architecture & Design (added Standard Entity Query Patterns requirement)
 Added sections:
-- Domain-Driven Development Terminology requirement (DDD jargon for consistent domain modeling)
-- MermaidJS Diagram Requirements (visual technical documentation standards)
-- Data Contracts requirement (explicit API interface definitions)
+- Standard Entity Query Patterns requirement (standardized query operations for all entities)
 Removed sections:
 - None
 Templates requiring updates:
-- ✅ .specify/templates/plan-template.md (Constitution Check updated with DDD terminology, MermaidJS diagrams, and data contracts requirements)
+- ✅ .specify/templates/plan-template.md (Constitution Check updated with standard entity query patterns validation)
 - ✅ .specify/templates/spec-template.md (no changes needed - correctly focused on functional requirements)
-- ✅ .specify/templates/tasks-template.md (validation checklist updated with DDD terminology, MermaidJS diagrams, and data contracts requirements)
+- ✅ .specify/templates/tasks-template.md (no changes needed - task validation covers API implementation)
 Follow-up TODOs:
-- None (all templates aligned with expanded Code Quality, Technology Stack, and Architecture requirements)
+- Future specifications must implement the three standard entity query patterns for all entities
 -->
 
 # Schema Registry Service Constitution
@@ -101,13 +97,19 @@ Rationale: Establishes consistent technology foundation with clear architectural
 
 **Event Sourcing**: All significant mutations MUST emit domain events for traceability, audit, and integration purposes.
 
+**Event Sourcing Audit Trail**: All audit trail requirements MUST be derived from persisted domain events rather than implemented as separate audit tables or explicit audit trail features, leveraging the event store's natural audit capabilities.
+
 **RESTful API Design**: APIs MUST follow RESTful principles with standard HTTP verbs, appropriate status codes, and consistent resource naming.
 
 **Data Contracts**: All API interfaces and data transfer objects MUST be explicitly defined with clear contracts including request/response schemas, validation rules, and versioning strategies to ensure API consistency and consumer clarity.
 
+**Continuation Token Pagination**: All list operations MUST implement continuation token based pagination rather than offset/limit or page-based pagination to ensure consistent performance and reliable cursor-based navigation through large result sets.
+
+**Standard Entity Query Patterns**: All entities MUST implement exactly three query operations: (1) List - filtered, sorted, and paginated result set of all stored items, (2) Get by ID - retrieve entity details from a single entity ID or return not found error, and (3) Get by IDs - retrieve details of found entities from a list of entity IDs, ensuring consistent query patterns across all domain entities.
+
 **Idempotent Operations**: All operations MUST be idempotent and resilient to transient failures for system reliability.
 
-Rationale: Ensures maintainable architecture, reliable data management, pure domain layer with controlled dependencies through FluentValidation, comprehensive audit capabilities, consistent API design patterns, and clear data contract definitions for API reliability.
+Rationale: Ensures maintainable architecture, reliable data management, pure domain layer with controlled dependencies through FluentValidation, comprehensive audit capabilities through event sourcing rather than separate audit systems, consistent API design patterns with reliable continuation token pagination, standardized entity query operations across all domain entities, and clear data contract definitions for API reliability.
 
 ## Governance
 
@@ -119,4 +121,4 @@ Rationale: Ensures maintainable architecture, reliable data management, pure dom
 
 **Exception Handling**: Temporary exceptions to principles require explicit documentation with time-bound remediation plan and stakeholder approval.
 
-**Version**: 1.0.0 | **Ratified**: 2025-09-21 | **Last Amended**: 2025-09-21
+**Version**: 1.0.0 | **Ratified**: 2025-09-21 | **Last Amended**: 2025-09-24

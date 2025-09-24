@@ -52,7 +52,7 @@ Validate design against the Constitution:
 - Version Control: Feature branch strategy used; no direct main commits; PR workflow with code review planned.
 - Code Quality: Business logic test coverage strategy defined (100% with xUnit); Moq, Verify, and Shouldly used for testing; DDD terminology consistently applied throughout; infrastructure integration test approach specified; error handling with ProblemDetails planned; warnings treated as errors.
 - Technology Stack: .NET/C# stack used; Clean Architecture with Domain/Application/Infrastructure/WebApi layers; ASP.NET Core for APIs; Marten library for event sourcing over PostgreSQL; Microsoft Orleans for scaling and caching; Temporal.io for long-running workflows; OpenTelemetry for observability; .NET Aspire for local development; Docker containerization planned; GitHub Actions CI/CD configured; MermaidJS diagrams used for technical documentation.
-- Architecture: Layer separation maintained; dependency direction correct; FluentValidation used in Domain layer as only third-party dependency; soft deletion pattern used; RESTful API design with explicit data contracts; event sourcing for mutations; idempotent operations.
+- Architecture: Layer separation maintained; dependency direction correct; FluentValidation used in Domain layer as only third-party dependency; soft deletion pattern used; RESTful API design with explicit data contracts; continuation token pagination for all list operations; standard entity query patterns (List, Get by ID, Get by IDs) implemented for all entities; event sourcing for mutations; idempotent operations.
 
 ## Project Structure
 

@@ -3,7 +3,7 @@
 **Feature Branch**: `001-namespace`
 **Created**: September 21, 2025
 **Status**: Draft
-**Input**: User description: "The user can create a namespace to group all related schemas. Each namespace have a unique name, an optional display name, description and markdown documentation. Namespaces can be soft-deleted, or permanently deleted, and also restored"
+**Input**: User description: "The user can create a namespace to group all related schemas. Each namespace have a unique name, an optional display name, description and markdown documentation. Namespaces can be soft-deleted and also restored"
 
 ## Execution Flow (main)
 
@@ -12,7 +12,7 @@
    → User wants namespace functionality for schema organization
 2. Extract key concepts from description
    → Actors: Schema Registry clients
-   → Actions: create, update, soft-delete, permanently delete, restore namespaces
+   → Actions: create, update, soft-delete, restore namespaces
    → Data: namespace name, display name, description, markdown documentation
    → Constraints: unique namespace names
 3. For each unclear aspect:
@@ -52,17 +52,26 @@ As a schema registry client, I want to organize schemas into logical namespaces 
 2. **Given** I have an existing namespace, **When** I update its display name and description via the API, **Then** the changes are saved and reflected in the namespace information
 3. **Given** I have a namespace I no longer need, **When** I soft-delete it via the API, **Then** the namespace is marked as deleted but can be restored later
 4. **Given** I have a soft-deleted namespace, **When** I choose to restore it via the API, **Then** the namespace becomes active again with all its previous information
-5. **Given** I have a soft-deleted namespace, **When** I permanently delete it via the API, **Then** the namespace is completely removed from the system
-6. **Given** I try to create a namespace via the API, **When** I use a name that already exists, **Then** the system prevents creation and returns an appropriate error response
-7. **Given** I have a namespace containing schemas, **When** I soft-delete the namespace via the API, **Then** all schemas within are automatically soft-deleted and can be accessed using `deleted=true` filter
-8. **Given** I have a soft-deleted namespace with soft-deleted schemas, **When** I restore the namespace via the API, **Then** both the namespace and all its schemas are restored to active status
-9. **Given** I have multiple namespaces in the system, **When** I request a list of active namespaces via the API, **Then** only active (non-deleted) namespaces are returned
-10. **Given** I have both active and soft-deleted namespaces, **When** I request namespaces with `deleted=true` filter, **Then** both active and soft-deleted namespaces are returned with their status clearly indicated
+5. **Given** I try to create a namespace via the API, **When** I use a name that already exists, **Then** the system prevents creation and returns an appropriate error response
+6. **Given** I have a namespace containing schemas, **When** I soft-delete the namespace via the API, **Then** all schemas within are automatically soft-deleted and can be accessed using `deleted=true` filter
+7. **Given** I have a soft-deleted namespace with soft-deleted schemas, **When** I restore the namespace via the API, **Then** both the namespace and all its schemas are restored to active status
+8. **Given** I have multiple namespaces in the system, **When** I request a list of active namespaces via the API, **Then** only active (non-deleted) namespaces are returned
+9. **Given** I have both active and soft-deleted namespaces, **When** I request namespaces with `deleted=true` filter, **Then** both active and soft-deleted namespaces are returned with their status clearly indicated
+
+```mermaid
+stateDiagram-v2
+  [*] --> Active : create
+  Active --> SoftDeleted : delete
+  SoftDeleted --> Active : restore
+
+  state Active
+  state SoftDeleted
+```
 
 ### Edge Cases
 
 - When a namespace containing schemas is soft-deleted, all schemas within are automatically soft-deleted and can be accessed with `deleted=true` filter
-- When a namespace is soft-deleted, its name is kept as reserved until permanently deleted (prevents name reuse)
+- When a namespace is soft-deleted, its name remains reserved (prevents name reuse while deleted)
 - Namespace names must follow pattern: lowercase letters (a-z), numbers (0-9), and hyphens (-), with maximum 40 characters
   - Valid examples: "user-service", "payment-v2", "analytics123", "core"
   - Invalid examples: "User-Service" (uppercase), "-payment" (starts with hyphen), "user--service" (consecutive hyphens)
@@ -75,8 +84,7 @@ As a schema registry client, I want to organize schemas into logical namespaces 
 - When attempting to restore an already active namespace, system returns appropriate error
 - When attempting to soft-delete an already soft-deleted namespace, system returns appropriate error
 - When multiple clients attempt to create namespace with same name simultaneously, only one succeeds
-- When permanently deleting a namespace, system must ensure all external references to schemas within that namespace are considered (this may require coordination with dependent services)
-- When a namespace contains schemas that are referenced by other systems, soft-deletion should be preferred over permanent deletion to maintain referential integrity
+- When a namespace contains schemas that are referenced by other systems, soft-deletion maintains referential integrity while marking the namespace as inactive
 
 ## Requirements *(mandatory)*
 
@@ -90,30 +98,26 @@ As a schema registry client, I want to organize schemas into logical namespaces 
 - **FR-006**: System MUST allow users to update the display name, description, and documentation of existing namespaces
 - **FR-007**: System MUST provide the ability to soft-delete a namespace, marking it as deleted while preserving its data
 - **FR-008**: System MUST allow users to restore a previously soft-deleted namespace
-- **FR-009**: System MUST provide the ability to permanently delete a soft-deleted namespace
-- **FR-010**: System MUST prevent permanent deletion of namespaces that are not already soft-deleted
-- **FR-011**: System MUST display namespace information including name, display name, description, and documentation
-- **FR-012**: System MUST track the creation and modification timestamps for namespaces
-- **FR-013**: System MUST distinguish between active, soft-deleted, and permanently deleted namespaces in listings
-- **FR-014**: System MUST implement a flat namespace structure with no support for nested or hierarchical namespaces
-- **FR-015**: System MUST cascade soft-delete operations: when a namespace is soft-deleted, all schemas within that namespace are automatically soft-deleted and can be accessed using a `deleted=true` filter
-- **FR-016**: System MUST cascade restore operations: when a soft-deleted namespace is restored, all schemas that were soft-deleted with the namespace are automatically restored
-- **FR-017**: System MUST cascade permanent delete operations: when a namespace is permanently deleted, all schemas within that namespace are permanently deleted
-- **FR-018**: System MUST reserve soft-deleted namespace names until permanent deletion to prevent name reuse
-- **FR-019**: System MUST validate namespace names using pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
-- **FR-020**: System MUST trim and validate display names with maximum 80 characters
-- **FR-021**: System MUST trim and validate descriptions with maximum 1000 characters
-- **FR-022**: System MUST validate documentation with maximum 10kb (10,240 characters)
-- **FR-023**: System MUST handle concurrent operations safely to prevent race conditions and data corruption
-- **FR-024**: System MUST return appropriate HTTP status codes and error messages for validation failures (400 Bad Request for invalid input, 409 Conflict for duplicate names)
-- **FR-025**: System MUST return descriptive error messages that clearly indicate which validation rule was violated
-- **FR-026**: System MUST return 404 Not Found when attempting operations on non-existent namespaces
-- **FR-027**: System MUST return 422 Unprocessable Entity when attempting invalid state transitions (e.g., restoring active namespace, permanently deleting active namespace)
-- **FR-028**: System MUST provide warnings when attempting to permanently delete namespaces that contain schemas with external dependencies
-- **FR-029**: System MUST support querying schemas within a namespace to verify dependencies before permanent deletion
-- **FR-030**: System MUST maintain an audit trail of all namespace operations including creation, updates, deletions, and restorations
-- **FR-031**: System MUST record the operation type, timestamp, and any relevant metadata for each namespace change
-- **FR-032**: System MUST provide the ability to query the audit trail for a specific namespace to understand its change history
+
+- **FR-009**: System MUST display namespace information including name, display name, description, and documentation
+- **FR-010**: System MUST track the creation and modification timestamps for namespaces
+- **FR-011**: System MUST distinguish between active and soft-deleted namespaces in listings
+- **FR-012**: System MUST implement a flat namespace structure with no support for nested or hierarchical namespaces
+- **FR-013**: System MUST cascade soft-delete operations: when a namespace is soft-deleted, all schemas within that namespace are automatically soft-deleted and can be accessed using a `deleted=true` filter
+- **FR-014**: System MUST cascade restore operations: when a soft-deleted namespace is restored, all schemas that were soft-deleted with the namespace are automatically restored
+- **FR-015**: System MUST reserve soft-deleted namespace names to prevent name reuse while deleted
+- **FR-016**: System MUST validate namespace names using pattern "my-namespace123" (lowercase letters, numbers, hyphens) with maximum 40 characters
+- **FR-017**: System MUST trim and validate display names with maximum 80 characters
+- **FR-018**: System MUST trim and validate descriptions with maximum 1000 characters
+- **FR-019**: System MUST validate documentation with maximum 10kb (10,240 characters)
+- **FR-020**: System MUST handle concurrent operations safely to prevent race conditions and data corruption
+- **FR-021**: System MUST return appropriate HTTP status codes and error messages for validation failures (400 Bad Request for invalid input, 409 Conflict for duplicate names)
+- **FR-022**: System MUST return descriptive error messages that clearly indicate which validation rule was violated
+- **FR-023**: System MUST return 404 Not Found when attempting operations on non-existent namespaces
+- **FR-024**: System MUST return 422 Unprocessable Entity when attempting invalid state transitions (e.g., restoring active namespace, soft-deleting already soft-deleted namespace)
+- **FR-025**: System MUST maintain an audit trail of all namespace operations including creation, updates, soft-deletions, and restorations
+- **FR-026**: System MUST record the operation type, timestamp, and any relevant metadata for each namespace change
+- **FR-027**: System MUST provide the ability to query the audit trail for a specific namespace to understand its change history
 
 ### Non-Functional Requirements
 
@@ -131,16 +135,10 @@ As a schema registry client, I want to organize schemas into logical namespaces 
   - Display Name (optional): String, 0-80 characters after trimming, human-friendly name for display purposes
   - Description (optional): String, 0-1000 characters after trimming, brief description of the namespace purpose
   - Documentation (optional): String, 0-10,240 characters, markdown-formatted detailed documentation
-  - Status: Enum (Active, SoftDeleted, PermanentlyDeleted)
+  - Status: Enum (Active, SoftDeleted)
   - Created timestamp: ISO 8601 datetime, when the namespace was originally created
   - Modified timestamp: ISO 8601 datetime, when the namespace was last updated
   - Deleted timestamp: ISO 8601 datetime, when the namespace was soft-deleted (null if never deleted)
-
-- **Namespace Audit Entry**: Represents a record of operations performed on namespaces with the following attributes:
-  - Namespace ID: String or UUID, reference to the affected namespace
-  - Operation Type: Enum (CREATE, UPDATE, SOFT_DELETE, RESTORE, PERMANENT_DELETE)
-  - Timestamp: ISO 8601 datetime, when the operation occurred
-  - Metadata: JSON object, additional context about the operation (e.g., which fields were changed, previous values)
 
 ---
 

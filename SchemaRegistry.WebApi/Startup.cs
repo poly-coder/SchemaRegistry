@@ -20,12 +20,44 @@ internal static class Startup
 {
     public static void ConfigureServices(WebApplicationBuilder builder)
     {
-        builder.Services.LogRegisteredServices(
-            "[***] ServiceDefaults services",
-            _ => builder.AddServiceDefaults(),
-            TextWriter.Null
-        );
+        builder
+            .AddServiceDefaults()
+            .AddFluentValidationServices()
+            .AddExceptionHandlingServices()
+            .AddSchemaRegistryInfrastructureServices()
+            .AddOpenApiServices()
+            .AddPostgresServices()
+            .AddMartenServices()
+            .AddOrleansServices();
+    }
 
+    public static void ConfigureApplication(WebApplication app)
+    {
+        app.MapDefaultEndpoints();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi();
+            app.MapScalarApiReference(
+                "/docs",
+                (options, context) =>
+                {
+                    options.Title = "Schema Registry API";
+                }
+            );
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseExceptionToProblemMiddleware();
+
+        app.MapSchemaRegistryEndpoints();
+    }
+
+    internal static WebApplicationBuilder AddFluentValidationServices(
+        this WebApplicationBuilder builder
+    )
+    {
         builder.Services.LogRegisteredServices(
             "[***] FluentValidation services",
             services =>
@@ -37,6 +69,13 @@ internal static class Startup
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddExceptionHandlingServices(
+        this WebApplicationBuilder builder
+    )
+    {
         builder.Services.LogRegisteredServices(
             "[***] ProblemDetails services",
             services =>
@@ -47,12 +86,24 @@ internal static class Startup
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddSchemaRegistryInfrastructureServices(
+        this WebApplicationBuilder builder
+    )
+    {
         builder.Services.LogRegisteredServices(
             "[***] SchemaRegistry Infrastructure services",
             services => services.AddSchemaRegistryOrleansServices(),
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddOpenApiServices(this WebApplicationBuilder builder)
+    {
         builder.Services.LogRegisteredServices(
             "[***] OpenAPI services",
             services =>
@@ -75,8 +126,13 @@ internal static class Startup
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddPostgresServices(this WebApplicationBuilder builder)
+    {
         builder.Services.LogRegisteredServices(
-            "[***] Postgres services",
+            "[***] Database services",
             services =>
             {
                 var connectionString =
@@ -90,6 +146,11 @@ internal static class Startup
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddMartenServices(this WebApplicationBuilder builder)
+    {
         builder.Services.LogRegisteredServices(
             "[***] Marten services",
             services =>
@@ -136,6 +197,11 @@ internal static class Startup
             Console.Out
         );
 
+        return builder;
+    }
+
+    internal static WebApplicationBuilder AddOrleansServices(this WebApplicationBuilder builder)
+    {
         builder.Services.LogRegisteredServices(
             "[***] Microsoft Orleans services",
             _ =>
@@ -145,28 +211,7 @@ internal static class Startup
                 }),
             TextWriter.Null
         );
-    }
 
-    public static void ConfigureApplication(WebApplication app)
-    {
-        app.MapDefaultEndpoints();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-            app.MapScalarApiReference(
-                "/docs",
-                (options, context) =>
-                {
-                    options.Title = "Schema Registry API";
-                }
-            );
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseExceptionToProblemMiddleware();
-
-        app.MapSchemaRegistryEndpoints();
+        return builder;
     }
 }

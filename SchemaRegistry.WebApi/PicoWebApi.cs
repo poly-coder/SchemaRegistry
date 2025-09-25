@@ -23,7 +23,7 @@ public class PicoWebApi
     public static readonly Meter Meter = new(Name);
 }
 
-public static class CommonDependencyInjectionExtensions
+public static class PicoWebApiDependencyInjectionExtensions
 {
     public static IServiceCollection AddCustomExceptionHandlerMiddleware(
         this IServiceCollection services

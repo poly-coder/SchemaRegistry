@@ -1,0 +1,121 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# Our custom ontology for feature specifications
+@prefix req: <http://pico.example/ontology/requirements#> .
+
+# Ontology declaration
+req: rdf:type owl:Ontology ;
+    rdfs:label "Requirements Ontology" ;
+    rdfs:comment "Ontology for describing software feature requirements and specifications" ;
+    dcterms:created "2025-09-25"^^xsd:date .
+
+# Core classes for our requirements ontology
+req:Feature rdf:type owl:Class ;
+    rdfs:label "Feature" ;
+    rdfs:comment "A software feature specification" .
+
+req:Requirement rdf:type owl:Class ;
+    rdfs:label "Requirement" ;
+    rdfs:comment "A specific requirement within a feature" .
+
+req:FunctionalRequirement rdf:type owl:Class ;
+    rdfs:subClassOf req:Requirement ;
+    rdfs:label "Functional Requirement" ;
+    rdfs:comment "A requirement that describes what the system must do" .
+
+req:NonFunctionalRequirement rdf:type owl:Class ;
+    rdfs:subClassOf req:Requirement ;
+    rdfs:label "Non-Functional Requirement" ;
+    rdfs:comment "A requirement that describes how the system must perform" .
+
+req:Entity rdf:type owl:Class ;
+    rdfs:label "Entity" ;
+    rdfs:comment "A key data entity in the feature" .
+
+req:UserScenario rdf:type owl:Class ;
+    rdfs:label "User Scenario" ;
+    rdfs:comment "A scenario describing user interaction with the feature" .
+
+req:AcceptanceScenario rdf:type owl:Class ;
+    rdfs:label "Acceptance Scenario" ;
+    rdfs:comment "A specific testable scenario for acceptance criteria" .
+
+req:EdgeCase rdf:type owl:Class ;
+    rdfs:label "Edge Case" ;
+    rdfs:comment "A boundary condition or exceptional scenario" .
+
+# Properties for connecting concepts
+req:hasRequirement rdf:type owl:ObjectProperty ;
+    rdfs:label "has requirement" ;
+    rdfs:comment "Connects a feature to its requirements" ;
+    rdfs:domain req:Feature ;
+    rdfs:range req:Requirement .
+
+req:hasEntity rdf:type owl:ObjectProperty ;
+    rdfs:label "has entity" ;
+    rdfs:comment "Connects a feature to its key entities" ;
+    rdfs:domain req:Feature ;
+    rdfs:range req:Entity .
+
+req:hasUserScenario rdf:type owl:ObjectProperty ;
+    rdfs:label "has user scenario" ;
+    rdfs:comment "Connects a feature to its user scenarios" ;
+    rdfs:domain req:Feature ;
+    rdfs:range req:UserScenario .
+
+req:hasAcceptanceScenario rdf:type owl:ObjectProperty ;
+    rdfs:label "has acceptance scenario" ;
+    rdfs:comment "Connects a user scenario to its acceptance scenarios" ;
+    rdfs:domain req:UserScenario ;
+    rdfs:range req:AcceptanceScenario .
+
+req:hasEdgeCase rdf:type owl:ObjectProperty ;
+    rdfs:label "has edge case" ;
+    rdfs:comment "Connects a feature to its edge cases" ;
+    rdfs:domain req:Feature ;
+    rdfs:range req:EdgeCase .
+
+req:relatedToEntity rdf:type owl:ObjectProperty ;
+    rdfs:label "related to entity" ;
+    rdfs:comment "Connects a requirement to entities it involves" ;
+    rdfs:domain req:Requirement ;
+    rdfs:range req:Entity .
+
+req:dependsOn rdf:type owl:ObjectProperty ;
+    rdfs:label "depends on" ;
+    rdfs:comment "Indicates a dependency between requirements" ;
+    rdfs:domain req:Requirement ;
+    rdfs:range req:Requirement .
+
+# Data properties
+req:identifier rdf:type owl:DatatypeProperty ;
+    rdfs:label "identifier" ;
+    rdfs:comment "Unique identifier for a requirement (e.g., FR-001)" ;
+    rdfs:domain req:Requirement ;
+    rdfs:range xsd:string .
+
+req:priority rdf:type owl:DatatypeProperty ;
+    rdfs:label "priority" ;
+    rdfs:comment "Priority level of a requirement" ;
+    rdfs:domain req:Requirement ;
+    rdfs:range xsd:string .
+
+req:status rdf:type owl:DatatypeProperty ;
+    rdfs:label "status" ;
+    rdfs:comment "Current status of a requirement or feature" ;
+    rdfs:range xsd:string .
+
+req:description rdf:type owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:comment "Detailed description of the concept" ;
+    rdfs:range xsd:string .
+
+req:branchName rdf:type owl:DatatypeProperty ;
+    rdfs:label "branch name" ;
+    rdfs:comment "Git branch associated with the feature" ;
+    rdfs:domain req:Feature ;
+    rdfs:range xsd:string .

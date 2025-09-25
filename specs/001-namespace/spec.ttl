@@ -1,0 +1,230 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# Import the requirements ontology
+@prefix req: <http://pico.example/ontology/requirements#> .
+
+# This specific feature
+@prefix ns: <http://pico.example/features/001-namespace#> .
+
+# Namespace Management Feature Specification
+ns:NamespaceFeature rdf:type req:Feature ;
+    rdfs:label "Namespace Management" ;
+    req:description "The user can create a namespace to group all related schemas. Each namespace have a unique name, an optional display name, description and markdown documentation. Namespaces can be soft-deleted and also restored" ;
+    req:branchName "001-namespace" ;
+    req:status "Draft" ;
+    dcterms:created "2025-09-21"^^xsd:date ;
+    req:hasEntity ns:NamespaceEntity .
+
+# Key Entity: Namespace
+ns:NamespaceEntity rdf:type req:Entity ;
+    rdfs:label "Namespace" ;
+    req:description "Represents a logical grouping container for schemas" .
+
+# Namespace properties (from the specification)
+ns:name rdf:type owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "Unique identifier name, 1-40 characters, pattern: lowercase letters, numbers, hyphens only" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:string .
+
+ns:displayName rdf:type owl:DatatypeProperty ;
+    rdfs:label "display name" ;
+    rdfs:comment "Optional human-friendly name for display purposes, 0-80 characters after trimming" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:string .
+
+ns:description rdf:type owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:comment "Optional brief description of the namespace purpose, 0-1000 characters after trimming" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:string .
+
+ns:documentation rdf:type owl:DatatypeProperty ;
+    rdfs:label "documentation" ;
+    rdfs:comment "Optional markdown-formatted detailed documentation, 0-10,000 characters" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:string .
+
+ns:status rdf:type owl:DatatypeProperty ;
+    rdfs:label "status" ;
+    rdfs:comment "Current status of the namespace: Active or SoftDeleted" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:string .
+
+ns:createdTimestamp rdf:type owl:DatatypeProperty ;
+    rdfs:label "created timestamp" ;
+    rdfs:comment "ISO 8601 datetime when the namespace was originally created" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:dateTime .
+
+ns:modifiedTimestamp rdf:type owl:DatatypeProperty ;
+    rdfs:label "modified timestamp" ;
+    rdfs:comment "ISO 8601 datetime when the namespace was last updated" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:dateTime .
+
+ns:deletedTimestamp rdf:type owl:DatatypeProperty ;
+    rdfs:label "deleted timestamp" ;
+    rdfs:comment "ISO 8601 datetime when the namespace was soft-deleted (null if never deleted)" ;
+    rdfs:domain ns:NamespaceEntity ;
+    rdfs:range xsd:dateTime .
+
+# Functional Requirements
+ns:FR-001 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-001" ;
+    req:description "System MUST allow users to create a new namespace with a unique name" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-002 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-002" ;
+    req:description "System MUST validate that namespace names are unique across the entire system" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-001 .
+
+ns:FR-003 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-003" ;
+    req:description "System MUST allow users to specify an optional display name for a namespace" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-006 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-006" ;
+    req:description "System MUST allow users to update the display name, description, and documentation of existing namespaces" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-007 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-007" ;
+    req:description "System MUST provide the ability to soft-delete a namespace, marking it as deleted while preserving its data" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-008 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-008" ;
+    req:description "System MUST allow users to restore a previously soft-deleted namespace" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-007 .
+
+ns:FR-013 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-013" ;
+    req:description "System MUST cascade soft-delete operations: when a namespace is soft-deleted, all schemas within that namespace are automatically soft-deleted and can be accessed using a deleted=true filter" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-014 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-014" ;
+    req:description "System MUST cascade restore operations: when a soft-deleted namespace is restored, all schemas that were soft-deleted with the namespace are automatically restored" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-013 .
+
+ns:FR-016 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-016" ;
+    req:description "System MUST validate namespace names using pattern 'my-namespace123' (lowercase letters, numbers, hyphens) with maximum 40 characters" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-001 .
+
+ns:FR-017 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-017" ;
+    req:description "System MUST trim and validate display names with maximum 80 characters" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-003 .
+
+ns:FR-018 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-018" ;
+    req:description "System MUST trim and validate descriptions with maximum 1000 characters" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-019 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-019" ;
+    req:description "System MUST validate documentation with maximum 10kb (10,000 characters)" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-020 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-020" ;
+    req:description "System MUST handle concurrent operations safely to prevent race conditions and data corruption" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:FR-021 rdf:type req:FunctionalRequirement ;
+    req:identifier "FR-021" ;
+    req:description "System MUST return appropriate HTTP status codes and error messages for validation failures (400 Bad Request for invalid input, 409 Conflict for duplicate names)" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:FR-002, ns:FR-016, ns:FR-017, ns:FR-018, ns:FR-019 .
+
+# Non-Functional Requirements
+ns:NFR-001 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-001" ;
+    req:description "System MUST support at least 10,000 active namespaces without performance degradation" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:NFR-002 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-002" ;
+    req:description "Namespace operations (create, read, update) MUST complete within 100ms under normal load" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:NFR-003 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-003" ;
+    req:description "System MUST maintain 99.9% availability for namespace operations" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:NFR-004 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-004" ;
+    req:description "Namespace listing operations MUST support pagination to handle large numbers of namespaces efficiently" ;
+    req:relatedToEntity ns:NamespaceEntity ;
+    req:dependsOn ns:NFR-001 .
+
+ns:NFR-005 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-005" ;
+    req:description "System MUST be horizontally scalable to handle increased namespace management load" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+ns:NFR-006 rdf:type req:NonFunctionalRequirement ;
+    req:identifier "NFR-006" ;
+    req:description "All namespace data MUST be persisted durably to prevent data loss" ;
+    req:relatedToEntity ns:NamespaceEntity .
+
+# User Scenarios
+ns:PrimaryUserStory rdf:type req:UserScenario ;
+    rdfs:label "Primary User Story" ;
+    req:description "As a schema registry client, I want to organize schemas into logical namespaces through the Schema Registry service API so that I can better manage and categorize related schemas within my microservice architecture, making them easier to find and maintain. I need the ability to create namespaces with descriptive information, update them as needed, and manage their lifecycle including soft deletion and restoration when necessary." .
+
+ns:CreateNamespaceScenario rdf:type req:AcceptanceScenario ;
+    rdfs:label "Create Namespace Scenario" ;
+    req:description "Given I am a schema registry client, When I create a new namespace with a unique name 'payment-schemas' via the API, Then the namespace is created and available for schema assignment" .
+
+ns:UpdateNamespaceScenario rdf:type req:AcceptanceScenario ;
+    rdfs:label "Update Namespace Scenario" ;
+    req:description "Given I have an existing namespace, When I update its display name and description via the API, Then the changes are saved and reflected in the namespace information" .
+
+ns:SoftDeleteNamespaceScenario rdf:type req:AcceptanceScenario ;
+    rdfs:label "Soft Delete Namespace Scenario" ;
+    req:description "Given I have a namespace I no longer need, When I soft-delete it via the API, Then the namespace is marked as deleted but can be restored later" .
+
+ns:RestoreNamespaceScenario rdf:type req:AcceptanceScenario ;
+    rdfs:label "Restore Namespace Scenario" ;
+    req:description "Given I have a soft-deleted namespace, When I choose to restore it via the API, Then the namespace becomes active again with all its previous information" .
+
+ns:CascadeDeleteScenario rdf:type req:AcceptanceScenario ;
+    rdfs:label "Cascade Delete Scenario" ;
+    req:description "Given I have a namespace containing schemas, When I soft-delete the namespace via the API, Then all schemas within are automatically soft-deleted and can be accessed using deleted=true filter" .
+
+# Edge Cases
+ns:ConcurrentCreationEdgeCase rdf:type req:EdgeCase ;
+    rdfs:label "Concurrent Creation Edge Case" ;
+    req:description "When multiple clients attempt to create namespace with same name simultaneously, only one succeeds" .
+
+ns:ReservedNameEdgeCase rdf:type req:EdgeCase ;
+    rdfs:label "Reserved Name Edge Case" ;
+    req:description "When a namespace is soft-deleted, its name remains reserved (prevents name reuse while deleted)" .
+
+ns:ValidationEdgeCase rdf:type req:EdgeCase ;
+    rdfs:label "Validation Edge Case" ;
+    req:description "Namespace names must follow pattern: lowercase letters (a-z), numbers (0-9), and hyphens (-), with maximum 40 characters. Invalid examples: 'User-Service' (uppercase), '-payment' (starts with hyphen)" .
+
+# Connect scenarios to the primary user story
+ns:PrimaryUserStory req:hasAcceptanceScenario ns:CreateNamespaceScenario, ns:UpdateNamespaceScenario, ns:SoftDeleteNamespaceScenario, ns:RestoreNamespaceScenario, ns:CascadeDeleteScenario .
+
+# Connect all scenarios and edge cases to the feature
+ns:NamespaceFeature req:hasUserScenario ns:PrimaryUserStory ;
+    req:hasEdgeCase ns:ConcurrentCreationEdgeCase, ns:ReservedNameEdgeCase, ns:ValidationEdgeCase ;
+    req:hasRequirement ns:FR-001, ns:FR-002, ns:FR-003, ns:FR-006, ns:FR-007, ns:FR-008, ns:FR-013, ns:FR-014, ns:FR-016, ns:FR-017, ns:FR-018, ns:FR-019, ns:FR-020, ns:FR-021 ;
+    req:hasRequirement ns:NFR-001, ns:NFR-002, ns:NFR-003, ns:NFR-004, ns:NFR-005, ns:NFR-006 .

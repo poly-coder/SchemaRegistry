@@ -1,50 +1,52 @@
 using SchemaRegistry.Domain;
-using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(CreateNamespaceInput)}")]
-public sealed record CreateNamespaceInput(
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(CreateNamespaceCommand)}")]
+public sealed record CreateNamespaceCommand(
     string? DisplayName,
     string? Description,
     string? Documentation
 );
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDescriptionsInput)}")]
-public sealed record UpdateNamespaceDescriptionsInput(string? DisplayName, string? Description);
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDescriptionsCommand)}")]
+public sealed record UpdateNamespaceDescriptionsCommand(string? DisplayName, string? Description);
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDocumentationInput)}")]
-public sealed record UpdateNamespaceDocumentationInput(string? Documentation);
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(UpdateNamespaceDocumentationCommand)}")]
+public sealed record UpdateNamespaceDocumentationCommand(string? Documentation);
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(DeleteNamespaceInput)}")]
-public sealed record DeleteNamespaceInput;
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(DeleteNamespaceCommand)}")]
+public sealed record DeleteNamespaceCommand;
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(RestoreNamespaceInput)}")]
-public sealed record RestoreNamespaceInput;
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(RestoreNamespaceCommand)}")]
+public sealed record RestoreNamespaceCommand;
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceCommandOutput)}")]
-public sealed record NamespaceCommandOutput(bool Updated);
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceCommandResult)}")]
+public sealed record NamespaceCommandResult(bool Updated);
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdInput)}")]
-public sealed record GetNamespaceByIdInput(bool Deleted);
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdQuery)}")]
+public sealed record GetNamespaceByIdQuery(bool Deleted);
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdOutput)}")]
-public sealed record GetNamespaceByIdOutput(
-    NamespaceDetailsData Details,
-    NamespaceOperationsData Operations
-);
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdQueryResult)}")]
+public sealed record GetNamespaceByIdQueryResult(NamespaceDetailsInfo Namespace);
+
+public enum NamespaceStatus
+{
+    Active = 0,
+    Deleted = 1,
+}
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceDetailsData)}")]
-public sealed record NamespaceDetailsData(
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceDetails)}")]
+public sealed record NamespaceDetails(
     string Name,
     string? DisplayName,
     string? Description,
@@ -59,52 +61,15 @@ public sealed record NamespaceDetailsData(
 }
 
 [GenerateSerializer]
-[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceOperationsData)}")]
-public sealed record NamespaceOperationsData(
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceOperations)}")]
+public sealed record NamespaceOperations(
     bool CanUpdateDescriptions,
     bool CanDelete,
     bool CanRestore
 );
 
+[GenerateSerializer]
+[Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceDetailsInfo)}")]
+public sealed record NamespaceDetailsInfo(NamespaceDetails Details, NamespaceOperations Operations);
+
 // Mapper
-
-public static class NamespaceGrainModelsMapper
-{
-    public static NamespaceDetailsData MapToDetails(this NamespaceAggregate aggregate) =>
-        new(
-            Name: aggregate.Name,
-            DisplayName: aggregate.DisplayName,
-            Description: aggregate.Description,
-            Documentation: aggregate.Documentation,
-            Status: aggregate.Status,
-            CreatedAt: aggregate.CreatedAt,
-            ModifiedAt: aggregate.ModifiedAt,
-            DeletedAt: aggregate.DeletedAt
-        );
-
-    public static NamespaceOperationsData MapToOperations(this NamespaceAggregate aggregate) =>
-        new(
-            CanDelete: aggregate.Status != NamespaceStatus.Deleted,
-            CanRestore: aggregate.Status != NamespaceStatus.Active,
-            CanUpdateDescriptions: aggregate.Status == NamespaceStatus.Active
-        );
-
-    public static NamespaceDetails MapToDomain(this NamespaceDetailsData data) =>
-        new(
-            Name: data.Name,
-            DisplayName: data.DisplayName,
-            Description: data.Description,
-            Documentation: data.Documentation,
-            Status: data.Status,
-            CreatedAt: data.CreatedAt,
-            ModifiedAt: data.ModifiedAt,
-            DeletedAt: data.DeletedAt
-        );
-
-    public static NamespaceOperations MapToDomain(this NamespaceOperationsData data) =>
-        new(
-            CanUpdateDescriptions: data.CanUpdateDescriptions,
-            CanDelete: data.CanDelete,
-            CanRestore: data.CanRestore
-        );
-}

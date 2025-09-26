@@ -6,6 +6,15 @@ public enum NamespaceStatus
     Deleted = 1,
 }
 
+public sealed record NamespaceListItem(
+    string Name,
+    string? DisplayName,
+    DateTimeOffset CreatedAt,
+    DateTimeOffset ModifiedAt,
+    DateTimeOffset? DeletedAt,
+    NamespaceStatus Status
+);
+
 public sealed record NamespaceDetails(
     string Name,
     string? DisplayName,
@@ -23,6 +32,8 @@ public sealed record NamespaceOperations(
     bool CanRestore
 );
 
-public sealed record NamespaceItem(NamespaceDetails Details, NamespaceOperations Operations);
+public sealed record NamespaceDetailsInfo(NamespaceDetails Details, NamespaceOperations Operations);
+
+public sealed record NamespaceListItemInfo(NamespaceListItem Item, NamespaceOperations Operations);
 
 public sealed record NamespaceCommandResult(bool Updated);

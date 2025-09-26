@@ -5,10 +5,7 @@ namespace SchemaRegistry.Domain.NamespaceFeature;
 
 public sealed record GetNamespaceByIdQuery(string Name, bool Deleted);
 
-public sealed record GetNamespaceByIdQueryResult(
-    NamespaceDetails Details,
-    NamespaceOperations Operations
-);
+public sealed record GetNamespaceByIdQueryResult(NamespaceDetailsInfo Namespace);
 
 // Validation
 

@@ -1,3 +1,5 @@
+using SchemaRegistry.WebApi.NamespaceFeature.RestApis;
+
 namespace SchemaRegistry.WebApi.NamespaceFeature;
 
 internal static class RestEndpoints

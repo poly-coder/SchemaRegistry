@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using JasperFx.Events;
 using Marten;
 using Pico.Domain.Errors;
-using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
@@ -27,8 +26,8 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         );
     }
 
-    public async Task<NamespaceCommandOutput> CreateNamespace(
-        CreateNamespaceInput command,
+    public async Task<NamespaceCommandResult> CreateNamespace(
+        CreateNamespaceCommand command,
         CancellationToken cancel
     )
     {
@@ -51,8 +50,8 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         return new(Updated: true);
     }
 
-    public async Task<NamespaceCommandOutput> UpdateNamespaceDescriptions(
-        UpdateNamespaceDescriptionsInput command,
+    public async Task<NamespaceCommandResult> UpdateNamespaceDescriptions(
+        UpdateNamespaceDescriptionsCommand command,
         CancellationToken cancel
     )
     {
@@ -82,8 +81,8 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         return new(Updated: true);
     }
 
-    public async Task<NamespaceCommandOutput> UpdateNamespaceDocumentation(
-        UpdateNamespaceDocumentationInput command,
+    public async Task<NamespaceCommandResult> UpdateNamespaceDocumentation(
+        UpdateNamespaceDocumentationCommand command,
         CancellationToken cancel
     )
     {
@@ -107,8 +106,8 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         return new(Updated: true);
     }
 
-    public async Task<NamespaceCommandOutput> DeleteNamespace(
-        DeleteNamespaceInput command,
+    public async Task<NamespaceCommandResult> DeleteNamespace(
+        DeleteNamespaceCommand command,
         CancellationToken cancel
     )
     {
@@ -132,8 +131,8 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         return new(Updated: true);
     }
 
-    public async Task<NamespaceCommandOutput> RestoreNamespace(
-        RestoreNamespaceInput command,
+    public async Task<NamespaceCommandResult> RestoreNamespace(
+        RestoreNamespaceCommand command,
         CancellationToken cancel
     )
     {
@@ -157,25 +156,29 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
         return new(Updated: true);
     }
 
-    public Task<GetNamespaceByIdOutput> GetNamespaceById(
-        GetNamespaceByIdInput command,
+    public Task<GetNamespaceByIdQueryResult> GetNamespaceById(
+        GetNamespaceByIdQuery query,
         CancellationToken cancel
     )
     {
-        ValidateExistingAggregate(command.Deleted);
+        ValidateExistingAggregate(query.Deleted);
 
         var details = aggregate.MapToDetails();
 
-        var operations = aggregate.MapToOperations();
+        var operations = new NamespaceOperations(
+            CanDelete: aggregate.Status != NamespaceStatus.Deleted,
+            CanRestore: aggregate.Status != NamespaceStatus.Active,
+            CanUpdateDescriptions: aggregate.Status == NamespaceStatus.Active
+        );
 
-        return Task.FromResult(new GetNamespaceByIdOutput(details, operations));
+        return Task.FromResult(new GetNamespaceByIdQueryResult(new(details, operations)));
     }
 
     private void ValidateNewAggregate()
     {
         if (aggregate is not null)
         {
-            throw new AlreadyExistsException(NamespaceMetadata.Name, Id);
+            throw new AlreadyExistsException(Domain.NamespaceFeature.NamespaceMetadata.Name, Id);
         }
     }
 
@@ -184,7 +187,7 @@ public sealed class NamespaceGrain(IDocumentStore store, StoreOptions storeOptio
     {
         if (aggregate is null || (!deleted && aggregate.DeletedAt is not null))
         {
-            throw new EntityNotFoundException(NamespaceMetadata.Name, Id);
+            throw new EntityNotFoundException(Domain.NamespaceFeature.NamespaceMetadata.Name, Id);
         }
     }
 

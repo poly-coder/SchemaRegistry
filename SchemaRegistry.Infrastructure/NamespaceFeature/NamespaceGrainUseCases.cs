@@ -1,9 +1,8 @@
 using SchemaRegistry.Application.NamespaceFeature;
-using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
-internal sealed class NamespaceGrainUseCase(IGrainFactory grains)
+internal sealed class NamespaceGrainUseCases(IGrainFactory grains)
     : ICreateNamespaceUseCase,
         IUpdateNamespaceDescriptionsUseCase,
         IUpdateNamespaceDocumentationUseCase,

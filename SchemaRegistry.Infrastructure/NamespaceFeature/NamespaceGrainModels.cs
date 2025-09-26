@@ -54,7 +54,8 @@ public sealed record NamespaceDetails(
     NamespaceStatus Status,
     DateTimeOffset CreatedAt,
     DateTimeOffset ModifiedAt,
-    DateTimeOffset? DeletedAt
+    DateTimeOffset? DeletedAt,
+    long Version
 )
 {
     public bool IsDeleted => DeletedAt.HasValue;
@@ -64,6 +65,7 @@ public sealed record NamespaceDetails(
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(NamespaceOperations)}")]
 public sealed record NamespaceOperations(
     bool CanUpdateDescriptions,
+    bool CanUpdateDocumentation,
     bool CanDelete,
     bool CanRestore
 );

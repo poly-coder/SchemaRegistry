@@ -9,11 +9,12 @@ internal static class NamespaceInfrastructureServices
     public static IServiceCollection AddNamespaceOrleansServices(this IServiceCollection services)
     {
         services
-            .AddScoped<ICreateNamespaceUseCase, NamespaceGrainUseCase>()
-            .AddScoped<IDeleteNamespaceUseCase, NamespaceGrainUseCase>()
-            .AddScoped<IUpdateNamespaceDescriptionsUseCase, NamespaceGrainUseCase>()
-            .AddScoped<IUpdateNamespaceDocumentationUseCase, NamespaceGrainUseCase>()
-            .AddScoped<IRestoreNamespaceUseCase, NamespaceGrainUseCase>()
+            .AddScoped<ICreateNamespaceUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IDeleteNamespaceUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IUpdateNamespaceDescriptionsUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IUpdateNamespaceDocumentationUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IRestoreNamespaceUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IGetNamespaceByIdUseCase, NamespaceGrainUseCases>()
             .ConfigureMarten(options =>
             {
                 options.Events.AddEventType<NamespaceWasCreated>();

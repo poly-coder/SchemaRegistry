@@ -11,14 +11,8 @@ internal static class NamespaceInfrastructureMapper
             Status: source.Status,
             CreatedAt: source.CreatedAt,
             ModifiedAt: source.ModifiedAt,
-            DeletedAt: source.DeletedAt
-        );
-
-    public static NamespaceOperations MapToOperations(this NamespaceAggregate source) =>
-        new NamespaceOperations(
-            CanDelete: source.Status != NamespaceStatus.Deleted,
-            CanRestore: source.Status != NamespaceStatus.Active,
-            CanUpdateDescriptions: source.Status == NamespaceStatus.Active
+            DeletedAt: source.DeletedAt,
+            Version: source.Version
         );
 
     #region [ MapToDomain ]

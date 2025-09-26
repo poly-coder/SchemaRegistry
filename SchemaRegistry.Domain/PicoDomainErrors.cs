@@ -37,7 +37,7 @@ public sealed class EntityNotFoundException : PicoDomainException
     public string EntityId { get; }
 }
 
-public sealed class OperationConflictException : PicoDomainException
+public class OperationConflictException : PicoDomainException
 {
     public OperationConflictException(
         string entityType,
@@ -59,4 +59,16 @@ public sealed class OperationConflictException : PicoDomainException
     public string EntityId { get; }
     public string Reason { get; }
     public string Operation { get; }
+}
+
+public class AlreadyDeletedException : OperationConflictException
+{
+    public AlreadyDeletedException(string entityType, string entityId)
+        : base(entityType, entityId, "Delete", "Already deleted") { }
+}
+
+public class CannotRestoreException : OperationConflictException
+{
+    public CannotRestoreException(string entityType, string entityId)
+        : base(entityType, entityId, "Delete", "Cannot restore") { }
 }

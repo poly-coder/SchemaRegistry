@@ -32,7 +32,7 @@ public sealed record NamespaceCommandResult(bool Updated);
 
 [GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdQuery)}")]
-public sealed record GetNamespaceByIdQuery(bool Deleted);
+public sealed record GetNamespaceByIdQuery(bool Deleted = false);
 
 [GenerateSerializer]
 [Alias($"{SchemaRegistryDomain.ProjectName}.{nameof(GetNamespaceByIdQueryResult)}")]

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Xunit.Sdk;
 
 namespace Pico.Testing;
@@ -21,4 +22,21 @@ public sealed class IntegrationTestAttribute : Attribute, ITraitAttribute
 public sealed class PerformanceTestAttribute : Attribute, ITraitAttribute
 {
     public PerformanceTestAttribute(string name = "Category", string value = "UnitTest") { }
+}
+
+public static class PicoVerifyExtensions
+{
+    public static SettingsTask UseSnapshotsDirectory(this SettingsTask source)
+    {
+        return source.UseDirectory("_snapshots");
+    }
+
+    public static SettingsTask UseCaseName(
+        this SettingsTask source,
+        string name,
+        [CallerMemberName] string methodName = ""
+    )
+    {
+        return source.UseMethodName($"{methodName}_{name}");
+    }
 }

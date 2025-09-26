@@ -32,11 +32,24 @@ public static class CreateNamespaceCommandExtensions
 {
     public static CreateNamespaceCommand Coerce(this CreateNamespaceCommand command)
     {
-        return new(
-            command.Name.CoerceTrim(),
-            command.DisplayName.CoerceTrim(),
-            command.Description.CoerceTrim(),
-            command.Documentation.CoerceTrim()
-        );
+        var name = command.Name.CoerceTrimRequired();
+        var displayName = command.DisplayName.CoerceTrim();
+        var description = command.Description.CoerceTrim();
+
+        if (
+            name == command.Name
+            && displayName == command.DisplayName
+            && description == command.Description
+        )
+        {
+            return command;
+        }
+
+        return command with
+        {
+            Name = name,
+            DisplayName = displayName,
+            Description = description,
+        };
     }
 }

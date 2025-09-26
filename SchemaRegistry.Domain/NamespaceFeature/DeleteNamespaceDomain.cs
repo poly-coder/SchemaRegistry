@@ -21,6 +21,13 @@ public static class DeleteNamespaceCommandExtensions
 {
     public static DeleteNamespaceCommand Coerce(this DeleteNamespaceCommand command)
     {
-        return command with { Name = command.Name.CoerceTrim() };
+        var name = command.Name.CoerceTrimRequired();
+
+        if (name == command.Name)
+        {
+            return command;
+        }
+
+        return new(Name: name);
     }
 }

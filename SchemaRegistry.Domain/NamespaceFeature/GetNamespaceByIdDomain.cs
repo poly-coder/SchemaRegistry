@@ -3,7 +3,7 @@ using Pico;
 
 namespace SchemaRegistry.Domain.NamespaceFeature;
 
-public sealed record GetNamespaceByIdQuery(string Name, bool Deleted);
+public sealed record GetNamespaceByIdQuery(string Name, bool Deleted = false);
 
 public sealed record GetNamespaceByIdQueryResult(NamespaceDetailsInfo Namespace);
 
@@ -23,6 +23,16 @@ public static class GetNamespaceByIdQueryExtensions
 {
     public static GetNamespaceByIdQuery Coerce(this GetNamespaceByIdQuery command)
     {
-        return command with { Name = command.Name.CoerceTrim() };
+        var name = command.Name.CoerceTrimRequired();
+
+        if (name == command.Name)
+        {
+            return command;
+        }
+
+        return command with
+        {
+            Name = name,
+        };
     }
 }

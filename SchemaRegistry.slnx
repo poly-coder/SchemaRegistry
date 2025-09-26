@@ -12,7 +12,10 @@
         <File Path="README.md" />
     </Folder>
     <Folder Name="/test/">
+        <Project Path="test/SchemaRegistry.Application.UnitTests/SchemaRegistry.Application.UnitTests.csproj" Id="19cf655f-7033-4bdf-8cd2-eb3e0b4299a1" />
         <Project Path="test/SchemaRegistry.Domain.UnitTests/SchemaRegistry.Domain.UnitTests.csproj" Id="0661c8d3-95b6-43a4-9edf-3d56de3732b9" />
+        <Project Path="test/SchemaRegistry.Infrastructure.UnitTests/SchemaRegistry.Infrastructure.UnitTests.csproj" Id="9f71e6fb-8519-447e-a401-83e3e436da96" />
+        <Project Path="test/SchemaRegistry.WebApi.UnitTests/SchemaRegistry.WebApi.UnitTests.csproj" Id="07055a70-231c-4565-9e82-279b077a35ac" />
     </Folder>
     <Project Path="AppHost/AppHost.csproj" />
     <Project Path="SchemaRegistry.Application/SchemaRegistry.Application.csproj" Id="4eb6e956-0807-4595-b65e-b1460fb8354f" />

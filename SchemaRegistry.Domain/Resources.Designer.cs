@@ -68,5 +68,14 @@ namespace SchemaRegistry.Domain {
                 return ResourceManager.GetString("Namespace.Validation.Name.PatternMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must not have leading or trailing whitespace characters.
+        /// </summary>
+        internal static string NoTrailingWhitespaces_Validation_PatternMessage {
+            get {
+                return ResourceManager.GetString("NoTrailingWhitespaces_Validation_PatternMessage", resourceCulture);
+            }
+        }
     }
 }

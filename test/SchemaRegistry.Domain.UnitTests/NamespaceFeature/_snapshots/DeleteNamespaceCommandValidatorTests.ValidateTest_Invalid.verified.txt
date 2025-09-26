@@ -1,0 +1,22 @@
+﻿{
+  result: {
+    IsValid: false,
+    Errors: [
+      {
+        PropertyName: Name,
+        ErrorMessage: Namespace name must contain a simple domain name, like 'example-ns', with only lowercase letters, numbers, and hyphens.,
+        AttemptedValue: invalid namespace,
+        ErrorCode: RegularExpressionValidator,
+        FormattedMessagePlaceholderValues: {
+          PropertyName: Name,
+          PropertyPath: Name,
+          PropertyValue: invalid namespace,
+          RegularExpression: ^([a-z][a-z0-9]*)(\-([a-z][a-z0-9]*))*$
+        }
+      }
+    ],
+    RuleSetsExecuted: [
+      default
+    ]
+  }
+}

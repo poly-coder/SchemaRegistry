@@ -21,6 +21,16 @@ public static class RestoreNamespaceCommandExtensions
 {
     public static RestoreNamespaceCommand Coerce(this RestoreNamespaceCommand command)
     {
-        return new(command.Name.CoerceTrim());
+        var name = command.Name.CoerceTrimRequired();
+
+        if (name == command.Name)
+        {
+            return command;
+        }
+
+        return command with
+        {
+            Name = name,
+        };
     }
 }

@@ -4,55 +4,52 @@ using SchemaRegistry.Domain.NamespaceFeature;
 namespace SchemaRegistry.Domain.UnitTests.NamespaceFeature;
 
 [UnitTest]
-public class CreateNamespaceCommandValidatorTests
+public class UpdateNamespaceDescriptionsCommandValidatorTests
 {
     [Theory]
     [MemberData(nameof(GetValidateTestData))]
     public async Task ValidateTest(ValidateTestData test)
     {
-        var validator = new CreateNamespaceCommandValidator();
+        var validator = new UpdateNamespaceDescriptionsCommandValidator();
 
         var result = await validator.ValidateAsync(test.Input);
 
         await Verify(new { result }).UseSnapshotsDirectory().UseCaseName(test.Name);
     }
 
-    public sealed record ValidateTestData(string Name, CreateNamespaceCommand Input);
+    public sealed record ValidateTestData(string Name, UpdateNamespaceDescriptionsCommand Input);
 
     public static TheoryData<ValidateTestData> GetValidateTestData() =>
         [
             new(
                 "Null",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: null!,
                     DisplayName: null,
-                    Description: null,
-                    Documentation: null
+                    Description: null
                 )
             ),
             new(
                 "Valid",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "my-namespace",
                     DisplayName: "My Namespace",
-                    Description: "My Namespace Description",
-                    Documentation: "# Simple Documentation"
+                    Description: "My Namespace Description"
                 )
             ),
             new(
                 "Invalid",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "invalid namespace",
                     DisplayName: "  Do not use leading spaces",
-                    Description: "Do not use trailing spaces  ",
-                    Documentation: "It is hard to create an invalid documentation"
+                    Description: "Do not use trailing spaces  "
                 )
             ),
         ];
 }
 
 [UnitTest]
-public class CreateNamespaceCommandExtensionsTests
+public class UpdateNamespaceDescriptionsCommandExtensionsTests
 {
     [Theory]
     [MemberData(nameof(GetCoerceTestData))]
@@ -65,55 +62,49 @@ public class CreateNamespaceCommandExtensionsTests
 
     public sealed record CoerceTestData(
         string Name,
-        CreateNamespaceCommand Input,
-        CreateNamespaceCommand Expected
+        UpdateNamespaceDescriptionsCommand Input,
+        UpdateNamespaceDescriptionsCommand Expected
     );
 
     public static TheoryData<CoerceTestData> GetCoerceTestData() =>
         [
             new(
                 "Null",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: null!,
                     DisplayName: null,
-                    Description: null,
-                    Documentation: null
+                    Description: null
                 ),
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "",
                     DisplayName: null,
-                    Description: null,
-                    Documentation: null
+                    Description: null
                 )
             ),
             new(
                 "Clean",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "my-namespace",
                     DisplayName: "My Namespace",
-                    Description: "My Namespace Description",
-                    Documentation: "# Simple Documentation"
+                    Description: "My Namespace Description"
                 ),
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "my-namespace",
                     DisplayName: "My Namespace",
-                    Description: "My Namespace Description",
-                    Documentation: "# Simple Documentation"
+                    Description: "My Namespace Description"
                 )
             ),
             new(
                 "Coercing",
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: " \t\r\n\fmy-namespace \t\r\n\f",
                     DisplayName: " \t\r\n\fMy Namespace \t\r\n\f",
-                    Description: " \t\r\n\fMy Namespace Description \t\r\n\f",
-                    Documentation: "# Simple Documentation\r\n"
+                    Description: " \t\r\n\fMy Namespace Description \t\r\n\f"
                 ),
-                new CreateNamespaceCommand(
+                new UpdateNamespaceDescriptionsCommand(
                     Name: "my-namespace",
                     DisplayName: "My Namespace",
-                    Description: "My Namespace Description",
-                    Documentation: "# Simple Documentation\r\n"
+                    Description: "My Namespace Description"
                 )
             ),
         ];

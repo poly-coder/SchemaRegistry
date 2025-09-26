@@ -26,6 +26,16 @@ public static class UpdateNamespaceDocumentationCommandExtensions
         this UpdateNamespaceDocumentationCommand command
     )
     {
-        return new(command.Name.CoerceTrim(), command.Documentation.CoerceTrim());
+        var name = command.Name.CoerceTrimRequired();
+
+        if (name == command.Name)
+        {
+            return command;
+        }
+
+        return command with
+        {
+            Name = name,
+        };
     }
 }

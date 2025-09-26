@@ -120,4 +120,7 @@
   <data name="Namespace.Validation.Name.PatternMessage" xml:space="preserve">
     <value>Namespace name must contain a simple domain name, like 'example-ns', with only lowercase letters, numbers, and hyphens.</value>
   </data>
+  <data name="NoTrailingWhitespaces_Validation_PatternMessage" xml:space="preserve">
+    <value>Must not have leading or trailing whitespace characters</value>
+  </data>
 </root>

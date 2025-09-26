@@ -1,0 +1,15 @@
+using System.Runtime.CompilerServices;
+using DiffEngine;
+
+namespace SchemaRegistry.Domain.UnitTests;
+
+internal class ModuleInitialization
+{
+    [ModuleInitializer]
+    internal static void Init()
+    {
+        DiffTools.UseOrder(DiffTool.VisualStudioCode);
+
+        VerifierSettings.DontIgnoreEmptyCollections();
+    }
+}

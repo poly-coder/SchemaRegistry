@@ -1,0 +1,9 @@
+﻿{
+  result: {
+    IsValid: true,
+    Errors: [],
+    RuleSetsExecuted: [
+      default
+    ]
+  }
+}

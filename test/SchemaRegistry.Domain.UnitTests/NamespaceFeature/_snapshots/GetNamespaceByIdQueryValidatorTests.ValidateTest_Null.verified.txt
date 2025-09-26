@@ -1,0 +1,21 @@
+﻿{
+  result: {
+    IsValid: false,
+    Errors: [
+      {
+        PropertyName: Name,
+        ErrorMessage: 'Name' must not be empty.,
+        AttemptedValue: ,
+        ErrorCode: NotEmptyValidator,
+        FormattedMessagePlaceholderValues: {
+          PropertyName: Name,
+          PropertyPath: Name,
+          PropertyValue: 
+        }
+      }
+    ],
+    RuleSetsExecuted: [
+      default
+    ]
+  }
+}

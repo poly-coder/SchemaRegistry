@@ -1,0 +1,46 @@
+﻿{
+  result: {
+    IsValid: false,
+    Errors: [
+      {
+        PropertyName: Name,
+        ErrorMessage: Namespace name must contain a simple domain name, like 'example-ns', with only lowercase letters, numbers, and hyphens.,
+        AttemptedValue: invalid namespace,
+        ErrorCode: RegularExpressionValidator,
+        FormattedMessagePlaceholderValues: {
+          PropertyName: Name,
+          PropertyPath: Name,
+          PropertyValue: invalid namespace,
+          RegularExpression: ^([a-z][a-z0-9]*)(\-([a-z][a-z0-9]*))*$
+        }
+      },
+      {
+        PropertyName: DisplayName,
+        ErrorMessage: Must not have leading or trailing whitespace characters,
+        AttemptedValue:   Do not use leading spaces,
+        ErrorCode: RegularExpressionValidator,
+        FormattedMessagePlaceholderValues: {
+          PropertyName: Display Name,
+          PropertyPath: DisplayName,
+          PropertyValue:   Do not use leading spaces,
+          RegularExpression: ^([^\s](.*[^\s])?)?$
+        }
+      },
+      {
+        PropertyName: Description,
+        ErrorMessage: Must not have leading or trailing whitespace characters,
+        AttemptedValue: Do not use trailing spaces  ,
+        ErrorCode: RegularExpressionValidator,
+        FormattedMessagePlaceholderValues: {
+          PropertyName: Description,
+          PropertyPath: Description,
+          PropertyValue: Do not use trailing spaces  ,
+          RegularExpression: ^([^\s](.*[^\s])?)?$
+        }
+      }
+    ],
+    RuleSetsExecuted: [
+      default
+    ]
+  }
+}

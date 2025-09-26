@@ -32,10 +32,19 @@ public static class UpdateNamespaceDescriptionsCommandExtensions
         this UpdateNamespaceDescriptionsCommand command
     )
     {
-        return new(
-            command.Name.CoerceTrim(),
-            command.DisplayName.CoerceTrim(),
-            command.Description.CoerceTrim()
-        );
+        var name = command.Name.CoerceTrimRequired();
+        var displayName = command.DisplayName.CoerceTrim();
+        var description = command.Description.CoerceTrim();
+
+        if (
+            name == command.Name
+            && displayName == command.DisplayName
+            && description == command.Description
+        )
+        {
+            return command;
+        }
+
+        return new(Name: name, DisplayName: displayName, Description: description);
     }
 }

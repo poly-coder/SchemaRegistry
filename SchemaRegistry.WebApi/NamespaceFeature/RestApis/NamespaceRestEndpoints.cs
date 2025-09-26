@@ -77,7 +77,7 @@ internal static class NamespaceRestEndpoints
 
     internal static async Task<GetNamespaceByIdResult> GetNamespaceById(
         [FromRoute(Name = "name")] string name,
-        [FromServices] IGetNamespaceByIdService service,
+        [FromServices] IGetNamespaceByIdUseCase useCase,
         [FromServices] IValidator<GetNamespaceByIdQuery> validator,
         CancellationToken cancel,
         [FromQuery(Name = "deleted")] bool deleted = false
@@ -87,7 +87,7 @@ internal static class NamespaceRestEndpoints
             .Coerce()
             .ValidateWithAsync(validator, cancel);
 
-        var result = await service.GetNamespaceByIdAsync(command, cancel);
+        var result = await useCase.GetNamespaceByIdAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }
@@ -95,14 +95,14 @@ internal static class NamespaceRestEndpoints
     internal static async Task<NamespaceCommandResult> CreateNamespace(
         [FromRoute(Name = "name")] string name,
         [FromBody] CreateNamespaceCommand body,
-        [FromServices] ICreateNamespaceService service,
+        [FromServices] ICreateNamespaceUseCase useCase,
         [FromServices] IValidator<Domain.NamespaceFeature.CreateNamespaceCommand> validator,
         CancellationToken cancel
     )
     {
         var command = await body.MapToCommand(name).Coerce().ValidateWithAsync(validator, cancel);
 
-        var result = await service.CreateNamespaceAsync(command, cancel);
+        var result = await useCase.CreateNamespaceAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }
@@ -110,7 +110,7 @@ internal static class NamespaceRestEndpoints
     internal static async Task<NamespaceCommandResult> UpdateNamespaceDescriptions(
         [FromRoute(Name = "name")] string name,
         [FromBody] UpdateNamespaceDescriptionsCommand body,
-        [FromServices] IUpdateNamespaceDescriptionsService service,
+        [FromServices] IUpdateNamespaceDescriptionsUseCase useCase,
         [FromServices]
             IValidator<Domain.NamespaceFeature.UpdateNamespaceDescriptionsCommand> validator,
         CancellationToken cancel
@@ -118,7 +118,7 @@ internal static class NamespaceRestEndpoints
     {
         var command = await body.MapToCommand(name).Coerce().ValidateWithAsync(validator, cancel);
 
-        var result = await service.UpdateNamespaceDescriptionsAsync(command, cancel);
+        var result = await useCase.UpdateNamespaceDescriptionsAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }
@@ -126,7 +126,7 @@ internal static class NamespaceRestEndpoints
     internal static async Task<NamespaceCommandResult> UpdateNamespaceDocumentation(
         [FromRoute(Name = "name")] string name,
         [FromBody] UpdateNamespaceDocumentationCommand body,
-        [FromServices] IUpdateNamespaceDocumentationService service,
+        [FromServices] IUpdateNamespaceDocumentationUseCase useCase,
         [FromServices]
             IValidator<Domain.NamespaceFeature.UpdateNamespaceDocumentationCommand> validator,
         CancellationToken cancel
@@ -134,14 +134,14 @@ internal static class NamespaceRestEndpoints
     {
         var command = await body.MapToCommand(name).Coerce().ValidateWithAsync(validator, cancel);
 
-        var result = await service.UpdateNamespaceDocumentationAsync(command, cancel);
+        var result = await useCase.UpdateNamespaceDocumentationAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }
 
     internal static async Task<NamespaceCommandResult> RestoreNamespace(
         [FromRoute(Name = "name")] string name,
-        [FromServices] IRestoreNamespaceService service,
+        [FromServices] IRestoreNamespaceUseCase useCase,
         [FromServices] IValidator<RestoreNamespaceCommand> validator,
         CancellationToken cancel
     )
@@ -150,21 +150,21 @@ internal static class NamespaceRestEndpoints
             .Coerce()
             .ValidateWithAsync(validator, cancel);
 
-        var result = await service.RestoreNamespaceAsync(command, cancel);
+        var result = await useCase.RestoreNamespaceAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }
 
     internal static async Task<NamespaceCommandResult> DeleteNamespace(
         [FromRoute(Name = "name")] string name,
-        [FromServices] IDeleteNamespaceService service,
+        [FromServices] IDeleteNamespaceUseCase useCase,
         [FromServices] IValidator<DeleteNamespaceCommand> validator,
         CancellationToken cancel
     )
     {
         var command = new DeleteNamespaceCommand(name).Coerce().ValidateWith(validator);
 
-        var result = await service.DeleteNamespaceAsync(command, cancel);
+        var result = await useCase.DeleteNamespaceAsync(command, cancel);
 
         return result.MapToRestApiResult();
     }

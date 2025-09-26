@@ -2,7 +2,7 @@ using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Application.NamespaceFeature;
 
-public interface IRestoreNamespaceService
+public interface IRestoreNamespaceUseCase
 {
     Task<NamespaceCommandResult> RestoreNamespaceAsync(
         RestoreNamespaceCommand command,

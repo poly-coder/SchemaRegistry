@@ -3,13 +3,13 @@ using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
-internal sealed class NamespaceGrainService(IGrainFactory grains)
-    : ICreateNamespaceService,
-        IUpdateNamespaceDescriptionsService,
-        IUpdateNamespaceDocumentationService,
-        IDeleteNamespaceService,
-        IRestoreNamespaceService,
-        IGetNamespaceByIdService
+internal sealed class NamespaceGrainUseCase(IGrainFactory grains)
+    : ICreateNamespaceUseCase,
+        IUpdateNamespaceDescriptionsUseCase,
+        IUpdateNamespaceDocumentationUseCase,
+        IDeleteNamespaceUseCase,
+        IRestoreNamespaceUseCase,
+        IGetNamespaceByIdUseCase
 {
     public async Task<Domain.NamespaceFeature.NamespaceCommandResult> CreateNamespaceAsync(
         Domain.NamespaceFeature.CreateNamespaceCommand command,

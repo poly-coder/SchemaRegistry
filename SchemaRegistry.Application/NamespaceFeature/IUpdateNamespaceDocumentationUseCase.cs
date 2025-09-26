@@ -2,7 +2,7 @@ using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Application.NamespaceFeature;
 
-public interface IUpdateNamespaceDocumentationService
+public interface IUpdateNamespaceDocumentationUseCase
 {
     Task<NamespaceCommandResult> UpdateNamespaceDocumentationAsync(
         UpdateNamespaceDocumentationCommand command,

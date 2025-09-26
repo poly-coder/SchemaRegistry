@@ -2,10 +2,10 @@ using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Application.NamespaceFeature;
 
-public interface IGetNamespaceByIdsService
+public interface IGetNamespaceByIdUseCase
 {
-    Task<GetNamespaceByIdsQueryResult> GetNamespaceByIdsAsync(
-        GetNamespaceByIdsQuery command,
+    Task<GetNamespaceByIdQueryResult> GetNamespaceByIdAsync(
+        GetNamespaceByIdQuery command,
         CancellationToken cancel = default
     );
 }

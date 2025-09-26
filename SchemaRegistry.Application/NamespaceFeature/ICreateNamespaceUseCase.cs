@@ -2,7 +2,7 @@ using SchemaRegistry.Domain.NamespaceFeature;
 
 namespace SchemaRegistry.Application.NamespaceFeature;
 
-public interface ICreateNamespaceService
+public interface ICreateNamespaceUseCase
 {
     Task<NamespaceCommandResult> CreateNamespaceAsync(
         CreateNamespaceCommand command,

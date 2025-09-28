@@ -1,8 +1,9 @@
-using Pico.Domain.Errors;
+using System.Diagnostics.CodeAnalysis;
 using Pico.Orleans;
 
 namespace SchemaRegistry.Infrastructure.NamespaceFeature;
 
+[ExcludeFromCodeCoverage]
 public sealed class NamespaceGrain(IServiceProvider provider)
     : PicoMartenAggregateGrain<NamespaceAggregate>(provider),
         INamespaceGrain

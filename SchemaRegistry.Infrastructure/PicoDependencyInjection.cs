@@ -1,53 +1,73 @@
+using Microsoft.Extensions.DependencyInjection;
 using Pico.Reflection;
 
 namespace Pico.DependencyInjection;
 
 public static class PicoDependencyInjectionExtensions
 {
+    public static LogRegisteredServicesResult LogRegisteredServices(
+        this IServiceCollection services,
+        Action<IServiceCollection> configure
+    )
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configure);
+
+        var before = services.ToHashSet();
+
+        configure(services);
+
+        var added = services.Where(d => !before.Contains(d)).ToArray();
+        var removed = before.Except(services).ToArray();
+
+        return new(Added: added, Removed: removed);
+    }
+
     public static IServiceCollection LogRegisteredServices(
         this IServiceCollection services,
         string caption,
         Action<IServiceCollection> configure,
         TextWriter? output,
-        bool fullNames = false
+        ToDisplayNameOptions? options = null
     )
     {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configure);
+
+        options ??= ToDisplayNameOptions.Default;
+
         if (output is null || output == TextWriter.Null)
         {
             configure(services);
             return services;
         }
 
-        var before = services.ToArray();
+        var (added, removed) = services.LogRegisteredServices(configure);
 
-        configure(services);
-
-        var comparer = fullNames
+        var comparer = options.FullNames
             ? ServiceDescriptorComparer.FullNames
             : ServiceDescriptorComparer.Default;
-        var removed = before.Except(services).Order(comparer).ToArray();
-        var added = services.Except(before).Order(comparer).ToArray();
 
-        if (removed.Length > 0 || added.Length > 0)
+        if (removed.Count > 0 || added.Count > 0)
         {
             output.Write(caption);
             output.Write(" -");
-            output.Write(removed.Length);
+            output.Write(removed.Count);
             output.Write(" +");
-            output.Write(added.Length);
+            output.Write(added.Count);
             output.WriteLine();
 
             foreach (var descriptor in removed)
             {
                 output.Write("  - ");
-                output.WriteServiceDescriptor(descriptor, fullNames);
+                output.WriteServiceDescriptor(descriptor, options);
                 output.WriteLine();
             }
 
             foreach (var descriptor in added)
             {
                 output.Write("  + ");
-                output.WriteServiceDescriptor(descriptor, fullNames);
+                output.WriteServiceDescriptor(descriptor, options);
                 output.WriteLine();
             }
         }
@@ -58,7 +78,7 @@ public static class PicoDependencyInjectionExtensions
     public static void WriteServiceDescriptor(
         this TextWriter output,
         ServiceDescriptor descriptor,
-        bool fullNames = false
+        ToDisplayNameOptions? options = null
     )
     {
         switch (descriptor.Lifetime)
@@ -78,7 +98,7 @@ public static class PicoDependencyInjectionExtensions
         object? instance;
         Type? concrete;
 
-        output.Write(descriptor.ServiceType.ToDisplayName(fullNames));
+        output.Write(descriptor.ServiceType.ToDisplayName(options));
 
         if (descriptor.IsKeyedService)
         {
@@ -102,23 +122,28 @@ public static class PicoDependencyInjectionExtensions
         if (concrete is not null)
         {
             output.Write("type: ");
-            output.Write(concrete.ToDisplayName(fullNames));
+            output.Write(concrete.ToDisplayName(options));
         }
         else if (instance is not null)
         {
             output.Write("instance: ");
-            output.Write(instance.GetType().ToDisplayName(fullNames));
+            output.Write(instance.GetType().ToDisplayName(options));
         }
         else if (factory is not null)
         {
             output.Write("factory: ");
-            output.Write(factory.Method.DeclaringType?.ToDisplayName(fullNames));
+            output.Write(factory.Method.DeclaringType?.ToDisplayName(options));
             output.Write(".");
             output.Write(factory.Method.Name);
             output.Write("(...)");
         }
     }
 }
+
+public readonly record struct LogRegisteredServicesResult(
+    IReadOnlyCollection<ServiceDescriptor> Added,
+    IReadOnlyCollection<ServiceDescriptor> Removed
+);
 
 public sealed class ServiceDescriptorComparer(bool fullNames = false) : IComparer<ServiceDescriptor>
 {

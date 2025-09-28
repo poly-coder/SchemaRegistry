@@ -20,14 +20,16 @@ public sealed record NamespaceDetails(
     string? DisplayName,
     string? Description,
     string? Documentation,
+    NamespaceStatus Status,
     DateTimeOffset CreatedAt,
     DateTimeOffset ModifiedAt,
     DateTimeOffset? DeletedAt,
-    NamespaceStatus Status
+    long Version
 );
 
 public sealed record NamespaceOperations(
     bool CanUpdateDescriptions,
+    bool CanUpdateDocumentation,
     bool CanDelete,
     bool CanRestore
 );

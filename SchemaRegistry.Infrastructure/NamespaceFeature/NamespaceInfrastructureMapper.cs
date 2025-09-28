@@ -38,7 +38,8 @@ internal static class NamespaceInfrastructureMapper
             Status: source.Status.MapToDomain(),
             CreatedAt: source.CreatedAt,
             ModifiedAt: source.ModifiedAt,
-            DeletedAt: source.DeletedAt
+            DeletedAt: source.DeletedAt,
+            Version: source.Version
         );
 
     public static Domain.NamespaceFeature.NamespaceOperations MapToDomain(
@@ -46,6 +47,7 @@ internal static class NamespaceInfrastructureMapper
     ) =>
         new(
             CanUpdateDescriptions: source.CanUpdateDescriptions,
+            CanUpdateDocumentation: source.CanUpdateDocumentation,
             CanDelete: source.CanDelete,
             CanRestore: source.CanRestore
         );

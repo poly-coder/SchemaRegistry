@@ -6,65 +6,61 @@ namespace Pico.DependencyInjection.Testing;
 
 public static class PicoDependencyInjectionTestingExtensions
 {
-    public static SettingsTask VerifyRegisteredServices(
-        Action<IServiceCollection> configureServices,
-        [CallerFilePath] string sourceFile = ""
+    //public static SettingsTask VerifyRegisteredServices(
+    //    Action<IServiceCollection> configureServices,
+    //    [CallerFilePath] string sourceFile = ""
+    //)
+    //{
+    //    var registered = CaptureRegisteredServices(configureServices);
+
+    //    // ReSharper disable once ExplicitCallerInfoArgument
+    //    return Verify(new { RegisteredServices = registered }, sourceFile: sourceFile);
+    //}
+
+    public static CaptureRegisteredServicesTestResult ForTesting(
+        this CaptureRegisteredServicesResult capture,
+        ToDisplayNameOptions? options = null
     )
     {
-        var registered = CaptureRegisteredServices(configureServices);
+        options ??= ToDisplayNameOptions.Default;
 
-        // ReSharper disable once ExplicitCallerInfoArgument
-        return Verify(new { RegisteredServices = registered }, sourceFile: sourceFile);
+        return new(
+            Added: capture
+                .Added.Select(e => MapToTestInfo(e, options))
+                .OrderBy(d => d.Lifetime)
+                .ThenBy(d => d.ServiceType)
+                .ThenBy(d => d.ServiceKey)
+                .ToArray(),
+            Removed: capture
+                .Removed.Select(e => MapToTestInfo(e, options))
+                .OrderBy(d => d.Lifetime)
+                .ThenBy(d => d.ServiceType)
+                .ThenBy(d => d.ServiceKey)
+                .ToArray()
+        );
     }
 
-    public static IReadOnlyList<ServiceDescriptorTestInfo> CaptureRegisteredServices(
-        this IServiceCollection services,
-        Action<IServiceCollection> configureServices
+    public static ServiceDescriptorTestInfo MapToTestInfo(
+        this ServiceDescriptor source,
+        ToDisplayNameOptions? options = null
     )
     {
-        ArgumentNullException.ThrowIfNull(services);
-        ArgumentNullException.ThrowIfNull(configureServices);
+        options ??= ToDisplayNameOptions.Default;
 
-        configureServices(services);
-
-        return services
-            .Select(d => new ServiceDescriptorTestInfo(
-                Lifetime: d.Lifetime,
-                ServiceType: d.ServiceType.ToDisplayName(),
-                ServiceKey: d.IsKeyedService ? $"{d.ServiceKey}" : null,
-                ImplementationType: d.IsKeyedService
-                    ? d.KeyedImplementationType?.ToDisplayName()
-                    : d.ImplementationType?.ToDisplayName(),
-                ImplementationInstance: d.IsKeyedService
-                    ? d.KeyedImplementationInstance?.GetType().ToDisplayName()
-                    : d.ImplementationInstance?.GetType().ToDisplayName()
-            ))
-            .OrderBy(d => d.Lifetime)
-            .ThenBy(d => d.ServiceType)
-            .ThenBy(d => d.ServiceKey)
-            .ToArray();
-    }
-
-    public static IReadOnlyList<ServiceDescriptorTestInfo> CaptureRegisteredServices(
-        Action<IServiceCollection> configureServices
-    )
-    {
-        ArgumentNullException.ThrowIfNull(configureServices);
-
-        var services = new ServiceCollection();
-
-        configureServices(services);
-
-        return services
-            .Select(d => new ServiceDescriptorTestInfo(
-                d.Lifetime,
-                d.ServiceType.ToDisplayName(),
-                d.IsKeyedService ? $"{d.ServiceKey}" : null
-            ))
-            .OrderBy(d => d.Lifetime)
-            .ThenBy(d => d.ServiceType)
-            .ThenBy(d => d.ServiceKey)
-            .ToArray();
+        return new ServiceDescriptorTestInfo(
+            Lifetime: source.Lifetime,
+            ServiceType: source.ServiceType.ToDisplayName(options),
+            ServiceKey: source.IsKeyedService ? $"{source.ServiceKey}" : null,
+            ImplementationType: source.IsKeyedService
+                ? source.KeyedImplementationType?.ToDisplayName(options)
+                : source.ImplementationType?.ToDisplayName(options),
+            ImplementationInstance: source.IsKeyedService
+                ? source.KeyedImplementationInstance?.GetType().ToDisplayName(options)
+                : source.ImplementationInstance?.GetType().ToDisplayName(options),
+            ImplementationFactory: source.IsKeyedService
+                ? source.KeyedImplementationFactory?.Method.ToDisplayName(options)
+                : source.ImplementationFactory?.Method.ToDisplayName(options)
+        );
     }
 }
 
@@ -74,10 +70,10 @@ public sealed record ServiceDescriptorTestInfo(
     string? ServiceKey,
     string? ImplementationType = null,
     string? ImplementationInstance = null,
-    string? ImplementationMethod = null
+    string? ImplementationFactory = null
 );
 
-public sealed record RegisteredServicesTestInfo(
-    IReadOnlyList<ServiceDescriptorTestInfo> AddedServices,
-    IReadOnlyList<ServiceDescriptorTestInfo> RemovedServices
+public readonly record struct CaptureRegisteredServicesTestResult(
+    IReadOnlyCollection<ServiceDescriptorTestInfo> Added,
+    IReadOnlyCollection<ServiceDescriptorTestInfo> Removed
 );

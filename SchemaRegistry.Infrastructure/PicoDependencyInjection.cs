@@ -5,7 +5,7 @@ namespace Pico.DependencyInjection;
 
 public static class PicoDependencyInjectionExtensions
 {
-    public static LogRegisteredServicesResult LogRegisteredServices(
+    public static CaptureRegisteredServicesResult CaptureRegisteredServices(
         this IServiceCollection services,
         Action<IServiceCollection> configure
     )
@@ -42,7 +42,7 @@ public static class PicoDependencyInjectionExtensions
             return services;
         }
 
-        var (added, removed) = services.LogRegisteredServices(configure);
+        var (added, removed) = services.CaptureRegisteredServices(configure);
 
         var comparer = options.FullNames
             ? ServiceDescriptorComparer.FullNames
@@ -98,7 +98,7 @@ public static class PicoDependencyInjectionExtensions
         object? instance;
         Type? concrete;
 
-        output.Write(descriptor.ServiceType.ToDisplayName(options));
+        output.WriteType(descriptor.ServiceType, options);
 
         if (descriptor.IsKeyedService)
         {
@@ -122,25 +122,22 @@ public static class PicoDependencyInjectionExtensions
         if (concrete is not null)
         {
             output.Write("type: ");
-            output.Write(concrete.ToDisplayName(options));
+            output.WriteType(concrete, options);
         }
         else if (instance is not null)
         {
             output.Write("instance: ");
-            output.Write(instance.GetType().ToDisplayName(options));
+            output.WriteType(instance.GetType(), options);
         }
         else if (factory is not null)
         {
             output.Write("factory: ");
-            output.Write(factory.Method.DeclaringType?.ToDisplayName(options));
-            output.Write(".");
-            output.Write(factory.Method.Name);
-            output.Write("(...)");
+            output.WriteMethod(factory.Method, options);
         }
     }
 }
 
-public readonly record struct LogRegisteredServicesResult(
+public readonly record struct CaptureRegisteredServicesResult(
     IReadOnlyCollection<ServiceDescriptor> Added,
     IReadOnlyCollection<ServiceDescriptor> Removed
 );

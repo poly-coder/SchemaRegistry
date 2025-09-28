@@ -1,31 +1,39 @@
 ﻿{
-  services: [
+  Added: [
     {
-      ServiceType: IConfigureMarten
+      ServiceType: Marten.IConfigureMarten,
+      ImplementationInstance: Marten.LambdaConfigureMarten
     },
     {
-      ServiceType: ICreateNamespaceUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.ICreateNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },
     {
-      ServiceType: IDeleteNamespaceUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IDeleteNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },
     {
-      ServiceType: IGetNamespaceByIdUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IGetNamespaceByIdUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },
     {
-      ServiceType: IRestoreNamespaceUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IRestoreNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },
     {
-      ServiceType: IUpdateNamespaceDescriptionsUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IUpdateNamespaceDescriptionsUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },
     {
-      ServiceType: IUpdateNamespaceDocumentationUseCase,
-      Lifetime: Scoped
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IUpdateNamespaceDocumentationUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     }
-  ]
+  ],
+  Removed: []
 }

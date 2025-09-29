@@ -20,7 +20,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\SchemaRegistry.Infrastructure\SchemaRegistry.Infrastructure.csproj" />
-        <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
+        <ProjectReference Include="..\SchemaRegistry.ServiceDefaults\SchemaRegistry.ServiceDefaults.csproj" />
     </ItemGroup>
 
 </Project>

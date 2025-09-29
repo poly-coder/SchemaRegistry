@@ -12,8 +12,8 @@ Auto-generated from all feature plans. Last updated: 2025-09-21
 
 ## Project Structure
 ```
-/AppHost/ # .NET Aspire application host
-/ServiceDefaults/ # .NET Aspire service defaults
+/SchemaRegistry.AppHost/ # .NET Aspire application host
+/SchemaRegistry.ServiceDefaults/ # .NET Aspire service defaults
 /SchemaRegistry.Domain/ # Domain layer
 /SchemaRegistry.Application/ # Application layer
 /SchemaRegistry.Infrastructure/ # Infrastructure layer

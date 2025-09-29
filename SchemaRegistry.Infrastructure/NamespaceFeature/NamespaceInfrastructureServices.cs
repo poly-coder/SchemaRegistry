@@ -15,6 +15,7 @@ internal static class NamespaceInfrastructureServices
             .AddScoped<IUpdateNamespaceDocumentationUseCase, NamespaceGrainUseCases>()
             .AddScoped<IRestoreNamespaceUseCase, NamespaceGrainUseCases>()
             .AddScoped<IGetNamespaceByIdUseCase, NamespaceGrainUseCases>()
+            .AddScoped<IGetNamespaceByIdsUseCase, GetNamespaceByIdsUseCase>()
             .ConfigureMarten(options =>
             {
                 options.Events.AddEventType<NamespaceWasCreated>();

@@ -1,1 +1,80 @@
-﻿
+﻿{
+  Added: [
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.CreateNamespaceCommand>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.CreateNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.DeleteNamespaceCommand>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.DeleteNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdQuery>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdQueryValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdsQuery>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdsQueryValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.RestoreNamespaceCommand>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.RestoreNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDescriptionsCommand>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDescriptionsCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: FluentValidation.IValidator<SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDocumentationCommand>,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDocumentationCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.CreateNamespaceCommandValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.CreateNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.DeleteNamespaceCommandValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.DeleteNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdQueryValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdQueryValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdsQueryValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.GetNamespaceByIdsQueryValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.RestoreNamespaceCommandValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.RestoreNamespaceCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDescriptionsCommandValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDescriptionsCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDocumentationCommandValidator,
+      ImplementationType: SchemaRegistry.Domain.NamespaceFeature.UpdateNamespaceDocumentationCommandValidator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SharpGrip.FluentValidation.AutoValidation.Endpoints.Results.IFluentValidationAutoValidationResultFactory,
+      ImplementationType: SharpGrip.FluentValidation.AutoValidation.Endpoints.Results.FluentValidationAutoValidationDefaultResultFactory
+    }
+  ],
+  Removed: []
+}

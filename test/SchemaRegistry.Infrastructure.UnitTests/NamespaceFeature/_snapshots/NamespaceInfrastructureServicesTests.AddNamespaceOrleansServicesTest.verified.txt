@@ -16,6 +16,11 @@
     },
     {
       Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IGetNamespaceByIdsUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.GetNamespaceByIdsUseCase
+    },
+    {
+      Lifetime: Scoped,
       ServiceType: SchemaRegistry.Application.NamespaceFeature.IGetNamespaceByIdUseCase,
       ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
     },

@@ -1,0 +1,79 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.IMetricsListener,
+      ImplementationType: OpenTelemetry.Metrics.OpenTelemetryMetricsListener
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: OpenTelemetry.Extensions.Hosting.Implementation.TelemetryHostedService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.MetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.ActivityExportProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Npgsql.NpgsqlDataSource,
+      ImplementationFactory: object Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProvider,
+      ImplementationFactory: OpenTelemetry.Metrics.MeterProvider OpenTelemetry.Metrics.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Metrics.MeterProviderBuilderSdk
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProvider,
+      ImplementationFactory: OpenTelemetry.Trace.TracerProvider OpenTelemetry.Trace.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Trace.TracerProviderBuilderSdk
+    },
+    {
+      ServiceType: System.Data.Common.DbDataSource,
+      ImplementationFactory: object Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Npgsql.NpgsqlConnection,
+      ImplementationFactory: object Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: System.Data.Common.DbConnection,
+      ImplementationFactory: object Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    }
+  ],
+  Removed: []
+}

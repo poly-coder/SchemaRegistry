@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Pico.DependencyInjection;
 using Pico.DependencyInjection.Testing;
@@ -37,7 +38,7 @@ public class StartupUnitTests
     [Fact]
     public async Task AddFluentValidationServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddFluentValidationServices())
@@ -49,7 +50,7 @@ public class StartupUnitTests
     [Fact]
     public async Task AddExceptionHandlingServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddExceptionHandlingServices())
@@ -61,7 +62,7 @@ public class StartupUnitTests
     [Fact]
     public async Task AddSchemaRegistryInfrastructureServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
 
         var capture = builder
             .Services.CaptureRegisteredServices(s =>
@@ -75,7 +76,11 @@ public class StartupUnitTests
     [Fact]
     public async Task AddOpenApiServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
+
+        builder.Configuration.AddInMemoryCollection(
+            [new KeyValuePair<string, string?>("ConnectionStrings:database", "1234")]
+        );
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddOpenApiServices())
@@ -87,7 +92,11 @@ public class StartupUnitTests
     [Fact]
     public async Task AddPostgresServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
+
+        builder.Configuration.AddInMemoryCollection(
+            [new KeyValuePair<string, string?>("ConnectionStrings:database", "1234")]
+        );
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddPostgresServices())
@@ -99,7 +108,7 @@ public class StartupUnitTests
     [Fact]
     public async Task AddMartenServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddMartenServices())
@@ -111,7 +120,7 @@ public class StartupUnitTests
     [Fact]
     public async Task AddOrleansServicesTest()
     {
-        var builder = WebApplication.CreateBuilder([]);
+        var builder = WebApplication.CreateEmptyBuilder(new WebApplicationOptions());
 
         var capture = builder
             .Services.CaptureRegisteredServices(s => builder.AddOrleansServices())

@@ -23,6 +23,17 @@ public static class PicoDependencyInjectionExtensions
         return new(Added: added, Removed: removed);
     }
 
+    public static CaptureRegisteredServicesResult CaptureRegisteredServices(
+        this IServiceCollection services
+    )
+    {
+        ArgumentNullException.ThrowIfNull(services);
+
+        var added = services.ToArray();
+
+        return new(Added: added, Removed: []);
+    }
+
     public static IServiceCollection LogRegisteredServices(
         this IServiceCollection services,
         string caption,

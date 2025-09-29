@@ -1,0 +1,49 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionGroupCollectionProvider,
+      ImplementationFactory: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionGroupCollectionProvider Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Mvc.Infrastructure.IActionDescriptorCollectionProvider,
+      ImplementationType: Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.OpenApi.NamedService<Microsoft.AspNetCore.OpenApi.OpenApiDocumentService>,
+      ImplementationInstance: Microsoft.AspNetCore.OpenApi.NamedService<Microsoft.AspNetCore.OpenApi.OpenApiDocumentService>
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.OpenApi.OpenApiDocumentService,
+      ServiceKey: v1,
+      ImplementationType: Microsoft.AspNetCore.OpenApi.OpenApiDocumentService
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.OpenApi.OpenApiSchemaService,
+      ServiceKey: v1,
+      ImplementationType: Microsoft.AspNetCore.OpenApi.OpenApiSchemaService
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.OpenApi.OpenApiSchemaStore,
+      ServiceKey: v1,
+      ImplementationType: Microsoft.AspNetCore.OpenApi.OpenApiSchemaStore
+    },
+    {
+      ServiceType: Microsoft.Extensions.ApiDescriptions.IDocumentProvider,
+      ImplementationType: Microsoft.Extensions.ApiDescriptions.OpenApiDocumentProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Http.Json.JsonOptions>,
+      ImplementationType: Microsoft.AspNetCore.OpenApi.OpenApiSchemaJsonOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.OpenApi.OpenApiOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.AspNetCore.OpenApi.OpenApiOptions>
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider,
+      ImplementationType: Microsoft.AspNetCore.Mvc.ApiExplorer.EndpointMetadataApiDescriptionProvider
+    }
+  ],
+  Removed: []
+}

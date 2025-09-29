@@ -1,0 +1,39 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Marten.IConfigureMarten,
+      ImplementationInstance: Marten.LambdaConfigureMarten
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.ICreateNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IDeleteNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IGetNamespaceByIdUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IRestoreNamespaceUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IUpdateNamespaceDescriptionsUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: SchemaRegistry.Application.NamespaceFeature.IUpdateNamespaceDocumentationUseCase,
+      ImplementationType: SchemaRegistry.Infrastructure.NamespaceFeature.NamespaceGrainUseCases
+    }
+  ],
+  Removed: []
+}

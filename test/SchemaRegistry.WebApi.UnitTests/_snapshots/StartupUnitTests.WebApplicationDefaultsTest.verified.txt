@@ -1,0 +1,459 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IConnectionListenerFactory,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IConnectionListenerFactory,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal.NamedPipeTransportFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IMultiplexedConnectionListenerFactory,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory,
+      ImplementationType: Microsoft.AspNetCore.Hosting.Builder.ApplicationBuilderFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.HostingMetrics,
+      ImplementationType: Microsoft.AspNetCore.Hosting.HostingMetrics
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.IApplicationLifetime,
+      ImplementationType: Microsoft.AspNetCore.Hosting.GenericWebHostApplicationLifetime
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.IHostingEnvironment,
+      ImplementationInstance: Microsoft.AspNetCore.Hosting.HostingEnvironment
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.IWebHostEnvironment,
+      ImplementationInstance: Microsoft.AspNetCore.Hosting.HostingEnvironment
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Hosting.Server.IServer,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Http.IHttpContextFactory,
+      ImplementationType: Microsoft.AspNetCore.Http.DefaultHttpContextFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.EndpointDataSource,
+      ImplementationFactory: Microsoft.AspNetCore.Routing.EndpointDataSource Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.IEndpointAddressScheme<Microsoft.AspNetCore.Routing.RouteValuesAddress>,
+      ImplementationType: Microsoft.AspNetCore.Routing.RouteValuesAddressScheme
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.IEndpointAddressScheme<string>,
+      ImplementationType: Microsoft.AspNetCore.Routing.EndpointNameAddressScheme
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Internal.DfaGraphWriter,
+      ImplementationType: Microsoft.AspNetCore.Routing.Internal.DfaGraphWriter
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.LinkGenerator,
+      ImplementationType: Microsoft.AspNetCore.Routing.DefaultLinkGenerator
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.LinkParser,
+      ImplementationType: Microsoft.AspNetCore.Routing.DefaultLinkParser
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.MatcherPolicy,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.MatcherPolicy,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.HostMatcherPolicy
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.MatcherPolicy,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.AcceptsMatcherPolicy
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.MatcherPolicy,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.ContentEncodingNegotiationMatcherPolicy
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Matching.EndpointMetadataComparer,
+      ImplementationFactory: Microsoft.AspNetCore.Routing.Matching.EndpointMetadataComparer Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider services)
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Matching.EndpointSelector,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Matching.MatcherFactory,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.DfaMatcherFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.ParameterPolicyFactory,
+      ImplementationType: Microsoft.AspNetCore.Routing.DefaultParameterPolicyFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Patterns.RoutePatternTransformer,
+      ImplementationType: Microsoft.AspNetCore.Routing.Patterns.DefaultRoutePatternTransformer
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.RoutingMarkerService,
+      ImplementationType: Microsoft.AspNetCore.Routing.RoutingMarkerService
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.RoutingMetrics,
+      ImplementationType: Microsoft.AspNetCore.Routing.RoutingMetrics
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Routing.Template.TemplateBinderFactory,
+      ImplementationType: Microsoft.AspNetCore.Routing.Template.DefaultTemplateBinderFactory
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Server.Kestrel.Core.IHttpsConfigurationService,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Core.HttpsConfigurationService
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Server.Kestrel.Core.IInitializer,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Core.Initializer
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.KestrelMetrics,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.KestrelMetrics
+    },
+    {
+      ServiceType: Microsoft.Extensions.Configuration.IConfiguration,
+      ImplementationFactory: Microsoft.Extensions.Configuration.IConfiguration Microsoft.Extensions.Hosting.SpecialType.SpecialMethod(System.IServiceProvider _)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.Configuration.IMetricListenerConfigurationFactory,
+      ImplementationType: Microsoft.Extensions.Diagnostics.Metrics.Configuration.MetricListenerConfigurationFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.Configuration.MetricsConfiguration,
+      ImplementationInstance: Microsoft.Extensions.Diagnostics.Metrics.Configuration.MetricsConfiguration
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.MetricsSubscriptionManager,
+      ImplementationType: Microsoft.Extensions.Diagnostics.Metrics.MetricsSubscriptionManager
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.HostBuilderContext,
+      ImplementationInstance: Microsoft.Extensions.Hosting.HostBuilderContext
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IApplicationLifetime,
+      ImplementationFactory: Microsoft.Extensions.Hosting.IApplicationLifetime Microsoft.Extensions.Hosting.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHost,
+      ImplementationFactory: Microsoft.Extensions.Hosting.IHost Microsoft.Extensions.Hosting.SpecialType.SpecialMethod(System.IServiceProvider _)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostApplicationLifetime,
+      ImplementationType: Microsoft.Extensions.Hosting.Internal.ApplicationLifetime
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostEnvironment,
+      ImplementationInstance: Microsoft.Extensions.Hosting.Internal.HostingEnvironment
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostingEnvironment,
+      ImplementationInstance: Microsoft.Extensions.Hosting.Internal.HostingEnvironment
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostLifetime,
+      ImplementationType: Microsoft.Extensions.Hosting.Internal.ConsoleLifetime
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfiguration<Microsoft.Extensions.Logging.Configuration.T>,
+      ImplementationType: Microsoft.Extensions.Logging.Configuration.LoggerProviderConfiguration<Microsoft.Extensions.Logging.Configuration.T>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfigurationFactory,
+      ImplementationType: Microsoft.Extensions.Logging.Configuration.LoggerProviderConfigurationFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Configuration.LoggingConfiguration,
+      ImplementationInstance: Microsoft.Extensions.Logging.Configuration.LoggingConfiguration
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Console.ConsoleFormatter,
+      ImplementationType: Microsoft.Extensions.Logging.Console.JsonConsoleFormatter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Console.ConsoleFormatter,
+      ImplementationType: Microsoft.Extensions.Logging.Console.SystemdConsoleFormatter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.Console.ConsoleFormatter,
+      ImplementationType: Microsoft.Extensions.Logging.Console.SimpleConsoleFormatter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.EventSource.LoggingEventSource,
+      ImplementationInstance: Microsoft.Extensions.Logging.EventSource.LoggingEventSource
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILogger<Microsoft.Extensions.Logging.TCategoryName>,
+      ImplementationType: Microsoft.Extensions.Logging.Logger<Microsoft.Extensions.Logging.T>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerFactory,
+      ImplementationType: Microsoft.Extensions.Logging.LoggerFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerProvider,
+      ImplementationType: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerProvider,
+      ImplementationType: Microsoft.Extensions.Logging.Debug.DebugLoggerProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerProvider,
+      ImplementationType: Microsoft.Extensions.Logging.EventSource.EventSourceLoggerProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerProvider,
+      ImplementationType: Microsoft.Extensions.Logging.EventLog.EventLogLoggerProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.ObjectPool.ObjectPool<Microsoft.AspNetCore.Routing.UriBuildingContext>,
+      ImplementationFactory: Microsoft.Extensions.ObjectPool.ObjectPool<Microsoft.AspNetCore.Routing.UriBuildingContext> Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Microsoft.Extensions.ObjectPool.ObjectPoolProvider,
+      ImplementationType: Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Hosting.GenericWebHostServiceOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.AspNetCore.Hosting.GenericWebHostServiceOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Hosting.GenericWebHostServiceOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.AspNetCore.Hosting.GenericWebHostServiceOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Routing.RouteOptions>,
+      ImplementationType: Microsoft.Extensions.DependencyInjection.RegexInlineRouteConstraintSetup
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.DependencyInjection.NoOpOptions>,
+      ImplementationType: Microsoft.Extensions.DependencyInjection.SubscriptionActivator
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Diagnostics.Metrics.MetricsOptions>,
+      ImplementationInstance: Microsoft.Extensions.Diagnostics.Metrics.Configuration.MetricsConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Hosting.HostOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Hosting.HostOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleFormatterConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleLoggerConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.Console.JsonConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleFormatterConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.Console.SimpleConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleFormatterConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.LoggerFactoryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Logging.LoggerFactoryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Logging.DefaultLoggerLevelConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Logging.LoggerFilterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Logging.LoggerFilterConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.EventLogFiltersConfigureOptions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Options.TOptions>,
+      ImplementationType: Microsoft.Extensions.Options.UnnamedOptionsManager<Microsoft.Extensions.Options.TOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.AspNetCore.HostFiltering.HostFilteringOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigurationChangeTokenSource<Microsoft.AspNetCore.HostFiltering.HostFilteringOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Diagnostics.Metrics.MetricsOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigurationChangeTokenSource<Microsoft.Extensions.Diagnostics.Metrics.MetricsOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleLoggerFormatterOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.SystemdConsoleFormatter, Microsoft.Extensions.Logging.Console.ConsoleFormatterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.Configuration.LoggerProviderOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions, Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.JsonConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleLoggerFormatterOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.JsonConsoleFormatter, Microsoft.Extensions.Logging.Console.JsonConsoleFormatterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.SimpleConsoleFormatterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.ConsoleLoggerFormatterOptionsChangeTokenSource<Microsoft.Extensions.Logging.Console.SimpleConsoleFormatter, Microsoft.Extensions.Logging.Console.SimpleConsoleFormatterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigurationChangeTokenSource<Microsoft.Extensions.Logging.LoggerFilterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Microsoft.Extensions.Logging.LoggerFilterOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.EventLogFiltersConfigureOptionsChangeSource
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Options.TOptions>,
+      ImplementationType: Microsoft.Extensions.Options.OptionsMonitor<Microsoft.Extensions.Options.TOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsMonitorCache<Microsoft.Extensions.Options.TOptions>,
+      ImplementationType: Microsoft.Extensions.Options.OptionsCache<Microsoft.Extensions.Options.TOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Microsoft.AspNetCore.HostFiltering.HostFilteringOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.PostConfigureOptions<Microsoft.AspNetCore.HostFiltering.HostFilteringOptions>
+    },
+    {
+      ServiceType: System.Diagnostics.ActivitySource,
+      ImplementationFactory: System.Diagnostics.ActivitySource Microsoft.AspNetCore.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: System.Diagnostics.DiagnosticListener,
+      ImplementationFactory: System.Diagnostics.DiagnosticListener Microsoft.AspNetCore.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: System.Diagnostics.DiagnosticSource,
+      ImplementationFactory: System.Diagnostics.DiagnosticSource Microsoft.AspNetCore.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: System.Diagnostics.DistributedContextPropagator,
+      ImplementationInstance: System.Diagnostics.LegacyPropagator
+    },
+    {
+      ServiceType: System.Diagnostics.Metrics.IMeterFactory,
+      ImplementationType: Microsoft.Extensions.Diagnostics.Metrics.DefaultMeterFactory
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Microsoft.AspNetCore.Http.IMiddlewareFactory,
+      ImplementationType: Microsoft.AspNetCore.Http.MiddlewareFactory
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Microsoft.Extensions.Options.IOptionsSnapshot<Microsoft.Extensions.Options.TOptions>,
+      ImplementationType: Microsoft.Extensions.Options.OptionsManager<Microsoft.Extensions.Options.TOptions>
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Hosting.IStartupFilter,
+      ImplementationType: Microsoft.AspNetCore.HostFilteringStartupFilter
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Hosting.IStartupFilter,
+      ImplementationType: Microsoft.AspNetCore.ForwardedHeadersStartupFilter
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Routing.IInlineConstraintResolver,
+      ImplementationType: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.DfaMatcherBuilder
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Routing.Matching.Lifetime,
+      ImplementationType: Microsoft.AspNetCore.Routing.Matching.Lifetime
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.AspNetCore.Routing.Tree.TreeRouteBuilder,
+      ImplementationFactory: Microsoft.AspNetCore.Routing.Tree.TreeRouteBuilder Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>,
+      ImplementationType: Microsoft.AspNetCore.ForwardedHeadersOptionsSetup
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Routing.RouteHandlerOptions>,
+      ImplementationType: Microsoft.AspNetCore.Routing.ConfigureRouteHandlerOptions
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Routing.RouteOptions>,
+      ImplementationFactory: Microsoft.Extensions.DependencyInjection.ConfigureRouteOptions Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>,
+      ImplementationType: Microsoft.AspNetCore.Server.Kestrel.Core.Internal.KestrelServerOptionsSetup
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.DependencyInjection.NoOpOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.DependencyInjection.NoOpOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.DependencyInjection.NoOpOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.DependencyInjection.NoOpOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<Microsoft.Extensions.Options.TOptions>,
+      ImplementationType: Microsoft.Extensions.Options.OptionsFactory<Microsoft.Extensions.Options.TOptions>
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IStartupValidator,
+      ImplementationType: Microsoft.Extensions.Options.StartupValidator
+    }
+  ],
+  Removed: []
+}

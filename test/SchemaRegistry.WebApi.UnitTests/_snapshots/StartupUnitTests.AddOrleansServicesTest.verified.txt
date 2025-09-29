@@ -1,0 +1,1304 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IConnectionFactory,
+      ServiceKey: System.Object,
+      ImplementationFactory: Microsoft.AspNetCore.Connections.IConnectionFactory Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp, object key)
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IConnectionListenerFactory,
+      ServiceKey: System.Object,
+      ImplementationFactory: Microsoft.AspNetCore.Connections.IConnectionListenerFactory Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp, object key)
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Connections.IConnectionListenerFactory,
+      ServiceKey: System.Object,
+      ImplementationFactory: Microsoft.AspNetCore.Connections.IConnectionListenerFactory Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp, object key)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: Orleans.Hosting.SiloHostedService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.OrleansBuilderMarker,
+      ImplementationInstance: Microsoft.Extensions.Hosting.OrleansBuilderMarker
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.ClusterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.NamedConfigureFromConfigurationOptions<Orleans.Configuration.ClusterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.EndpointOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Orleans.Configuration.EndpointOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.GrainTypeOptions>,
+      ImplementationType: Orleans.Configuration.DefaultGrainTypeOptionsProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.SiloMessagingOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.NamedConfigureFromConfigurationOptions<Orleans.Configuration.SiloMessagingOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.OrleansCoreAbstractions.Metadata_OrleansCoreAbstractions
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.OrleansSerialization.Metadata_OrleansSerialization
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.SchemaRegistryWebApiUnitTests.Metadata_SchemaRegistryWebApiUnitTests
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.OrleansCore.Metadata_OrleansCore
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.OrleansPersistenceMemory.Metadata_OrleansPersistenceMemory
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.OrleansRuntime.Metadata_OrleansRuntime
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.SchemaRegistryInfrastructure.Metadata_SchemaRegistryInfrastructure
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.SchemaRegistryInfrastructureUnitTests.Metadata_SchemaRegistryInfrastructureUnitTests
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: OrleansCodeGen.SchemaRegistryWebApi.Metadata_SchemaRegistryWebApi
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: Orleans.Serialization.Configuration.DefaultTypeManifestProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Orleans.Configuration.ClusterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigurationChangeTokenSource<Orleans.Configuration.ClusterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<Orleans.Configuration.SiloMessagingOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigurationChangeTokenSource<Orleans.Configuration.SiloMessagingOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Orleans.Configuration.ClusterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.PostConfigureOptions<Orleans.Configuration.ClusterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Orleans.Configuration.EndpointOptions>,
+      ImplementationType: Orleans.Configuration.EndpointOptionsProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Orleans.Configuration.SiloOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.PostConfigureOptions<Orleans.Configuration.SiloOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Orleans.Serialization.Configuration.TypeManifestOptions>,
+      ImplementationType: Orleans.Serialization.Configuration.DefaultTypeManifestProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<Orleans.Serialization.OrleansJsonSerializerOptions>,
+      ImplementationType: Orleans.Serialization.ConfigureOrleansJsonSerializerOptions
+    },
+    {
+      ServiceType: Orleans.Core.StateStorageBridgeSharedMap,
+      ImplementationType: Orleans.Core.StateStorageBridgeSharedMap
+    },
+    {
+      ServiceType: Orleans.Factory<Orleans.Runtime.GrainDirectory.LocalGrainDirectoryPartition>,
+      ImplementationFactory: static Orleans.Factory<Orleans.Runtime.GrainDirectory.LocalGrainDirectoryPartition> Orleans.Runtime.Utilities.FactoryUtility.Create<Orleans.Runtime.GrainDirectory.LocalGrainDirectoryPartition>(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: Orleans.Factory<Orleans.Runtime.IGrainRuntime>,
+      ImplementationFactory: Orleans.Factory<Orleans.Runtime.IGrainRuntime> Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Factory<Orleans.Runtime.Messaging.MessageCenter, Orleans.Runtime.Messaging.Gateway>,
+      ImplementationFactory: static Orleans.Factory<Orleans.Runtime.Messaging.MessageCenter, Orleans.Runtime.Messaging.Gateway> Orleans.Runtime.Utilities.FactoryUtility.Create<Orleans.Runtime.Messaging.MessageCenter, Orleans.Runtime.Messaging.Gateway>(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: Orleans.GrainFactory,
+      ImplementationFactory: Orleans.GrainFactory Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.GrainInterfaceTypeToGrainTypeResolver,
+      ImplementationType: Orleans.GrainInterfaceTypeToGrainTypeResolver
+    },
+    {
+      ServiceType: Orleans.GrainReferences.GrainReferenceActivator,
+      ImplementationType: Orleans.GrainReferences.GrainReferenceActivator
+    },
+    {
+      ServiceType: Orleans.GrainReferences.GrainReferenceActivator,
+      ImplementationType: Orleans.GrainReferences.GrainReferenceActivator
+    },
+    {
+      ServiceType: Orleans.GrainReferences.IGrainReferenceActivatorProvider,
+      ImplementationType: Orleans.GrainReferences.GrainReferenceActivatorProvider
+    },
+    {
+      ServiceType: Orleans.GrainReferences.IGrainReferenceActivatorProvider,
+      ImplementationType: Orleans.GrainReferences.UntypedGrainReferenceActivatorProvider
+    },
+    {
+      ServiceType: Orleans.GrainReferences.RpcProvider,
+      ImplementationType: Orleans.GrainReferences.RpcProvider
+    },
+    {
+      ServiceType: Orleans.Hosting.ServicesAdded,
+      ImplementationInstance: Orleans.Hosting.ServicesAdded
+    },
+    {
+      ServiceType: Orleans.IClusterClient,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.ActivationCountBasedPlacementOptionsValidator
+    },
+    {
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.ResourceOptimizedPlacementOptionsValidator
+    },
+    {
+      ServiceType: Orleans.IGrainFactory,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IInternalClusterClient,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IInternalGrainFactory,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationType: Orleans.Runtime.Messaging.ConnectionManagerLifecycleAdapter<Orleans.Runtime.ISiloLifecycle>
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationType: Orleans.Runtime.Messaging.SiloConnectionMaintainer
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationType: Orleans.Runtime.Messaging.SiloConnectionListener
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationType: Orleans.Runtime.Messaging.GatewayConnectionListener
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.ILifecycleParticipant<Orleans.Runtime.ISiloLifecycle>,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IMembershipTable,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.InterfaceToImplementationMappingCache,
+      ImplementationType: Orleans.InterfaceToImplementationMappingCache
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.SiloOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.SchedulingOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ConnectionOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.SiloMessagingOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ClusterMembershipOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.GrainDirectoryOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ActivationCountBasedPlacementOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ResourceOptimizedPlacementOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.GrainCollectionOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.StatelessWorkerOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.GrainVersioningOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ConsistentRingOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.LoadSheddingOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.EndpointOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.ClusterOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter,
+      ImplementationFactory: Orleans.IOptionFormatter Orleans.Configuration.SpecialType<Orleans.Configuration.DevelopmentClusterMembershipOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.IOptionFormatter<Orleans.T>,
+      ImplementationType: Orleans.DefaultOptionsFormatter<Orleans.T>
+    },
+    {
+      ServiceType: Orleans.IOptionFormatterResolver<Orleans.T>,
+      ImplementationType: Orleans.DefaultOptionsFormatterResolver<Orleans.T>
+    },
+    {
+      ServiceType: Orleans.Metadata.GrainBindingsResolver,
+      ImplementationType: Orleans.Metadata.GrainBindingsResolver
+    },
+    {
+      ServiceType: Orleans.Metadata.GrainClassMap,
+      ImplementationFactory: Orleans.Metadata.GrainClassMap Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Metadata.GrainInterfaceTypeResolver,
+      ImplementationType: Orleans.Metadata.GrainInterfaceTypeResolver
+    },
+    {
+      ServiceType: Orleans.Metadata.GrainPropertiesResolver,
+      ImplementationType: Orleans.Metadata.GrainPropertiesResolver
+    },
+    {
+      ServiceType: Orleans.Metadata.GrainTypeResolver,
+      ImplementationType: Orleans.Metadata.GrainTypeResolver
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainInterfacePropertiesProvider,
+      ImplementationType: Orleans.Metadata.AttributeGrainInterfacePropertiesProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainInterfacePropertiesProvider,
+      ImplementationType: Orleans.Metadata.TypeNameGrainPropertiesProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainPropertiesProvider,
+      ImplementationType: Orleans.Metadata.AttributeGrainPropertiesProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainPropertiesProvider,
+      ImplementationType: Orleans.Metadata.AttributeGrainBindingsProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainPropertiesProvider,
+      ImplementationType: Orleans.Metadata.TypeNameGrainPropertiesProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainPropertiesProvider,
+      ImplementationType: Orleans.Metadata.ImplementedInterfaceProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.IGrainTypeProvider,
+      ImplementationType: Orleans.Metadata.AttributeGrainTypeProvider
+    },
+    {
+      ServiceType: Orleans.Metadata.SiloManifestProvider,
+      ImplementationType: Orleans.Metadata.SiloManifestProvider
+    },
+    {
+      ServiceType: Orleans.Networking.Shared.SharedMemoryPool,
+      ImplementationType: Orleans.Networking.Shared.SharedMemoryPool
+    },
+    {
+      ServiceType: Orleans.Networking.Shared.SocketSchedulers,
+      ImplementationType: Orleans.Networking.Shared.SocketSchedulers
+    },
+    {
+      ServiceType: Orleans.Placement.Repartitioning.IMessageStatisticsSink,
+      ImplementationType: Orleans.Placement.Repartitioning.NoOpMessageStatisticsSink
+    },
+    {
+      ServiceType: Orleans.Providers.IProviderRuntime,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.ActivationCollector,
+      ImplementationType: Orleans.Runtime.ActivationCollector
+    },
+    {
+      ServiceType: Orleans.Runtime.ActivationDirectory,
+      ImplementationType: Orleans.Runtime.ActivationDirectory
+    },
+    {
+      ServiceType: Orleans.Runtime.ActivationMigrationManager,
+      ImplementationType: Orleans.Runtime.ActivationMigrationManager
+    },
+    {
+      ServiceType: Orleans.Runtime.ActivationWorkingSet,
+      ImplementationType: Orleans.Runtime.ActivationWorkingSet
+    },
+    {
+      ServiceType: Orleans.Runtime.Catalog,
+      ImplementationType: Orleans.Runtime.Catalog
+    },
+    {
+      ServiceType: Orleans.Runtime.ClusterManifestSystemTarget,
+      ImplementationType: Orleans.Runtime.ClusterManifestSystemTarget
+    },
+    {
+      ServiceType: Orleans.Runtime.ClusterMembershipService,
+      ImplementationType: Orleans.Runtime.ClusterMembershipService
+    },
+    {
+      ServiceType: Orleans.Runtime.ConsistentRing.IConsistentRingProvider,
+      ImplementationFactory: Orleans.Runtime.ConsistentRing.IConsistentRingProvider Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.DeploymentLoadPublisher,
+      ImplementationType: Orleans.Runtime.DeploymentLoadPublisher
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainCallCancellationManager,
+      ImplementationType: Orleans.Runtime.GrainCallCancellationManager
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainContextActivator,
+      ImplementationType: Orleans.Runtime.GrainContextActivator
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainCountStatistics,
+      ImplementationType: Orleans.Runtime.GrainCountStatistics
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.CachedGrainLocator,
+      ImplementationType: Orleans.Runtime.GrainDirectory.CachedGrainLocator
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.ClientDirectory,
+      ImplementationType: Orleans.Runtime.GrainDirectory.ClientDirectory
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.ClientGrainLocator,
+      ImplementationType: Orleans.Runtime.GrainDirectory.ClientGrainLocator
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.DhtGrainLocator,
+      ImplementationFactory: Orleans.Runtime.GrainDirectory.DhtGrainLocator Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.GrainDirectoryResolver,
+      ImplementationType: Orleans.Runtime.GrainDirectory.GrainDirectoryResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.GrainLocator,
+      ImplementationType: Orleans.Runtime.GrainDirectory.GrainLocator
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.GrainLocatorResolver,
+      ImplementationType: Orleans.Runtime.GrainDirectory.GrainLocatorResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.IGrainDirectoryResolver,
+      ImplementationType: Orleans.Runtime.GrainDirectory.GenericGrainDirectoryResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.ILocalClientDirectory,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.ILocalGrainDirectory,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainDirectory.LocalGrainDirectory,
+      ImplementationType: Orleans.Runtime.GrainDirectory.LocalGrainDirectory
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainRuntime,
+      ImplementationType: Orleans.Runtime.GrainRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.GrainTypeSharedContextResolver,
+      ImplementationType: Orleans.Runtime.GrainTypeSharedContextResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.HostedClient,
+      ImplementationType: Orleans.Runtime.HostedClient
+    },
+    {
+      ServiceType: Orleans.Runtime.IActivationMigrationManager,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IActivationWorkingSet,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IActivationWorkingSetObserver,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IActivationWorkingSetObserver,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IAsyncTimerFactory,
+      ImplementationType: Orleans.Runtime.AsyncTimerFactory
+    },
+    {
+      ServiceType: Orleans.Runtime.IAttributeToFactoryMapper<Orleans.Runtime.PersistentStateAttribute>,
+      ImplementationType: Orleans.PersistentStateAttributeMapper
+    },
+    {
+      ServiceType: Orleans.Runtime.IClusterManifestProvider,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IClusterMembershipService,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IConfigureGrainContextProvider,
+      ImplementationType: Orleans.Runtime.MayInterleaveConfiguratorProvider
+    },
+    {
+      ServiceType: Orleans.Runtime.IConfigureGrainTypeComponents,
+      ImplementationType: Orleans.Runtime.ReentrantSharedComponentsConfigurator
+    },
+    {
+      ServiceType: Orleans.Runtime.IConfigureGrainTypeComponents,
+      ImplementationType: Orleans.Runtime.ConfigureDefaultGrainActivator
+    },
+    {
+      ServiceType: Orleans.Runtime.IConnectedClientCollection,
+      ImplementationFactory: Orleans.Runtime.IConnectedClientCollection Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IFatalErrorHandler,
+      ImplementationType: Orleans.Runtime.FatalErrorHandler
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainCallCancellationManager,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainCancellationTokenRuntime,
+      ImplementationType: Orleans.Runtime.GrainCancellationTokenRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainContextAccessor,
+      ImplementationType: Orleans.Runtime.GrainContextAccessor
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainContextActivatorProvider,
+      ImplementationType: Orleans.Runtime.ActivationDataActivatorProvider
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainInterfaceTypeProvider,
+      ImplementationType: Orleans.Runtime.AttributeGrainInterfaceTypeProvider
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainReferenceRuntime,
+      ImplementationType: Orleans.Runtime.GrainReferenceRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainRuntime,
+      ImplementationType: Orleans.Runtime.GrainRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.IGrainServiceFactory,
+      ImplementationType: Orleans.Runtime.GrainServiceFactory
+    },
+    {
+      ServiceType: Orleans.Runtime.IHealthCheckParticipant,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IHealthCheckParticipant,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IHealthCheckParticipant,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IHealthCheckParticipant,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.ILocalSiloDetails,
+      ImplementationType: Orleans.Runtime.LocalSiloDetails
+    },
+    {
+      ServiceType: Orleans.Runtime.IMembershipService,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IMessageCenter,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.IncomingRequestMonitor,
+      ImplementationType: Orleans.Runtime.IncomingRequestMonitor
+    },
+    {
+      ServiceType: Orleans.Runtime.InsideRuntimeClient,
+      ImplementationType: Orleans.Runtime.InsideRuntimeClient
+    },
+    {
+      ServiceType: Orleans.Runtime.InternalClusterClient,
+      ImplementationType: Orleans.Runtime.InternalClusterClient
+    },
+    {
+      ServiceType: Orleans.Runtime.InternalGrainRuntime,
+      ImplementationType: Orleans.Runtime.InternalGrainRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.IPersistentStateFactory,
+      ImplementationType: Orleans.Runtime.PersistentStateFactory
+    },
+    {
+      ServiceType: Orleans.Runtime.IRuntimeClient,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.ISiloLifecycle,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.ISiloLifecycleSubject,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.ISiloStatusOracle,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.LifecycleSchedulingSystemTarget,
+      ImplementationType: Orleans.Runtime.LifecycleSchedulingSystemTarget
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.ClusterHealthMonitor,
+      ImplementationType: Orleans.Runtime.MembershipService.ClusterHealthMonitor
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.ILocalSiloHealthMonitor,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.IMembershipGossiper,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipGossiper
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.IRemoteSiloProber,
+      ImplementationType: Orleans.Runtime.MembershipService.RemoteSiloProber
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.LocalSiloHealthMonitor,
+      ImplementationType: Orleans.Runtime.MembershipService.LocalSiloHealthMonitor
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.MembershipAgent,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipAgent
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.MembershipSystemTarget,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipSystemTarget
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.MembershipTableCleanupAgent,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipTableCleanupAgent
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.MembershipTableManager,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipTableManager
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.MembershipTableSystemTarget,
+      ImplementationType: Orleans.Runtime.MembershipService.MembershipTableSystemTarget
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.SiloStatusListenerManager,
+      ImplementationType: Orleans.Runtime.MembershipService.SiloStatusListenerManager
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.SiloStatusOracle,
+      ImplementationType: Orleans.Runtime.MembershipService.SiloStatusOracle
+    },
+    {
+      ServiceType: Orleans.Runtime.MembershipService.SystemTargetBasedMembershipTable,
+      ImplementationType: Orleans.Runtime.MembershipService.SystemTargetBasedMembershipTable
+    },
+    {
+      ServiceType: Orleans.Runtime.MessageFactory,
+      ImplementationType: Orleans.Runtime.MessageFactory
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.ConnectionCommon,
+      ImplementationType: Orleans.Runtime.Messaging.ConnectionCommon
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.ConnectionFactory,
+      ImplementationType: Orleans.Runtime.Messaging.SiloConnectionFactory
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.ConnectionManager,
+      ImplementationType: Orleans.Runtime.Messaging.ConnectionManager
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.ConnectionPreambleHelper,
+      ImplementationType: Orleans.Runtime.Messaging.ConnectionPreambleHelper
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.MessageCenter,
+      ImplementationType: Orleans.Runtime.Messaging.MessageCenter
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.NetworkingTrace,
+      ImplementationType: Orleans.Runtime.Messaging.NetworkingTrace
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.OverloadDetector,
+      ImplementationType: Orleans.Runtime.Messaging.OverloadDetector
+    },
+    {
+      ServiceType: Orleans.Runtime.Messaging.ProbeRequestMonitor,
+      ImplementationType: Orleans.Runtime.Messaging.ProbeRequestMonitor
+    },
+    {
+      ServiceType: Orleans.Runtime.MessagingTrace,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Runtime.Metadata.ClusterManifestProvider,
+      ImplementationType: Orleans.Runtime.Metadata.ClusterManifestProvider
+    },
+    {
+      ServiceType: Orleans.Runtime.OnDeserializedCallbacks,
+      ImplementationType: Orleans.Runtime.OnDeserializedCallbacks
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.Filtering.PlacementFilterDirectorResolver,
+      ImplementationType: Orleans.Runtime.Placement.Filtering.PlacementFilterDirectorResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.Filtering.PlacementFilterStrategyResolver,
+      ImplementationType: Orleans.Runtime.Placement.Filtering.PlacementFilterStrategyResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.GrainMigratabilityChecker,
+      ImplementationType: Orleans.Runtime.Placement.GrainMigratabilityChecker
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.ActivationCountBasedPlacement,
+      ImplementationType: Orleans.Runtime.Placement.ActivationCountPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.ClientObserversPlacement,
+      ImplementationType: Orleans.Runtime.Placement.ClientObserversPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.HashBasedPlacement,
+      ImplementationType: Orleans.Runtime.Placement.HashBasedPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.PreferLocalPlacement,
+      ImplementationType: Orleans.Runtime.Placement.PreferLocalPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.RandomPlacement,
+      ImplementationType: Orleans.Runtime.Placement.RandomPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.ResourceOptimizedPlacement,
+      ImplementationType: Orleans.Runtime.Placement.ResourceOptimizedPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.SiloRoleBasedPlacement,
+      ImplementationType: Orleans.Runtime.Placement.SiloRoleBasedPlacementDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementDirector,
+      ServiceKey: Orleans.Runtime.StatelessWorkerPlacement,
+      ImplementationType: Orleans.Runtime.Placement.StatelessWorkerDirector
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.IPlacementStrategyResolver,
+      ImplementationType: Orleans.Runtime.Placement.ClientObserverPlacementStrategyResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.PlacementDirectorResolver,
+      ImplementationType: Orleans.Runtime.Placement.PlacementDirectorResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.PlacementService,
+      ImplementationType: Orleans.Runtime.Placement.PlacementService
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.PlacementService,
+      ImplementationType: Orleans.Runtime.Placement.PlacementService
+    },
+    {
+      ServiceType: Orleans.Runtime.Placement.PlacementStrategyResolver,
+      ImplementationType: Orleans.Runtime.Placement.PlacementStrategyResolver
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ImplementationType: Orleans.Runtime.ResourceOptimizedPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: ActivationCountBasedPlacement,
+      ImplementationType: Orleans.Runtime.ActivationCountBasedPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: ClientObserversPlacement,
+      ImplementationType: Orleans.Runtime.ClientObserversPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: HashBasedPlacement,
+      ImplementationType: Orleans.Runtime.HashBasedPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: PreferLocalPlacement,
+      ImplementationType: Orleans.Runtime.PreferLocalPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: RandomPlacement,
+      ImplementationType: Orleans.Runtime.RandomPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: ResourceOptimizedPlacement,
+      ImplementationType: Orleans.Runtime.ResourceOptimizedPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: SiloRoleBasedPlacement,
+      ImplementationType: Orleans.Runtime.SiloRoleBasedPlacement
+    },
+    {
+      ServiceType: Orleans.Runtime.Providers.SiloProviderRuntime,
+      ImplementationType: Orleans.Runtime.Providers.SiloProviderRuntime
+    },
+    {
+      ServiceType: Orleans.Runtime.RuntimeMessagingTrace,
+      ImplementationType: Orleans.Runtime.RuntimeMessagingTrace
+    },
+    {
+      ServiceType: Orleans.Runtime.SerializationHooks,
+      ImplementationType: Orleans.Runtime.SerializationHooks
+    },
+    {
+      ServiceType: Orleans.Runtime.Silo,
+      ImplementationType: Orleans.Runtime.Silo
+    },
+    {
+      ServiceType: Orleans.Runtime.SiloControl,
+      ImplementationType: Orleans.Runtime.SiloControl
+    },
+    {
+      ServiceType: Orleans.Runtime.SiloLifecycleSubject,
+      ImplementationType: Orleans.Runtime.SiloLifecycleSubject
+    },
+    {
+      ServiceType: Orleans.Runtime.SiloOptionsLogger,
+      ImplementationType: Orleans.Runtime.SiloOptionsLogger
+    },
+    {
+      ServiceType: Orleans.Runtime.SystemTargetShared,
+      ImplementationType: Orleans.Runtime.SystemTargetShared
+    },
+    {
+      ServiceType: Orleans.Runtime.Versions.CachedVersionSelectorManager,
+      ImplementationType: Orleans.Runtime.Versions.CachedVersionSelectorManager
+    },
+    {
+      ServiceType: Orleans.Runtime.Versions.Compatibility.CompatibilityDirectorManager,
+      ImplementationType: Orleans.Runtime.Versions.Compatibility.CompatibilityDirectorManager
+    },
+    {
+      ServiceType: Orleans.Runtime.Versions.GrainVersionManifest,
+      ImplementationType: Orleans.Runtime.Versions.GrainVersionManifest
+    },
+    {
+      ServiceType: Orleans.Runtime.Versions.GrainVersionStore,
+      ImplementationType: Orleans.Runtime.Versions.GrainVersionStore
+    },
+    {
+      ServiceType: Orleans.Runtime.Versions.Selector.VersionSelectorManager,
+      ImplementationType: Orleans.Runtime.Versions.Selector.VersionSelectorManager
+    },
+    {
+      ServiceType: Orleans.Runtime.Watchdog,
+      ImplementationType: Orleans.Runtime.Watchdog
+    },
+    {
+      ServiceType: Orleans.Serialization.Activators.IActivator<Orleans.Serialization.Activators.T>,
+      ImplementationType: Orleans.Serialization.ActivatorHolder<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Serialization.Cloning.CopyContextPool,
+      ImplementationType: Orleans.Serialization.Cloning.CopyContextPool
+    },
+    {
+      ServiceType: Orleans.Serialization.Cloning.IBaseCopier<Orleans.Serialization.Cloning.T>,
+      ImplementationType: Orleans.Serialization.BaseCopierHolder<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Serialization.Cloning.IDeepCopier<Orleans.Serialization.Cloning.T>,
+      ImplementationType: Orleans.Serialization.CopierHolder<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Serialization.Cloning.IDeepCopierProvider,
+      ImplementationFactory: Orleans.Serialization.Cloning.IDeepCopierProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Cloning.ISpecializableCopier,
+      ImplementationType: Orleans.Runtime.GrainReferenceCopierProvider
+    },
+    {
+      ServiceType: Orleans.Serialization.Codecs.IFieldCodec<Orleans.Serialization.Codecs.T>,
+      ImplementationType: Orleans.Serialization.FieldCodecHolder<Orleans.Serialization.TField>
+    },
+    {
+      ServiceType: Orleans.Serialization.ConfigurationContext,
+      ImplementationInstance: Orleans.Serialization.ConfigurationContext
+    },
+    {
+      ServiceType: Orleans.Serialization.DeepCopier,
+      ImplementationType: Orleans.Serialization.DeepCopier
+    },
+    {
+      ServiceType: Orleans.Serialization.DeepCopier<Orleans.Serialization.T>,
+      ImplementationType: Orleans.Serialization.DeepCopier<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Serialization.ExceptionCodec,
+      ImplementationType: Orleans.Serialization.ExceptionCodec
+    },
+    {
+      ServiceType: Orleans.Serialization.ITypeNameFilter,
+      ImplementationType: Orleans.Serialization.TypeSystem.DefaultTypeFilter
+    },
+    {
+      ServiceType: Orleans.Serialization.ITypeNameFilter,
+      ImplementationType: Orleans.Hosting.AllowOrleansTypes
+    },
+    {
+      ServiceType: Orleans.Serialization.ObjectSerializer,
+      ImplementationType: Orleans.Serialization.ObjectSerializer
+    },
+    {
+      ServiceType: Orleans.Serialization.OrleansJsonSerializer,
+      ImplementationType: Orleans.Serialization.OrleansJsonSerializer
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializer,
+      ImplementationType: Orleans.Serialization.Serializer
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializer<Orleans.Serialization.T>,
+      ImplementationType: Orleans.Serialization.Serializer<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.CodecProvider,
+      ImplementationType: Orleans.Serialization.Serializers.CodecProvider
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IActivatorProvider,
+      ImplementationFactory: Orleans.Serialization.Serializers.IActivatorProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IBaseCodec<Orleans.Serialization.Serializers.T>,
+      ImplementationType: Orleans.Serialization.BaseCodecHolder<Orleans.Serialization.TField>
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IBaseCodecProvider,
+      ImplementationFactory: Orleans.Serialization.Serializers.IBaseCodecProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.ICodecProvider,
+      ImplementationFactory: Orleans.Serialization.Serializers.ICodecProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IFieldCodecProvider,
+      ImplementationFactory: Orleans.Serialization.Serializers.IFieldCodecProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IGeneralizedBaseCodec,
+      ImplementationFactory: Orleans.Serialization.Serializers.IGeneralizedBaseCodec Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IGeneralizedCodec,
+      ImplementationType: Orleans.Serialization.Codecs.WellKnownStringComparerCodec
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IGeneralizedCodec,
+      ImplementationFactory: Orleans.Serialization.Serializers.IGeneralizedCodec Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.ISpecializableCodec,
+      ImplementationType: Orleans.Runtime.GrainReferenceCodecProvider
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IValueSerializer<Orleans.Serialization.Serializers.T>,
+      ImplementationType: Orleans.Serialization.ValueSerializerHolder<Orleans.Serialization.TField>
+    },
+    {
+      ServiceType: Orleans.Serialization.Serializers.IValueSerializerProvider,
+      ImplementationFactory: Orleans.Serialization.Serializers.IValueSerializerProvider Orleans.Serialization.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Serialization.Session.SerializerSessionPool,
+      ImplementationType: Orleans.Serialization.Session.SerializerSessionPool
+    },
+    {
+      ServiceType: Orleans.Serialization.Session.WellKnownTypeCollection,
+      ImplementationType: Orleans.Serialization.Session.WellKnownTypeCollection
+    },
+    {
+      ServiceType: Orleans.Serialization.TypeSystem.TypeCodec,
+      ImplementationType: Orleans.Serialization.TypeSystem.TypeCodec
+    },
+    {
+      ServiceType: Orleans.Serialization.TypeSystem.TypeConverter,
+      ImplementationType: Orleans.Serialization.TypeSystem.TypeConverter
+    },
+    {
+      ServiceType: Orleans.Serialization.TypeSystem.TypeResolver,
+      ImplementationType: Orleans.Serialization.TypeSystem.CachedTypeResolver
+    },
+    {
+      ServiceType: Orleans.Serialization.ValueSerializer<Orleans.Serialization.T>,
+      ImplementationType: Orleans.Serialization.ValueSerializer<Orleans.Serialization.T>
+    },
+    {
+      ServiceType: Orleans.Statistics.IAppEnvironmentStatistics,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Statistics.IEnvironmentStatisticsProvider,
+      ImplementationType: Orleans.Statistics.EnvironmentStatisticsProvider
+    },
+    {
+      ServiceType: Orleans.Statistics.IHostEnvironmentStatistics,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Statistics.OldEnvironmentStatistics,
+      ImplementationType: Orleans.Statistics.OldEnvironmentStatistics
+    },
+    {
+      ServiceType: Orleans.Storage.IGrainStorageSerializer,
+      ImplementationType: Orleans.Storage.JsonGrainStorageSerializer
+    },
+    {
+      ServiceType: Orleans.Timers.Internal.ITimerManager,
+      ImplementationType: Orleans.Timers.Internal.TimerManagerImpl
+    },
+    {
+      ServiceType: Orleans.Timers.ITimerRegistry,
+      ImplementationType: Orleans.Timers.TimerRegistry
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.CompatibilityStrategy,
+      ServiceKey: AllVersionsCompatible,
+      ImplementationType: Orleans.Versions.Compatibility.AllVersionsCompatible
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.CompatibilityStrategy,
+      ServiceKey: BackwardCompatible,
+      ImplementationType: Orleans.Versions.Compatibility.BackwardCompatible
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.CompatibilityStrategy,
+      ServiceKey: StrictVersionCompatible,
+      ImplementationType: Orleans.Versions.Compatibility.StrictVersionCompatible
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.ICompatibilityDirector,
+      ServiceKey: Orleans.Versions.Compatibility.AllVersionsCompatible,
+      ImplementationType: Orleans.Runtime.Versions.Compatibility.AllVersionsCompatibilityDirector
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.ICompatibilityDirector,
+      ServiceKey: Orleans.Versions.Compatibility.BackwardCompatible,
+      ImplementationType: Orleans.Runtime.Versions.Compatibility.BackwardCompatilityDirector
+    },
+    {
+      ServiceType: Orleans.Versions.Compatibility.ICompatibilityDirector,
+      ServiceKey: Orleans.Versions.Compatibility.StrictVersionCompatible,
+      ImplementationType: Orleans.Runtime.Versions.Compatibility.StrictVersionCompatibilityDirector
+    },
+    {
+      ServiceType: Orleans.Versions.IVersionStore,
+      ImplementationFactory: object Orleans.Configuration.Internal.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.IVersionSelector,
+      ServiceKey: Orleans.Versions.Selector.AllCompatibleVersions,
+      ImplementationType: Orleans.Runtime.Versions.Selector.AllCompatibleVersionsSelector
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.IVersionSelector,
+      ServiceKey: Orleans.Versions.Selector.LatestVersion,
+      ImplementationType: Orleans.Runtime.Versions.Selector.LatestVersionSelector
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.IVersionSelector,
+      ServiceKey: Orleans.Versions.Selector.MinimumVersion,
+      ImplementationType: Orleans.Runtime.Versions.Selector.MinimumVersionSelector
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.VersionSelectorStrategy,
+      ServiceKey: AllCompatibleVersions,
+      ImplementationType: Orleans.Versions.Selector.AllCompatibleVersions
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.VersionSelectorStrategy,
+      ServiceKey: LatestVersion,
+      ImplementationType: Orleans.Versions.Selector.LatestVersion
+    },
+    {
+      ServiceType: Orleans.Versions.Selector.VersionSelectorStrategy,
+      ServiceKey: MinimumVersion,
+      ImplementationType: Orleans.Versions.Selector.MinimumVersion
+    },
+    {
+      ServiceType: System.TimeProvider,
+      ImplementationInstance: System.SystemTimeProvider
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Orleans.Runtime.IAsyncEnumerableGrainExtension,
+      ImplementationType: Orleans.Runtime.AsyncEnumerableGrainExtension
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Orleans.Runtime.IGrainContext,
+      ImplementationFactory: Orleans.Runtime.IGrainContext Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.DevelopmentClusterMembershipOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.DevelopmentClusterMembershipOptions> Microsoft.Extensions.Options.SpecialType<Orleans.Configuration.DevelopmentClusterMembershipOptions, Microsoft.Extensions.Options.IOptions<Orleans.Configuration.EndpointOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.GrainCollectionOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Orleans.Configuration.GrainCollectionOptions> Microsoft.Extensions.Options.SpecialType<Orleans.Configuration.GrainCollectionOptions, Microsoft.Extensions.Options.IOptions<Orleans.Configuration.GrainTypeOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IOptions<Orleans.Configuration.MessagingOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptions<Orleans.Configuration.MessagingOptions> Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IValidateOptions<Orleans.Configuration.SiloMessagingOptions>,
+      ImplementationType: Orleans.Configuration.SiloMessagingOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.ClusterOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Runtime.Configuration.SiloClusteringValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.DevelopmentClusterMembershipOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.GrainTypeOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.GrainCollectionOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.Configuration.Validators.LoadSheddingValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.IConfigurationValidator,
+      ImplementationType: Orleans.SerializerConfigurationValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.Runtime.CancellationSourcesExtension,
+      ImplementationType: Orleans.Runtime.CancellationSourcesExtension
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.Runtime.IGrainExtension,
+      ServiceKey: Orleans.Runtime.IAsyncEnumerableGrainExtension,
+      ImplementationFactory: Orleans.Runtime.IGrainExtension Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp, object _)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.Runtime.IGrainExtension,
+      ServiceKey: Orleans.Runtime.ICancellationSourcesExtension,
+      ImplementationFactory: Orleans.Runtime.IGrainExtension Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp, object _)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.Runtime.Messaging.MessageSerializer,
+      ImplementationFactory: Orleans.Runtime.Messaging.MessageSerializer Orleans.Hosting.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Orleans.Runtime.PlacementStrategy,
+      ServiceKey: StatelessWorkerPlacement,
+      ImplementationType: Orleans.Runtime.StatelessWorkerPlacement
+    }
+  ],
+  Removed: []
+}

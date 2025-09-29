@@ -1,0 +1,389 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.Extensions.DependencyInjection.DefaultHttpClientConfigurationTracker,
+      ImplementationInstance: Microsoft.Extensions.DependencyInjection.DefaultHttpClientConfigurationTracker
+    },
+    {
+      ServiceType: Microsoft.Extensions.DependencyInjection.HttpClientMappingRegistry,
+      ImplementationInstance: Microsoft.Extensions.DependencyInjection.HttpClientMappingRegistry
+    },
+    {
+      ServiceType: Microsoft.Extensions.DependencyInjection.Marker,
+      ImplementationType: Microsoft.Extensions.DependencyInjection.Marker
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.ExceptionSummarization.IExceptionSummarizer,
+      ImplementationType: Microsoft.Extensions.Diagnostics.ExceptionSummarization.ExceptionSummarizer
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.ExceptionSummarization.IExceptionSummaryProvider,
+      ImplementationType: Microsoft.Extensions.Diagnostics.ExceptionSummarization.HttpExceptionSummaryProvider
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckService,
+      ImplementationType: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.IMetricsListener,
+      ImplementationType: OpenTelemetry.Metrics.OpenTelemetryMetricsListener
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: OpenTelemetry.Extensions.Hosting.Implementation.TelemetryHostedService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherHostedService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Http.Cache<Microsoft.Extensions.Http.TClient>,
+      ImplementationType: Microsoft.Extensions.Http.Cache<Microsoft.Extensions.Http.TClient>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Http.DefaultHttpClientFactory,
+      ImplementationType: Microsoft.Extensions.Http.DefaultHttpClientFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.Http.IHttpMessageHandlerBuilderFilter,
+      ImplementationType: Microsoft.Extensions.Http.LoggingHttpMessageHandlerBuilderFilter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Http.IHttpMessageHandlerBuilderFilter,
+      ImplementationType: Microsoft.Extensions.Http.MetricsFactoryHttpMessageHandlerFilter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Http.IHttpMessageHandlerBuilderFilter,
+      ImplementationType: Microsoft.Extensions.DependencyInjection.DisableGrpcLoadBalancingFilter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Logging.ILoggerProvider,
+      ImplementationFactory: OpenTelemetry.Logs.OpenTelemetryLoggerProvider Microsoft.Extensions.Logging.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.DependencyInjection.DisableGrpcLoadBalancingFilterOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.DependencyInjection.DisableGrpcLoadBalancingFilterOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckServiceOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckServiceOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.Http.HttpClientFactoryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.ServiceDiscovery.ConfigurationServiceEndpointProviderOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.ServiceDiscovery.ConfigurationServiceEndpointProviderOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<OpenTelemetry.Instrumentation.AspNetCore.AspNetCoreTraceInstrumentationOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<OpenTelemetry.Instrumentation.AspNetCore.AspNetCoreTraceInstrumentationOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.Configuration.LoggerProviderConfigureOptions<OpenTelemetry.Logs.OpenTelemetryLoggerOptions, OpenTelemetry.Logs.OpenTelemetryLoggerProvider>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Polly.Registry.ResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Polly.Registry.ResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Polly.Telemetry.TelemetryOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<Polly.Telemetry.TelemetryOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsChangeTokenSource<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Logging.Configuration.LoggerProviderOptionsChangeTokenSource<OpenTelemetry.Logs.OpenTelemetryLoggerOptions, OpenTelemetry.Logs.OpenTelemetryLoggerProvider>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Instrumentation.AspNetCore.AspNetCoreTraceInstrumentationOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Instrumentation.AspNetCore.AspNetCoreTraceInstrumentationOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Instrumentation.AspNetCore.AspNetCoreTraceInstrumentationOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Instrumentation.Http.HttpClientTraceInstrumentationOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Instrumentation.Http.HttpClientTraceInstrumentationOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Instrumentation.Http.HttpClientTraceInstrumentationOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Logs.BatchExportLogRecordProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Logs.BatchExportLogRecordProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Logs.BatchExportLogRecordProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Logs.LogRecordExportProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Logs.LogRecordExportProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Logs.LogRecordExportProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.MetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.ActivityExportProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsMonitor<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Options.SingletonOptionsManager<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IValidateOptions<Microsoft.Extensions.Http.Resilience.HttpStandardResilienceOptions>,
+      ImplementationType: Microsoft.Extensions.Http.Resilience.Internal.Validators.HttpStandardResilienceOptionsCustomValidator
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IValidateOptions<Microsoft.Extensions.Http.Resilience.HttpStandardResilienceOptions>,
+      ImplementationType: Microsoft.Extensions.Http.Resilience.Internal.Validators.HttpStandardResilienceOptionsValidator
+    },
+    {
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.Http.IServiceDiscoveryHttpMessageHandlerFactory,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.Http.ServiceDiscoveryHttpMessageHandlerFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.IServiceEndpointProviderFactory,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.Configuration.ConfigurationServiceEndpointProviderFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.IServiceEndpointProviderFactory,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.PassThrough.PassThroughServiceEndpointProviderFactory
+    },
+    {
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.ServiceEndpointResolver,
+      ImplementationFactory: Microsoft.Extensions.ServiceDiscovery.ServiceEndpointResolver Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.ServiceEndpointWatcherFactory,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.ServiceEndpointWatcherFactory
+    },
+    {
+      ServiceType: OpenTelemetry.Logs.IConfigureLoggerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Logs.ConfigureLoggerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Logs.IConfigureLoggerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Logs.ConfigureLoggerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Logs.LoggerProvider,
+      ImplementationFactory: OpenTelemetry.Logs.LoggerProvider OpenTelemetry.Logs.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Logs.LoggerProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Logs.LoggerProviderBuilderSdk
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProvider,
+      ImplementationFactory: OpenTelemetry.Metrics.MeterProvider OpenTelemetry.Metrics.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Metrics.MeterProviderBuilderSdk
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProvider,
+      ImplementationFactory: OpenTelemetry.Trace.TracerProvider OpenTelemetry.Trace.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Trace.TracerProviderBuilderSdk
+    },
+    {
+      ServiceType: Polly.Registry.ResiliencePipelineProvider<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>,
+      ImplementationFactory: Polly.Registry.ResiliencePipelineProvider<Microsoft.Extensions.Http.Resilience.Internal.HttpKey> Polly.SpecialType<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: Polly.Registry.ResiliencePipelineRegistry<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>,
+      ImplementationFactory: Polly.Registry.ResiliencePipelineRegistry<Microsoft.Extensions.Http.Resilience.Internal.HttpKey> Polly.SpecialType<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: Polly.RegistryMarker<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>,
+      ImplementationInstance: Polly.RegistryMarker<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>
+    },
+    {
+      ServiceType: System.Net.Http.IHttpClientFactory,
+      ImplementationFactory: System.Net.Http.IHttpClientFactory Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: System.Net.Http.IHttpMessageHandlerFactory,
+      ImplementationFactory: System.Net.Http.IHttpMessageHandlerFactory Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      ServiceType: System.TimeProvider,
+      ImplementationFactory: System.TimeProvider Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider _)
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Microsoft.Extensions.Options.IOptionsSnapshot<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>,
+      ImplementationType: Microsoft.Extensions.Options.SingletonOptionsManager<OpenTelemetry.Logs.OpenTelemetryLoggerOptions>
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Http.HttpMessageHandlerBuilder,
+      ImplementationType: Microsoft.Extensions.Http.DefaultHttpMessageHandlerBuilder
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Http.ITypedHttpClientFactory<Microsoft.Extensions.Http.TClient>,
+      ImplementationType: Microsoft.Extensions.Http.DefaultTypedHttpClientFactory<Microsoft.Extensions.Http.TClient>
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.DependencyInjection.NoOpOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Http.Resilience.HttpStandardResilienceOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.Extensions.Options.StartupValidatorOptions> Microsoft.Extensions.Options.SpecialType<Microsoft.Extensions.Options.StartupValidatorOptions, Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Http.Resilience.HttpStandardResilienceOptions>>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Polly.DependencyInjection.ConfigureResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Polly.DependencyInjection.ConfigureResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>> Microsoft.Extensions.Options.SpecialType<Polly.DependencyInjection.ConfigureResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>, System.IServiceProvider>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Polly.Registry.ResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Polly.Registry.ResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>> Microsoft.Extensions.Options.SpecialType<Polly.Registry.ResiliencePipelineRegistryOptions<Microsoft.Extensions.Http.Resilience.Internal.HttpKey>, System.IServiceProvider>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Polly.Telemetry.TelemetryOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IConfigureOptions<Polly.Telemetry.TelemetryOptions> Microsoft.Extensions.Options.SpecialType<Polly.Telemetry.TelemetryOptions, System.IServiceProvider>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IValidateOptions<Microsoft.Extensions.ServiceDiscovery.ConfigurationServiceEndpointProviderOptions>,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.Configuration.ConfigurationServiceEndpointProviderOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IValidateOptions<Microsoft.Extensions.ServiceDiscovery.ServiceDiscoveryOptions>,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.Internal.ServiceDiscoveryOptionsValidator
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.ServiceDiscovery.LoadBalancing.IServiceEndpointSelector,
+      ImplementationType: Microsoft.Extensions.ServiceDiscovery.LoadBalancing.RoundRobinServiceEndpointSelector
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage>,
+      ServiceKey: HttpKey { Name = -standard, InstanceName =  },
+      ImplementationFactory: Polly.ResiliencePipeline<System.Net.Http.HttpResponseMessage> Polly.SpecialType<Microsoft.Extensions.Http.Resilience.Internal.HttpKey, System.Net.Http.HttpResponseMessage>.SpecialMethod(System.IServiceProvider serviceProvider, object key)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Polly.ResiliencePipelineBuilder,
+      ImplementationFactory: Polly.ResiliencePipelineBuilder Polly.SpecialType.SpecialMethod(System.IServiceProvider serviceProvider)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: System.Net.Http.HttpClient,
+      ImplementationFactory: System.Net.Http.HttpClient Microsoft.Extensions.DependencyInjection.SpecialType.SpecialMethod(System.IServiceProvider s)
+    }
+  ],
+  Removed: []
+}

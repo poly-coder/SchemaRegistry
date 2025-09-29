@@ -1,0 +1,29 @@
+﻿{
+  Added: [
+    {
+      ServiceType: Microsoft.AspNetCore.Http.IProblemDetailsService,
+      ImplementationType: Microsoft.AspNetCore.Http.ProblemDetailsService
+    },
+    {
+      ServiceType: Microsoft.AspNetCore.Http.IProblemDetailsWriter,
+      ImplementationType: Microsoft.AspNetCore.Http.DefaultProblemDetailsWriter
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Http.Json.JsonOptions>,
+      ImplementationType: Microsoft.AspNetCore.Http.ProblemDetailsJsonOptionsSetup
+    },
+    {
+      ServiceType: Pico.WebApi.ExceptionToProblemMiddleware,
+      ImplementationType: Pico.WebApi.ExceptionToProblemMiddleware
+    },
+    {
+      ServiceType: Pico.WebApi.IExceptionToProblemHandler,
+      ImplementationType: Pico.WebApi.FluentValidationExceptionToProblemHandler
+    },
+    {
+      ServiceType: Pico.WebApi.IExceptionToProblemHandler,
+      ImplementationType: Pico.WebApi.PicoDomainExceptionsToProblemHandler
+    }
+  ],
+  Removed: []
+}

@@ -1,0 +1,175 @@
+﻿{
+  Added: [
+    {
+      ServiceType: JasperFx.CodeGeneration.IAssemblyGenerator,
+      ImplementationType: JasperFx.RuntimeCompiler.AssemblyGenerator
+    },
+    {
+      ServiceType: JasperFx.CodeGeneration.ICodeFileCollection,
+      ImplementationFactory: JasperFx.CodeGeneration.ICodeFileCollection Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: JasperFx.CodeGeneration.ICodeFileCollection,
+      ImplementationFactory: JasperFx.CodeGeneration.ICodeFileCollection Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: JasperFx.CodeGeneration.ICodeFileCollection,
+      ImplementationFactory: JasperFx.CodeGeneration.ICodeFileCollection Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: JasperFx.CommandLine.Descriptions.ISystemPart,
+      ImplementationFactory: JasperFx.CommandLine.Descriptions.ISystemPart JasperFx.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: JasperFx.CommandLine.Descriptions.ISystemPart,
+      ImplementationType: Marten.MartenSystemPart
+    },
+    {
+      ServiceType: JasperFx.Events.IEventStore,
+      ImplementationFactory: JasperFx.Events.IEventStore Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: JasperFx.JasperFxOptions,
+      ImplementationFactory: JasperFx.JasperFxOptions JasperFx.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Marten.Events.Daemon.Coordination.IProjectionCoordinator,
+      ImplementationType: Marten.Events.Daemon.Coordination.ProjectionCoordinator
+    },
+    {
+      ServiceType: Marten.IConfigureMarten,
+      ImplementationInstance: Marten.LambdaConfigureMarten
+    },
+    {
+      ServiceType: Marten.IConfigureMarten,
+      ImplementationInstance: Marten.LambdaConfigureMarten
+    },
+    {
+      ServiceType: Marten.IConfigureMarten,
+      ImplementationInstance: Marten.LambdaConfigureMarten
+    },
+    {
+      ServiceType: Marten.IDocumentStore,
+      ImplementationFactory: Marten.IDocumentStore Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Marten.ISessionFactory,
+      ImplementationFactory: Marten.Sessions.DefaultSessionFactory Marten.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Marten.ISessionFactory,
+      ImplementationType: Marten.Sessions.LightweightSessionFactory
+    },
+    {
+      ServiceType: Marten.StoreOptions,
+      ImplementationFactory: Marten.StoreOptions Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Diagnostics.Metrics.IMetricsListener,
+      ImplementationType: OpenTelemetry.Metrics.OpenTelemetryMetricsListener
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: OpenTelemetry.Extensions.Hosting.Implementation.TelemetryHostedService
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationType: Marten.Services.MartenActivator
+    },
+    {
+      ServiceType: Microsoft.Extensions.Hosting.IHostedService,
+      ImplementationFactory: Microsoft.Extensions.Hosting.IHostedService Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IConfigureOptions<JasperFx.JasperFxOptions>,
+      ImplementationInstance: Microsoft.Extensions.Options.ConfigureNamedOptions<JasperFx.JasperFxOptions>
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.MetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.MetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Metrics.PeriodicExportingMetricReaderOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.ActivityExportProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.ActivityExportProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IOptionsFactory<OpenTelemetry.Trace.BatchExportActivityProcessorOptions> Microsoft.Extensions.DependencyInjection.SpecialType<OpenTelemetry.Trace.BatchExportActivityProcessorOptions>.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.IConfigureMeterProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Metrics.ConfigureMeterProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProvider,
+      ImplementationFactory: OpenTelemetry.Metrics.MeterProvider OpenTelemetry.Metrics.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Metrics.MeterProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Metrics.MeterProviderBuilderSdk
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.IConfigureTracerProviderBuilder,
+      ImplementationInstance: OpenTelemetry.Trace.ConfigureTracerProviderBuilderCallbackWrapper
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProvider,
+      ImplementationFactory: OpenTelemetry.Trace.TracerProvider OpenTelemetry.Trace.SpecialType.SpecialMethod(System.IServiceProvider sp)
+    },
+    {
+      ServiceType: OpenTelemetry.Trace.TracerProviderBuilderSdk,
+      ImplementationType: OpenTelemetry.Trace.TracerProviderBuilderSdk
+    },
+    {
+      ServiceType: Weasel.Core.Migrations.IDatabaseSource,
+      ImplementationFactory: Weasel.Core.Migrations.IDatabaseSource Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      ServiceType: Weasel.Core.MultiTenancy.IMasterTableMultiTenancy,
+      ImplementationFactory: Weasel.Core.MultiTenancy.IMasterTableMultiTenancy Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: JasperFx.CommandLine.CommandExecutor,
+      ImplementationType: JasperFx.CommandLine.CommandExecutor
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: JasperFx.CommandLine.ICommandCreator,
+      ImplementationType: JasperFx.CommandLine.DependencyInjectionCommandCreator
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: JasperFx.CommandLine.ICommandFactory,
+      ImplementationFactory: JasperFx.CommandLine.ICommandFactory JasperFx.SpecialType.SpecialMethod(System.IServiceProvider ctx)
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Marten.IDocumentSession,
+      ImplementationFactory: Marten.IDocumentSession Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      Lifetime: Scoped,
+      ServiceType: Marten.IQuerySession,
+      ImplementationFactory: Marten.IQuerySession Marten.SpecialType.SpecialMethod(System.IServiceProvider s)
+    },
+    {
+      Lifetime: Transient,
+      ServiceType: Microsoft.Extensions.Options.IPostConfigureOptions<JasperFx.JasperFxOptions>,
+      ImplementationFactory: Microsoft.Extensions.Options.IPostConfigureOptions<JasperFx.JasperFxOptions> Microsoft.Extensions.Options.SpecialType<JasperFx.JasperFxOptions, Microsoft.Extensions.Hosting.IHostEnvironment>.SpecialMethod(System.IServiceProvider sp)
+    }
+  ],
+  Removed: []
+}
